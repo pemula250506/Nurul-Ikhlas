@@ -40,7 +40,7 @@
             transition: 0.3s;
         }
 
-        /* --- NAVIGATION & BUBBLE MENU --- */
+        /* --- NAVIGATION --- */
         nav {
             background: var(--card);
             padding: 15px 5%;
@@ -64,6 +64,7 @@
             display: flex;
             gap: 10px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .bubble-btn {
@@ -106,7 +107,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- DASHBOARD ELEMENTS --- */
+        /* --- DASHBOARD ELEMENTS (GRID RATA) --- */
         .banner {
             background: linear-gradient(135deg, var(--primary), #00D2FF);
             padding: 50px 20px; border-radius: 40px; color: white;
@@ -115,17 +116,43 @@
         .banner h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; }
 
         .menu-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px;
+            align-items: stretch; /* Memastikan semua baris grid sama tinggi */
         }
-        .menu-item {
-            background: var(--card); padding: 40px 20px; border-radius: 30px;
-            text-align: center; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-        }
-        .menu-item:hover { transform: scale(1.05); }
-        .menu-item i { font-size: 3rem; margin-bottom: 15px; display: block; }
 
-        /* --- PROFIL CARD STYLE --- */
+        .menu-item {
+            background: var(--card); 
+            padding: 40px 20px; 
+            border-radius: 30px;
+            text-align: center; 
+            cursor: pointer; 
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%; /* Memaksa kartu memenuhi ruang grid agar rata */
+        }
+
+        .menu-item:hover { transform: scale(1.05); }
+        .menu-item i { 
+            font-size: 3.5rem; 
+            margin-bottom: 20px; 
+            display: block;
+            height: 60px; /* Konsistensi tinggi ikon */
+            display: flex;
+            align-items: center;
+        }
+        .menu-item h3 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        /* --- PROFIL & KONTAK STYLE --- */
         .profile-container {
             background: var(--card); padding: 40px; border-radius: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -158,7 +185,6 @@
             <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
         </div>
 
-        <!-- BUBBLE MENU DI ATAS -->
         <div class="bubble-menu">
             <button class="bubble-btn active" onclick="showPage('home', this)">
                 <i class="fa-solid fa-house"></i> Beranda
@@ -180,19 +206,24 @@
                 <h1>Halo, Sahabat Kecil!</h1>
                 <p>Ayo bermain dan belajar bersama di TK Nurul Ikhlas</p>
             </div>
+            
             <div class="menu-grid">
+                <!-- Item 1 -->
                 <div class="menu-item" style="color: var(--primary);">
                     <i class="fa-solid fa-spell-check"></i>
                     <h3>Belajar Huruf</h3>
                 </div>
+                <!-- Item 2 (Sekarang Rata) -->
                 <div class="menu-item" style="color: var(--secondary);">
                     <i class="fa-solid fa-arrow-1-9"></i>
                     <h3>Belajar Angka</h3>
                 </div>
+                <!-- Item 3 -->
                 <div class="menu-item" style="color: var(--success);">
                     <i class="fa-solid fa-shapes"></i>
                     <h3>Mengenal Bentuk</h3>
                 </div>
+                <!-- Item 4 -->
                 <div class="menu-item" style="color: var(--danger);">
                     <i class="fa-solid fa-paint-brush"></i>
                     <h3>Mewarnai</h3>
@@ -210,15 +241,15 @@
                 <div class="profile-grid">
                     <div class="card-info">
                         <h3><i class="fa-solid fa-eye"></i> Visi Kami</h3>
-                        <p>Menjadi pusat pendidikan anak usia dini yang membentuk karakter islami, mandiri, dan kreatif melalui pembiasaan baik sejak dini.</p>
+                        <p>Menjadi pusat pendidikan anak usia dini yang membentuk karakter islami, mandiri, dan kreatif.</p>
                     </div>
                     <div class="card-info" style="border-top-color: var(--secondary);">
                         <h3><i class="fa-solid fa-bullseye"></i> Misi Kami</h3>
-                        <p>1. Menanamkan aqidah dan akhlak mulia.<br>2. Mengembangkan bakat minat anak secara optimal.<br>3. Menciptakan lingkungan belajar yang aman dan ceria.</p>
+                        <p>Menciptakan lingkungan belajar yang aman, ceria, dan menanamkan aqidah sejak dini.</p>
                     </div>
                     <div class="card-info" style="border-top-color: var(--success);">
                         <h3><i class="fa-solid fa-medal"></i> Akreditasi</h3>
-                        <p>Alhamdulillah, TK Nurul Ikhlas telah mendapatkan Akreditasi <strong>A (Sangat Baik)</strong> dari Badan Akreditasi Nasional.</p>
+                        <p>TK Nurul Ikhlas telah mendapatkan Akreditasi <strong>A (Sangat Baik)</strong>.</p>
                     </div>
                 </div>
             </div>
@@ -237,23 +268,13 @@
     </div>
 
     <script>
-        // Fungsi ganti halaman
         function showPage(pageId, btn) {
-            // Sembunyikan semua halaman
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            // Hapus status aktif di semua tombol bubble
-            document.querySelectorAll('.bubble-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            
-            // Tampilkan halaman yang dipilih & aktifkan tombolnya
+            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.bubble-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
         }
 
-        // Fungsi Logo & Tema (Sama seperti sebelumnya)
         function handleLogo(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
