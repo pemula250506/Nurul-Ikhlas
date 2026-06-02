@@ -3,188 +3,408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK Nurul Ikhlas - Beranda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Pintar Ceria - Website Edukasi Interaktif Anak TK Usia 4-7 Tahun. Belajar Huruf, Angka, Membaca, dan Berhitung dengan Seru!">
+    <title>Pintar Ceria - Belajar Jadi Seru!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #4A90E2;
-            --pink: #FF85A1;
-            --green: #6BCB77;
-            --purple: #A66CFF;
-            --yellow: #FFD93D;
-            --bg: #F0F9FF;
-            --text: #2C3E50;
+            --bg-body: #F4F9F9;
+            --text-color: #2B2D42;
+            --primary: #4EA8DE;
+            --secondary: #FDC500;
+            --success: #70E000;
+            --danger: #FF4D6D;
+            --card-bg: #FFFFFF;
+            --transition: all 0.3s ease;
         }
 
-        * { 
-            box-sizing: border-box; 
-            font-family: 'Quicksand', sans-serif; 
+        [data-theme="dark"] {
+            --bg-body: #1E1E2F;
+            --text-color: #F8F9FA;
+            --primary: #0077B6;
+            --secondary: #E5A93C;
+            --success: #38B000;
+            --danger: #D90429;
+            --card-bg: #2D2D44;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
         }
 
         body {
-            margin: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: var(--bg-body);
+            color: var(--text-color);
+            transition: var(--transition);
+            overflow-x: hidden;
         }
 
-        /* HEADER UI */
-        header {
-            background: white;
-            padding: 15px 30px;
+        h1, h2, h3, .brand {
+            font-family: 'Fredoka One', cursive;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            background-color: var(--card-bg);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-bottom: 5px solid var(--yellow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .brand { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        
-        .logo-ui { 
-            width: 50px; height: 50px; background: var(--bg); 
-            border-radius: 50%; display: flex; justify-content: center; 
-            align-items: center; font-size: 24px; border: 2px solid var(--pink);
+        .brand {
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: 2px 2px 0px var(--secondary);
+            cursor: pointer;
         }
 
-        .brand h1 { 
-            font-family: 'Fredoka', sans-serif; 
-            font-size: 1.6rem; 
-            color: var(--primary); 
-            margin: 0; 
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
         }
 
-        /* NAVIGASI ATAS */
-        .nav-tabs { display: flex; gap: 8px; }
-        .tab-btn {
-            padding: 10px 18px; border: none; border-radius: 12px;
-            background: transparent; font-weight: 700; text-decoration: none;
-            color: var(--text); font-size: 0.9rem; transition: 0.3s;
-        }
-        .tab-btn.active { background: var(--primary); color: white; }
-        .tab-btn:hover:not(.active) { background: rgba(0,0,0,0.05); }
-
-        /* KONTEN UTAMA */
-        main { 
-            flex: 1; 
-            padding: 40px 20px; 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            width: 100%; 
-        }
-        
-        .hero { 
-            text-align: center; 
-            margin-bottom: 40px; 
-        }
-        
-        .hero h2 { 
-            font-family: 'Fredoka', sans-serif; 
-            font-size: 2.2rem; 
-            color: var(--text); 
-            margin: 0 0 10px 0;
-        }
-
-        .hero p { font-size: 1.2rem; color: #7F8C8D; font-weight: 500; margin: 0; }
-
-        /* GRID MENU BERANDA */
-        .menu-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 25px; 
-        }
-
-        .menu-card {
-            background: white; 
-            padding: 40px 20px; 
-            border-radius: 24px; 
-            text-align: center;
+        .nav-links a {
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-bottom: 8px solid #ddd;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.02);
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: var(--transition);
         }
 
-        .menu-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary);
+            color: white;
         }
 
-        .menu-card .icon { font-size: 60px; margin-bottom: 15px; display: block; }
-        
-        .menu-card h3 { 
-            margin: 0; 
-            font-size: 1.3rem; 
-            font-family: 'Fredoka', sans-serif; 
-            color: var(--text);
+        .btn-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
         }
 
-        /* WARNA KHUSUS PER CARD MENU */
-        .c-baca { border-color: var(--pink); }
-        .c-angka { border-color: var(--green); }
-        .c-gambar { border-color: var(--purple); }
-        .c-profil { border-color: var(--yellow); }
+        .lang-select {
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+            font-weight: bold;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
 
-        /* FOOTER */
-        footer { 
-            text-align: center; 
-            padding: 25px; 
-            color: #94A3B8; 
-            font-size: 0.9rem; 
-            font-weight: 500; 
+        /* --- HERO BANNER --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            background: linear-gradient(135deg, rgba(78,168,222,0.2) 0%, rgba(253,197,0,0.2) 100%);
+            border-radius: 0 0 50px 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .btn-main {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--secondary);
+            color: #2B2D42;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 8px 0px #C79A00;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .btn-main:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0px #C79A00;
+        }
+
+        .hero-avatar {
+            width: 350px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- MAIN CONTENT & CARDS --- */
+        .container {
+            padding: 60px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 3px solid transparent;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05) rotate(1deg);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- INTERACTIVE ZONE (KUIS) --- */
+        .quiz-zone {
+            background-color: var(--card-bg);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn-opt {
+            padding: 20px;
+            font-size: 1.5rem;
+            font-family: 'Fredoka One', cursive;
+            background-color: var(--bg-body);
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .btn-opt:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .score-badge {
+            display: inline-block;
+            background-color: var(--success);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .hero { flex-direction: column; text-align: center; gap: 40px; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-avatar { width: 250px; }
+            .options-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand">
-            <div class="logo-ui">🏫</div>
-            <h1>TK Nurul Ikhlas</h1>
+    <nav>
+        <div class="brand" onclick="location.reload()">✨ Pintar Ceria</div>
+        <ul class="nav-links">
+            <li><a href="#belajar" class="active" data-id="menu-belajar">Belajar</a></li>
+            <li><a href="#bermain" data-id="menu-bermain">Bermain</a></li>
+            <li><a href="#ortu" data-id="menu-ortu">Dashboard Ortu</a></li>
+            <li>
+                <select class="lang-select" onchange="switchLanguage(this.value)">
+                    <option value="id">🇮🇩 ID</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
+            </li>
+            <li><button class="btn-toggle" onclick="toggleDarkMode()">☀️</button></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-text">
+            <h1 id="hero-title">Belajar Jadi Lebih<br>Seru & Ceria!</h1>
+            <p id="hero-desc">Aplikasi edukasi interaktif untuk anak usia 4-7 tahun. Mengenal huruf, angka, dan membaca dengan petualangan interaktif.</p>
+            <a href="#belajar" class="btn-main" id="hero-btn">Mulai Belajar! 🚀</a>
         </div>
-        <nav class="nav-tabs">
-            <a href="index.html" class="tab-btn active">Beranda</a>
-            <a href="membaca.html" class="tab-btn">Membaca</a>
-            <a href="menghitung.html" class="tab-btn">Angka</a>
-            <a href="kreatif.html" class="tab-btn">Kreatif</a>
-            <a href="profil.html" class="tab-btn">Profil</a>
-        </nav>
+        <svg class="hero-avatar" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="110" r="60" fill="#FF4D6D" />
+            <ellipse cx="75" cy="60" rx="15" ry="40" fill="#FF4D6D" />
+            <ellipse cx="125" cy="60" rx="15" ry="40" fill="#FF4D6D" />
+            <ellipse cx="75" cy="65" rx="7" ry="25" fill="#FFCCD5" />
+            <ellipse cx="125" cy="65" rx="7" ry="25" fill="#FFCCD5" />
+            <circle cx="100" cy="120" r="50" fill="#FFF" />
+            <circle cx="80" cy="110" r="8" fill="#2B2D42" />
+            <circle cx="120" cy="110" r="8" fill="#2B2D42" />
+            <polygon points="100,123 92,118 108,118" fill="#FF4D6D" />
+            <path d="M 90 130 Q 100 140 110 130" stroke="#2B2D42" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
     </header>
 
-    <main>
-        <div class="hero">
-            <h2>Selamat Datang, Sobat Pintar! 👋</h2>
-            <p>Mulai petualangan belajar seru hari ini dengan senyuman!</p>
-        </div>
-
-        <div class="menu-grid">
-            <a href="membaca.html" class="menu-card c-baca">
-                <span class="icon">📖</span>
-                <h3>BELAJAR BACA</h3>
-            </a>
-            <a href="menghitung.html" class="menu-card c-angka">
-                <span class="icon">🔢</span>
-                <h3>MENGENAL ANGKA</h3>
-            </a>
-            <a href="kreatif.html" class="menu-card c-gambar">
-                <span class="icon">🎨</span>
-                <h3>PAPAN KREATIF</h3>
-            </a>
-            <a href="profil.html" class="menu-card c-profil">
-                <span class="icon">👤</span>
-                <h3>PROFIL PINTAR</h3>
-            </a>
+    <main class="container" id="belajar">
+        <h2 class="section-title" id="menu-title">Pilih Petualangan Belajarmu! 🗺️</h2>
+        <div class="grid-menu">
+            <div class="card" onclick="playAlphabetSound()">
+                <div class="card-icon">🔤</div>
+                <h3>Huruf A-Z</h3>
+                <p>Mengenal huruf dan suara pelafalan.</p>
+            </div>
+            <div class="card" onclick="alert('Fitur Angka 1-100 & Counting Latihan')">
+                <div class="card-icon">🔢</div>
+                <h3>Angka 1-100</h3>
+                <p>Belajar menghitung benda-benda lucu.</p>
+            </div>
+            <div class="card" onclick="alert('Fitur Membaca Suku Kata Dasar')">
+                <div class="card-icon">📖</div>
+                <h3>Membaca</h3>
+                <p>Mengeja suku kata dengan mudah.</p>
+            </div>
+            <div class="card" onclick="alert('Fitur Tracing Huruf & Angka Interaktif')">
+                <div class="card-icon">✍️</div>
+                <h3>Menulis</h3>
+                <p>Latihan menggores garis di layar.</p>
+            </div>
         </div>
     </main>
 
-    <footer>© 2026 TK Nurul Ikhlas - Platform Pembelajaran Modern Anak</footer>
+    <section class="container" style="background-color: rgba(112,224,0,0.1); border-radius: 50px;" id="bermain">
+        <h2 class="section-title">Zona Game Tebak Angka 🎮</h2>
+        <div class="quiz-zone">
+            <h3 id="quiz-question">Berapa jumlah buah Apel dibawah ini?</h3>
+            <div style="font-size: 3.5rem; margin: 20px 0;" id="quiz-display">🍎 🍎 🍎</div>
+            <div class="options-container">
+                <button class="btn-opt" onclick="checkAnswer(2)">2</button>
+                <button class="btn-opt" onclick="checkAnswer(3)">3</button>
+                <button class="btn-opt" onclick="checkAnswer(5)">5</button>
+                <button class="btn-opt" onclick="checkAnswer(4)">4</button>
+            </div>
+            <div class="score-badge">Skor Kamu: <span id="score">0</span> ⭐</div>
+        </div>
+    </section>
 
+    <script>
+        // --- GAME LOGIC ---
+        let currentScore = 0;
+        function checkAnswer(ans) {
+            if(ans === 3) {
+                alert("Hore! Jawabanmu BENAR! 🥳🎉");
+                currentScore += 10;
+                document.getElementById('score').innerText = currentScore;
+                generateNewQuestion();
+            } else {
+                alert("Wah, coba lagi yuk! Pasti bisa! 💪✨");
+            }
+        }
+
+        function generateNewQuestion() {
+            // Simulasi reset/ganti kuis sederhana
+            document.getElementById('quiz-question').innerText = "Berapa jumlah bintang di bawah ini?";
+            document.getElementById('quiz-display').innerText = "⭐ ⭐ ⭐ ⭐";
+            const options = document.querySelectorAll('.btn-opt');
+            options[0].innerText = "1";
+            options[1].innerText = "5";
+            options[2].innerText = "4"; // Kunci jawaban baru
+            options[3].innerText = "2";
+            
+            // Update fungsi cek jawaban untuk demonstrasi sederhana
+            options[2].setAttribute('onclick', 'alert("Hebat! Benar lagi! 🚀"); currentScore+=10; document.getElementById("score").innerText = currentScore;');
+        }
+
+        // --- AUDIO SYNTHESIS (Pelafalan Huruf) ---
+        function playAlphabetSound() {
+            let synth = window.speechSynthesis;
+            let textToSpeak = new SpeechSynthesisUtterance("A, B, C. A untuk Apel, B untuk Balon");
+            textToSpeak.lang = 'id-ID';
+            synth.speak(textToSpeak);
+            alert("🔊 Memutar Suara: A B C (Menggunakan fitur text-to-speech browser)");
+        }
+
+        // --- DARK MODE TOGGLE ---
+        function toggleDarkMode() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+            const toggleBtn = document.querySelector('.btn-toggle');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                toggleBtn.innerText = '☀️';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggleBtn.innerText = '🌙';
+            }
+        }
+
+        // --- MULTILINGUAL SWITCH ---
+        const langData = {
+            id: {
+                title: "Belajar Jadi Lebih Seru & Ceria!",
+                desc: "Aplikasi edukasi interaktif untuk anak usia 4-7 tahun. Mengenal huruf, angka, dan membaca dengan petualangan interaktif.",
+                btn: "Mulai Belajar! 🚀",
+                menu: "Pilih Petualangan Belajarmu! 🗺️"
+            },
+            en: {
+                title: "Learning is Fun & Cheerful!",
+                desc: "Interactive educational website for kids aged 4-7. Learn letters, numbers, and reading with interactive adventures.",
+                btn: "Start Learning! 🚀",
+                menu: "Choose Your Learning Adventure! 🗺️"
+            }
+        };
+
+        function switchLanguage(lang) {
+            document.getElementById('hero-title').innerHTML = langData[lang].title;
+            document.getElementById('hero-desc').innerText = langData[lang].desc;
+            document.getElementById('hero-btn').innerText = langData[lang].btn;
+            document.getElementById('menu-title').innerText = langData[lang].menu;
+        }
+    </script>
 </body>
 </html>
