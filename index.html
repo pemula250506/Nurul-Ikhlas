@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK Nurul Ikhlas - Panel Belajar Interaktif</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4EA8DE;
+            --secondary: #FDC500;
+            --success: #70E000;
+            --danger: #FF4D6D;
+            --bg: #F0F7F7;
+            --card: #FFFFFF;
+            --text: #2B2D42;
+            --placeholder-bg: #E2E8F0;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1A1A2E;
+            --card: #16213E;
+            --text: #EAEAEA;
+            --placeholder-bg: #2C3A5F;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+
+        body { background-color: var(--bg); color: var(--text); transition: 0.3s; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--card); padding: 15px 5%; display: flex; flex-direction: column;
+            gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .bubble-menu { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .bubble-btn {
+            background: var(--bg); border: none; padding: 8px 18px; border-radius: 25px;
+            font-weight: 800; color: var(--text); cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px; font-size: 0.9rem; box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+        .bubble-btn.active { background: var(--primary); color: white; }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-container-box {
+            width: 50px; height: 50px; border-radius: 10px; border: 2px dashed var(--primary);
+            background: var(--placeholder-bg); display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .logo-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .brand-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--primary); }
+
+        /* --- CONTENT --- */
+        .main-wrapper { padding: 30px 5%; max-width: 1200px; margin: 0 auto; }
+        .page-section { display: none; animation: fadeIn 0.5s; }
+        .page-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- BERANDA --- */
+        .banner {
+            background: linear-gradient(135deg, var(--primary), #00D2FF);
+            padding: 50px 20px; border-radius: 40px; color: white; text-align: center; margin-bottom: 30px;
+        }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        
+        /* Modifikasi selektor agar link tidak merusak gaya visual teks */
+        .menu-link { text-decoration: none; color: inherit; display: block; }
+        
+        .menu-item {
+            background: var(--card); padding: 40px 20px; border-radius: 30px; text-align: center;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;
+        }
+        .menu-link:hover .menu-item { transform: scale(1.05); }
+        .menu-item i { font-size: 3rem; margin-bottom: 15px; }
+
+        /* --- PROFIL --- */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px;
+        }
+        .gallery-box {
+            aspect-ratio: 4/3; background: var(--placeholder-bg); border-radius: 20px;
+            border: 3px dashed var(--primary); overflow: hidden; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .gallery-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .gallery-box span { font-size: 0.8rem; font-weight: 800; color: var(--primary); text-align: center; padding: 10px; }
+        .gallery-box:hover { background: #fff; }
+
+        .profile-card { background: var(--card); padding: 30px; border-radius: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .section-title { font-family: 'Fredoka One'; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+        .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .facility-item { background: var(--bg); padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .facility-item i { font-size: 1.5rem; color: var(--secondary); margin-bottom: 10px; display: block; }
+        .facility-item p { font-weight: 800; font-size: 0.85rem; }
+
+        .info-pill { display: inline-block; background: var(--primary); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; }
+
+        input[type="file"] { display: none; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-top">
+            <div class="logo-area">
+                <label for="logo-upload" class="logo-container-box" title="Klik ganti logo">
+                    <i class="fa-solid fa-mosque" id="logo-icon" style="color:var(--primary)"></i>
+                    <img src="" id="display-logo" class="logo-preview">
+                </label>
+                <input type="file" id="logo-upload" accept="image/*" onchange="handleImage(this, 'display-logo', 'logo-icon', 'tk_logo')">
+                <span class="brand-name">TK Nurul Ikhlas</span>
+            </div>
+            <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
+        </div>
+
+        <div class="bubble-menu">
+            <button class="bubble-btn active" onclick="showPage('home', this)"><i class="fa-solid fa-house"></i> Beranda</button>
+            <button class="bubble-btn" onclick="showPage('profil', this)"><i class="fa-solid fa-school"></i> Profil Sekolah</button>
+            <button class="bubble-btn" onclick="showPage('kontak', this)"><i class="fa-solid fa-phone"></i> Kontak</button>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        
+        <section id="home" class="page-section active">
+            <div class="banner">
+                <h1>Halo, Sahabat Kecil!</h1>
+                <p>Membentuk Generasi Cerdas, Berakhlak, dan Ceria</p>
+            </div>
+            
+            <div class="menu-grid">
+                <a href="huruf.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--primary);">
+                        <i class="fa-solid fa-spell-check"></i>
+                        <h3>Huruf A-Z</h3>
+                    </div>
+                </a>
+
+                <a href="angka.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--secondary);">
+                        <i class="fa-solid fa-arrow-1-9"></i>
+                        <h3>Angka</h3>
+                    </div>
+                </a>
+
+                <a href="membaca.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--success);">
+                        <i class="fa-solid fa-book-open"></i>
+                        <h3>Membaca</h3>
+                    </div>
+                </a>
+
+                <a href="mewarnai.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--danger);">
+                        <i class="fa-solid fa-palette"></i>
+                        <h3>Mewarnai</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="profil" class="page-section">
+            <h2 class="section-title"><i class="fa-solid fa-images"></i> Galeri Sekolah (Klik Ganti Foto)</h2>
+            <div class="gallery-grid">
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-1', 'txt-gal-1', 'gal_1')">
+                    <span id="txt-gal-1"><i class="fa-solid fa-plus"></i><br>Foto Gedung</span>
+                    <img src="" id="img-gal-1">
+                </label>
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-2', 'txt-gal-2', 'gal_2')">
+                    <span id="txt-gal-2"><i class="fa-solid fa-plus"></i><br>Foto Kelas</span>
+                    <img src="" id="img-gal-2">
+                </label>
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-3', 'txt-gal-3', 'gal_3')">
+                    <span id="txt-gal-3"><i class="fa-solid fa-plus"></i><br>Foto Bermain</span>
+                    <img src="" id="img-gal-3">
+                </label>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <div>
+                    <div class="profile-card">
+                        <h2 class="section-title"><i class="fa-solid fa-star"></i> Visi & Misi</h2>
+                        <p style="margin-bottom: 15px;"><b>Visi:</b> Terwujudnya anak yang sholeh, cerdas, mandiri dan kreatif.</p>
+                        <p><b>Misi:</b><br>1. Menanamkan aqidah islami sejak dini.<br>2. Menciptakan suasana belajar sambil bermain yang ceria.<br>3. Menjalin kerjasama yang baik dengan orang tua.</p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2 class="section-title"><i class="fa-solid fa-couch"></i> Fasilitas Kami</h2>
+                        <div class="facility-grid">
+                            <div class="facility-item"><i class="fa-solid fa-mosque"></i><p>Musholla</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-child-reaching"></i><p>Playground</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-book"></i><p>Perpustakaan</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-wifi"></i><p>Area WIFI</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="profile-card" style="text-align: center; border: 2px solid var(--success);">
+                        <span class="info-pill">RESMI BAN-PDM</span>
+                        <h2 style="font-family:'Fredoka One'; color:var(--success);">AKREDITASI A</h2>
+                        <p style="font-size: 0.8rem;">Sangat Baik (Terverifikasi)</p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2 class="section-title" style="font-size: 1rem;"><i class="fa-solid fa-clock"></i> Jam Sekolah</h2>
+                        <p style="font-size: 0.9rem;">Senin - Kamis:<br>07.30 - 11.00 WIB</p>
+                        <hr style="margin: 10px 0; opacity: 0.2;">
+                        <p style="font-size: 0.9rem;">Jumat:<br>07.30 - 09.30 WIB</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak" class="page-section">
+            <div class="profile-card" style="text-align: center;">
+                <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-paper-plane"></i> Hubungi Kami</h2>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-map-location-dot"></i> Jl. Pendidikan No. 12, Kota Nurul Ikhlas</p>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-phone-volume"></i> (021) 123-4567</p>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-envelope"></i> info@tknurulikhlas.sch.id</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function showPage(pageId, btn) {
+            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('.bubble-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function handleImage(input, imgId, hideId, storageKey) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(imgId);
+                    const hide = document.getElementById(hideId);
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    if(hide) hide.style.display = 'none';
+                    localStorage.setItem(storageKey, e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('tk_theme', theme);
+        }
+
+        window.onload = () => {
+            loadSavedImage('tk_logo', 'display-logo', 'logo-icon');
+            loadSavedImage('gal_1', 'img-gal-1', 'txt-gal-1');
+            loadSavedImage('gal_2', 'img-gal-2', 'txt-gal-2');
+            loadSavedImage('gal_3', 'img-gal-3', 'txt-gal-3');
+
+            const savedTheme = localStorage.getItem('tk_theme');
+            if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+        };
+
+        function loadSavedImage(key, imgId, hideId) {
+            const data = localStorage.getItem(key);
+            if (data) {
+                const img = document.getElementById(imgId);
+                const hide = document.getElementById(hideId);
+                img.src = data;
+                img.style.display = 'block';
+                if(hide) hide.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

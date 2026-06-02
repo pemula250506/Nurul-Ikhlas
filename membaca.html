@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Membaca - TK Nurul Ikhlas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #70E000; /* Hijau segar untuk tema membaca */
+            --secondary: #4EA8DE;
+            --bg: #F2F9F1;
+            --card: #FFFFFF;
+            --text: #2B2D42;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121A10;
+            --card: #1C2819;
+            --text: #EAEAEA;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); transition: 0.3s; padding: 20px 5%; }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .back-btn:hover { transform: translateY(-2px); }
+
+        .title {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary);
+            font-size: 2rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        /* --- TABS --- */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: var(--card);
+            border: 2px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 800;
+            color: var(--text);
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* --- CONTENT SECTION --- */
+        .content-section {
+            display: none;
+            animation: popIn 0.4s ease-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- GRID KATA --- */
+        .read-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .read-card {
+            background: var(--card);
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: 0.3s;
+        }
+        .read-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        /* Pewarnaan Suku Kata */
+        .syllable-1 { color: #FF4D6D; font-family: 'Fredoka One'; font-size: 1.8rem; }
+        .syllable-2 { color: #4EA8DE; font-family: 'Fredoka One'; font-size: 1.8rem; }
+        .syllable-3 { color: #FDC500; font-family: 'Fredoka One'; font-size: 1.8rem; }
+
+        .word-full {
+            font-family: 'Fredoka One';
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .sentence-text {
+            font-family: 'Nunito';
+            font-weight: 800;
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+
+        .sound-icon {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-top: 15px;
+            display: block;
+        }
+        .read-card:hover .sound-icon {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        <h1 class="title">📖 Ayo Belajar Membaca!</h1>
+        <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
+    </div>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('suku-kata', this)">1. Suku Kata</button>
+        <button class="tab-btn" onclick="switchTab('kata-dasar', this)">2. Kata Dasar</button>
+        <button class="tab-btn" onclick="switchTab('kalimat', this)">3. Kalimat Pendek</button>
+    </div>
+
+    <div class="main-container">
+        
+        <section id="suku-kata" class="content-section active">
+            <div class="read-grid">
+                <div class="read-card" onclick="suaraBicara('ba ju')">
+                    <span class="syllable-1">ba</span><span class="syllable-2">ju</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('bo la')">
+                    <span class="syllable-1">bo</span><span class="syllable-2">la</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('bu ku')">
+                    <span class="syllable-1">bu</span><span class="syllable-2">ku</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('ca ci')">
+                    <span class="syllable-1">ca</span><span class="syllable-2">ci</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('da si')">
+                    <span class="syllable-1">da</span><span class="syllable-2">si</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('gla tui')">
+                    <span class="syllable-1">ma</span><span class="syllable-2">ta</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('to pi')">
+                    <span class="syllable-1">to</span><span class="syllable-2">pi</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('se pe da')">
+                    <span class="syllable-1">se</span><span class="syllable-2">pe</span><span class="syllable-3">da</span>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="kata-dasar" class="content-section">
+            <div class="read-grid">
+                <div class="read-card" onclick="suaraBicara('Rumah')">
+                    <div class="word-full">Rumah</div>
+                    <p style="font-size:0.9rem; color:gray;">ru - mah</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('Gajah')">
+                    <div class="word-full">Gajah</div>
+                    <p style="font-size:0.9rem; color:gray;">ga - jah</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('Sekolah')">
+                    <div class="word-full">Sekolah</div>
+                    <p style="font-size:0.9rem; color:gray;">se - ko - lah</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('Burung')">
+                    <div class="word-full">Burung</div>
+                    <p style="font-size:0.9rem; color:gray;">bu - rung</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('Kucing')">
+                    <div class="word-full">Kucing</div>
+                    <p style="font-size:0.9rem; color:gray;">ku - cing</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+                <div class="read-card" onclick="suaraBicara('Pisang')">
+                    <div class="word-full">Pisang</div>
+                    <p style="font-size:0.9rem; color:gray;">pi - sang</p>
+                    <i class="fa-solid fa-volume-high sound-icon"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="kalimat" class="content-section">
+            <div class="read-grid" style="grid-template-columns: 1fr;">
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Budi suka membaca buku')">
+                    <div class="sentence-text">☀️ <span style="color:#FF4D6D">Budi</span> suka membaca <span style="color:#4EA8DE">buku</span>.</div>
+                    <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
+                </div>
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Saya pergi ke sekolah')">
+                    <div class="sentence-text">🎒 <span style="color:#70E000">Saya</span> pergi ke <span style="color:#FDC500">sekolah</span>.</div>
+                    <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
+                </div>
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Ibu memasak di dapur')">
+                    <div class="sentence-text">🍳 <span style="color:#4EA8DE">Ibu</span> memasak di <span style="color:#FF4D6D">dapur</span>.</div>
+                    <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
+                </div>
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Kucing itu melompat tinggi')">
+                    <div class="sentence-text">🐱 Kucing itu <span style="color:#70E000">melompat</span> tinggi.</div>
+                    <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Fungsi pindah tab belajar
+        function switchTab(sectionId, btn) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Fitur Mengeluarkan Suara (Text-to-Speech Bahasa Indonesia)
+        function suaraBicara(teks) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Menghentikan suara sebelumnya jika ada
+                const ucapan = new SpeechSynthesisUtterance(teks);
+                ucapan.lang = 'id-ID'; // Set bahasa ke Indonesia
+                ucapan.rate = 0.8;    // Sedikit diperlambat agar anak-anak jelas mendengar
+                ucapan.pitch = 1.2;   // Nada suara disesuaikan agar lebih ramah anak
+                window.speechSynthesis.speak(ucapan);
+            } else {
+                alert("Browser kamu tidak mendukung fitur suara.");
+            }
+        }
+
+        // Fitur Tema Gelap/Terang Otomatis sinkron dari LocalStorage utama
+        function toggleTheme() {
+            const body = document.body;
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('tk_theme', theme);
+        }
+
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('tk_theme');
+            if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+        };
+    </script>
+</body>
+</html>

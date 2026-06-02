@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Huruf A-Z - TK Nurul Ikhlas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4EA8DE;
+            --secondary: #FDC500;
+            --success: #70E000;
+            --danger: #FF4D6D;
+            --bg: #F0F7F7;
+            --card: #FFFFFF;
+            --text: #2B2D42;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1A1A2E;
+            --card: #16213E;
+            --text: #EAEAEA;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); transition: 0.3s; padding: 20px 5%; }
+
+        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+        .back-btn { background: var(--danger); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 800; box-shadow: 0 4px 0 rgba(0,0,0,0.1); transition: 0.2s; }
+        .title { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 2rem; text-align: center; flex-grow: 1; }
+
+        .belajar-box { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+        @media (max-width: 768px) { .belajar-box { grid-template-columns: 1fr; } }
+
+        .alphabet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-height: 500px; overflow-y: auto; padding-right: 5px; }
+        .alphabet-grid::-webkit-scrollbar { width: 6px; }
+        .alphabet-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .letter-btn { background: var(--card); border: 2px solid #e2e8f0; font-family: 'Fredoka One', cursive; font-size: 1.5rem; padding: 15px 0; border-radius: 15px; cursor: pointer; color: var(--text); transition: 0.2s; box-shadow: 0 4px 0 #e2e8f0; }
+        .letter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 0 #3a8ebf; transform: translateY(2px); }
+
+        .display-card { background: var(--card); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 480px; cursor: pointer; }
+        .big-letter { font-family: 'Fredoka One', cursive; font-size: 6rem; color: var(--primary); margin-bottom: 5px; }
+
+        .category-menu { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; justify-content: center; }
+        .cat-btn { background: var(--bg); border: none; padding: 10px 20px; border-radius: 20px; font-weight: 800; cursor: pointer; color: var(--text); transition: 0.3s; }
+        .cat-btn.active { color: white; }
+        .cat-btn.btn-hewan.active { background: var(--danger); }
+        .cat-btn.btn-buah.active { background: var(--success); }
+        .cat-btn.btn-kendaraan.active { background: var(--secondary); }
+
+        .object-illustration { font-size: 8rem; margin: 15px 0; animation: bounce 0.5s infinite alternate; }
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+
+        .object-name { font-family: 'Fredoka One', cursive; font-size: 3rem; color: var(--text); }
+        .object-spelling { font-size: 1.5rem; color: #888; font-weight: 800; letter-spacing: 3px; margin-top: 10px; }
+        .suara-instruksi { margin-top: 25px; font-size: 1rem; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        <h1 class="title">🔤 Belajar Huruf</h1>
+        <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
+    </div>
+
+    <div class="belajar-box">
+        <div class="alphabet-grid" id="alphabet-box"></div>
+
+        <div class="display-card" onclick="suaraBenda()">
+            <div class="big-letter" id="view-letter">A</div>
+            
+            <div class="category-menu" onclick="event.stopPropagation();">
+                <button class="cat-btn btn-hewan active" onclick="setKategori('hewan')">🦁 Hewan</button>
+                <button class="cat-btn btn-buah" onclick="setKategori('buah')">🍎 Buah</button>
+                <button class="cat-btn btn-kendaraan" onclick="setKategori('kendaraan')">🚗 Kendaraan</button>
+            </div>
+
+            <div class="object-illustration" id="view-icon">🐔</div>
+            <div class="object-name" id="view-name">Ayam</div>
+            <div class="object-spelling" id="view-spelling">A-Y-A-M</div>
+            
+            <div class="suara-instruksi"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
+        </div>
+    </div>
+
+    <script>
+        const databaseBelajar = {
+            'A': { hewan: ['🐔', 'Ayam', 'A-Y-A-M'], buah: ['🍎', 'Apel', 'A-P-E-L'], kendaraan: ['✈️', 'Pesawat', 'P-E-S-A-W-A-T'] },
+            'B': { hewan: ['🐊', 'Buaya', 'B-U-A-Y-A'], buah: ['🥔', 'Bengkoang', 'B-E-N-G-K-U-A-N'], kendaraan: ['🚌', 'Bus', 'B-U-S'] },
+            'C': { hewan: ['🦎', 'Cicak', 'C-I-C-A-K'], buah: ['🍒', 'Ceri', 'C-E-R-I'], kendaraan: ['🚜', 'Cranes', 'C-R-A-N-E-S'] },
+            'D': { hewan: ['🐑', 'Domba', 'D-O-M-B-A'], buah: ['🥔', 'Duku', 'D-U-K-U'], kendaraan: ['🛶', 'Delman', 'D-E-L-M-A-N'] },
+            'E': { hewan: ['🦅', 'Elang', 'E-L-A-N-G'], buah: ['🌿', 'Enau', 'E-N-A-U'], kendaraan: ['🚲', 'E-Bike', 'E-B-I-K-E'] },
+            'F': { hewan: ['🦩', 'Flamingo', 'F-L-A-M-I-N-G-O'], buah: ['🍓', 'Frut', 'F-R-U-T'], kendaraan: ['⛴️', 'Feri', 'F-E-R-I'] },
+            'G': { hewan: ['🐘', 'Gajah', 'G-A-J-A-H'], buah: ['🌾', 'Gandum', 'G-A-N-D-U-M'], kendaraan: ['🚲', 'Gerobak', 'G-E-R-O-B-A-K'] },
+            'H': { hewan: ['🐯', 'Harimau', 'H-A-R-I-M-A-U'], buah: ['🥥', 'Haver', 'H-A-V-E-R'], kendaraan: ['🚁', 'Helikopter', 'H-E-L-I-K-O-P-T-E-R'] },
+            'I': { hewan: ['🐟', 'Ikan', 'I-K-A-N'], buah: ['🍃', 'Iles-iles', 'I-L-E-S'], kendaraan: ['🚑', 'Innova', 'I-N-N-O-V-A'] },
+            'J': { hewan: ['🦒', 'Jerapah', 'J-E-R-A-P-A-H'], buah: ['🍊', 'Jeruk', 'J-E-R-U-K'], kendaraan: ['🚙', 'Jeep', 'J-E-E-P'] },
+            'K': { hewan: ['🐱', 'Kucing', 'K-U-C-I-N-G'], buah: ['🥥', 'Kelapa', 'K-E-L-A-P-A'], kendaraan: ['🚗', 'Kereta', 'K-E-R-E-T-A'] },
+            'L': { hewan: ['🐝', 'Lebah', 'L-E-B-A-H'], buah: ['🍋', 'Lemon', 'L-E-M-O-N'], kendaraan: ['🛳️', 'Lori', 'L-O-R-I'] },
+            'M': { hewan: ['🐒', 'Monyet', 'M-O-N-Y-E-T'], buah: ['🥭', 'Manggis', 'M-A-N-G-G-I-S'], kendaraan: ['🏍️', 'Motor', 'M-O-T-O-R'] },
+            'N': { hewan: ['🦟', 'Nyamuk', 'N-Y-A-M-U-K'], buah: ['🍍', 'Nanas', 'N-A-N-A-S'], kendaraan: ['⛵', 'Nascar', 'N-A-S-C-A-R'] },
+            'O': { hewan: ['🦧', 'Orangutan', 'O-R-A-N-G-U-T-A-N'], buah: ['🍏', 'Oranye', 'O-R-A-N-Y-E'], kendaraan: ['🛺', 'Ojek', 'O-J-E-K'] },
+            'P': { hewan: ['🐼', 'Panda', 'P-A-N-D-A'], buah: ['🍌', 'Pisang', 'P-I-S-A-N-G'], kendaraan: ['✈️', 'Pesawat', 'P-E-S-A-W-A-T'] },
+            'Q': { hewan: ['🐦', 'Quail', 'Q-U-A-I-L'], buah: ['🍐', 'Quini', 'Q-U-I-N-I'], kendaraan: ['🚜', 'Quad', 'Q-U-A-D'] },
+            'R': { hewan: ['🦌', 'Rusa', 'R-U-S-A'], buah: ['🍓', 'Rambutan', 'R-A-M-B-U-T-A-N'], kendaraan: ['🚀', 'Roket', 'R-O-K-E-T'] },
+            'S': { hewan: ['🦁', 'Singa', 'S-I-N-G-A'], buah: ['🍐', 'Sirsak', 'S-I-R-S-A-K'], kendaraan: ['🚲', 'Sepeda', 'S-E-P-E-D-A'] },
+            'T': { hewan: ['🐭', 'Tikus', 'T-I-K-U-S'], buah: ['🍎', 'Tomat', 'T-O-M-A-T'], kendaraan: ['🚜', 'Traktor', 'T-R-A-K-T-O-R'] },
+            'U': { hewan: ['🐍', 'Ular', 'U-L-A-R'], buah: ['🍠', 'Ubi', 'U-B-I'], kendaraan: ['🎈', 'Udara', 'U-D-A-R-A'] },
+            'V': { hewan: ['🐍', 'Viper', 'V-I-P-E-R'], buah: ['🌿', 'Vanili', 'V-A-N-I-L-I'], kendaraan: ['🚐', 'Van', 'V-A-N'] },
+            'W': { hewan: ['🐗', 'Walang', 'W-A-L-A-N-G'], buah: ['🥕', 'Wortel', 'W-O-R-T-E-L'], kendaraan: ['🚋', 'Wagon', 'W-A-G-O-N'] },
+            'X': { hewan: ['🐟', 'Xenopus', 'X-E-N-O-P-U-S'], buah: ['🍉', 'Ximenia', 'X-I-M-E-N-I-A'], kendaraan: ['🚗', 'Xenia', 'X-E-N-I-A'] },
+            'Y': { hewan: ['🐂', 'Yak', 'Y-A-K'], buah: ['🍠', 'Yam', 'Y-A-M'], kendaraan: ['⛵', 'Yacht', 'Y-A-C-H-T'] },
+            'Z': { hewan: ['🦓', 'Zebra', 'Z-E-B-R-A'], buah: ['🍈', 'Zaitun', 'Z-A-I-T-U-N'], kendaraan: ['🏎️', 'Zeppelin', 'Z-E-P-P-E-L-I-N'] }
+        };
+
+        let hurufAktif = 'A';
+        let kategoriAktif = 'hewan';
+
+        const alphabetBox = document.getElementById('alphabet-box');
+        for (let i = 65; i <= 90; i++) {
+            const huruf = String.fromCharCode(i);
+            const btn = document.createElement('button');
+            btn.className = `letter-btn ${huruf === 'A' ? 'active' : ''}`;
+            btn.innerText = huruf;
+            btn.id = `btn-${huruf}`;
+            btn.onclick = () => gantiHuruf(huruf);
+            alphabetBox.appendChild(btn);
+        }
+
+        function gantiHuruf(huruf) {
+            document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${huruf}`);
+            if(activeBtn) activeBtn.classList.add('active');
+            hurufAktif = huruf;
+            updateDisplay();
+        }
+
+        function setKategori(kategori) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.btn-${kategori}`).classList.add('active');
+            kategoriAktif = kategori;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const data = databaseBelajar[hurufAktif][kategoriAktif];
+            document.getElementById('view-letter').innerText = hurufAktif;
+            document.getElementById('view-icon').innerText = data[0];
+            document.getElementById('view-name').innerText = data[1];
+            document.getElementById('view-spelling').innerText = data[2];
+        }
+
+        function suaraBenda() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const data = databaseBelajar[hurufAktif][kategoriAktif];
+                const ucapan = new SpeechSynthesisUtterance(`${hurufAktif}... ${data[1]}`);
+                ucapan.lang = 'id-ID';
+                ucapan.rate = 0.8;
+                window.speechSynthesis.speak(ucapan);
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('tk_theme', theme);
+        }
+
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('tk_theme');
+            if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+            updateDisplay();
+        };
+    </script>
+</body>
+</html>
