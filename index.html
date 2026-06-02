@@ -3,31 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pintar Ceria - Website Edukasi Interaktif Anak TK Usia 4-7 Tahun. Belajar Huruf, Angka, Membaca, dan Berhitung dengan Seru!">
-    <title>Pintar Ceria - Belajar Jadi Seru!</title>
+    <title>Pintar Ceria - Panel Belajar Interaktif</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --bg-body: #F4F9F9;
-            --text-color: #2B2D42;
             --primary: #4EA8DE;
             --secondary: #FDC500;
             --success: #70E000;
             --danger: #FF4D6D;
-            --card-bg: #FFFFFF;
-            --transition: all 0.3s ease;
+            --bg: #F0F7F7;
+            --card: #FFFFFF;
+            --text: #2B2D42;
         }
 
         [data-theme="dark"] {
-            --bg-body: #1E1E2F;
-            --text-color: #F8F9FA;
-            --primary: #0077B6;
-            --secondary: #E5A93C;
-            --success: #38B000;
-            --danger: #D90429;
-            --card-bg: #2D2D44;
+            --bg: #1A1A2E;
+            --card: #16213E;
+            --text: #EAEAEA;
         }
 
         * {
@@ -38,373 +33,317 @@
         }
 
         body {
-            background-color: var(--bg-body);
-            color: var(--text-color);
-            transition: var(--transition);
-            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: 0.3s;
         }
 
-        h1, h2, h3, .brand {
-            font-family: 'Fredoka One', cursive;
-        }
-
-        /* --- NAVBAR --- */
+        /* --- NAVIGATION --- */
         nav {
-            background-color: var(--card-bg);
-            padding: 15px 5%;
+            background: var(--card);
+            padding: 12px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .brand {
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-preview {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .brand-name {
+            font-family: 'Fredoka One', cursive;
             font-size: 1.8rem;
             color: var(--primary);
-            text-shadow: 2px 2px 0px var(--secondary);
-            cursor: pointer;
         }
 
-        .nav-links {
+        .nav-right {
             display: flex;
-            list-style: none;
-            gap: 20px;
             align-items: center;
+            gap: 20px;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: var(--transition);
+        .user-mini-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            background-color: var(--primary);
+        /* --- MAIN LAYOUT --- */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            padding: 30px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- SIDEBAR PROFIL --- */
+        .profile-card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .photo-upload-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        #profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary);
+        }
+
+        .upload-circle {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--primary);
             color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 3px solid var(--card);
         }
 
-        .btn-toggle {
+        .input-name {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E0E0E0;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: transparent;
+            color: var(--text);
+        }
+
+        .input-name:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* --- DASHBOARD AREA --- */
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, var(--primary), #00D2FF);
+            padding: 40px;
+            border-radius: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- MENU GRID --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 5px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .menu-item i {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .btn-theme {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            padding: 5px;
+            color: var(--text);
         }
 
-        .lang-select {
-            padding: 5px 10px;
-            border-radius: 10px;
-            border: 2px solid var(--primary);
-            font-weight: bold;
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
+        input[type="file"] { display: none; }
 
-        /* --- HERO BANNER --- */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 60px 8%;
-            background: linear-gradient(135deg, rgba(78,168,222,0.2) 0%, rgba(253,197,0,0.2) 100%);
-            border-radius: 0 0 50px 50px;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero-text p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-
-        .btn-main {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: var(--secondary);
-            color: #2B2D42;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.3rem;
-            text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 8px 0px #C79A00;
-            transition: transform 0.1s, box-shadow 0.1s;
-        }
-
-        .btn-main:active {
-            transform: translateY(4px);
-            box-shadow: 0 4px 0px #C79A00;
-        }
-
-        .hero-avatar {
-            width: 350px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* --- MAIN CONTENT & CARDS --- */
-        .container {
-            padding: 60px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .grid-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 25px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 3px solid transparent;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: scale(1.05) rotate(1deg);
-            border-color: var(--primary);
-        }
-
-        .card-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- INTERACTIVE ZONE (KUIS) --- */
-        .quiz-zone {
-            background-color: var(--card-bg);
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 40px auto;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .btn-opt {
-            padding: 20px;
-            font-size: 1.5rem;
-            font-family: 'Fredoka One', cursive;
-            background-color: var(--bg-body);
-            border: 3px solid var(--primary);
-            border-radius: 20px;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        .btn-opt:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .score-badge {
-            display: inline-block;
-            background-color: var(--success);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; }
-            .hero { flex-direction: column; text-align: center; gap: 40px; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .hero-avatar { width: 250px; }
-            .options-container { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .profile-card { margin: 0 auto; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="brand" onclick="location.reload()">✨ Pintar Ceria</div>
-        <ul class="nav-links">
-            <li><a href="#belajar" class="active" data-id="menu-belajar">Belajar</a></li>
-            <li><a href="#bermain" data-id="menu-bermain">Bermain</a></li>
-            <li><a href="#ortu" data-id="menu-ortu">Dashboard Ortu</a></li>
-            <li>
-                <select class="lang-select" onchange="switchLanguage(this.value)">
-                    <option value="id">🇮🇩 ID</option>
-                    <option value="en">🇬🇧 EN</option>
-                </select>
-            </li>
-            <li><button class="btn-toggle" onclick="toggleDarkMode()">☀️</button></li>
-        </ul>
+        <div class="logo-area">
+            <label for="logo-upload">
+                <img src="https://via.placeholder.com/100?text=LOGO" id="display-logo" class="logo-preview" alt="Logo TK">
+            </label>
+            <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
+            <span class="brand-name">Pintar Ceria</span>
+        </div>
+
+        <div class="nav-right">
+            <button class="btn-theme" onclick="toggleTheme()">🌙</button>
+            <img src="https://via.placeholder.com/100?text=USER" id="nav-user-img" class="user-mini-photo" alt="Profil">
+        </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-text">
-            <h1 id="hero-title">Belajar Jadi Lebih<br>Seru & Ceria!</h1>
-            <p id="hero-desc">Aplikasi edukasi interaktif untuk anak usia 4-7 tahun. Mengenal huruf, angka, dan membaca dengan petualangan interaktif.</p>
-            <a href="#belajar" class="btn-main" id="hero-btn">Mulai Belajar! 🚀</a>
-        </div>
-        <svg class="hero-avatar" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="110" r="60" fill="#FF4D6D" />
-            <ellipse cx="75" cy="60" rx="15" ry="40" fill="#FF4D6D" />
-            <ellipse cx="125" cy="60" rx="15" ry="40" fill="#FF4D6D" />
-            <ellipse cx="75" cy="65" rx="7" ry="25" fill="#FFCCD5" />
-            <ellipse cx="125" cy="65" rx="7" ry="25" fill="#FFCCD5" />
-            <circle cx="100" cy="120" r="50" fill="#FFF" />
-            <circle cx="80" cy="110" r="8" fill="#2B2D42" />
-            <circle cx="120" cy="110" r="8" fill="#2B2D42" />
-            <polygon points="100,123 92,118 108,118" fill="#FF4D6D" />
-            <path d="M 90 130 Q 100 140 110 130" stroke="#2B2D42" stroke-width="4" fill="none" stroke-linecap="round"/>
-        </svg>
-    </header>
+    <div class="main-wrapper">
+        <aside class="profile-card">
+            <div class="photo-upload-container">
+                <img src="https://via.placeholder.com/150?text=FOTO" id="profile-img" alt="Foto Siswa">
+                <label for="photo-upload" class="upload-circle">
+                    <i class="fa-solid fa-camera"></i>
+                </label>
+                <input type="file" id="photo-upload" accept="image/*" onchange="handleProfilePhoto(this)">
+            </div>
 
-    <main class="container" id="belajar">
-        <h2 class="section-title" id="menu-title">Pilih Petualangan Belajarmu! 🗺️</h2>
-        <div class="grid-menu">
-            <div class="card" onclick="playAlphabetSound()">
-                <div class="card-icon">🔤</div>
-                <h3>Huruf A-Z</h3>
-                <p>Mengenal huruf dan suara pelafalan.</p>
+            <input type="text" id="user-name" class="input-name" placeholder="Masukkan Nama Siswa" oninput="saveName(this.value)">
+            
+            <div style="text-align: left; margin-top: 20px;">
+                <p style="font-weight: 800; font-size: 0.9rem; margin-bottom: 5px;">Progress Belajar</p>
+                <div style="background: #eee; height: 10px; border-radius: 5px;">
+                    <div style="background: var(--success); width: 65%; height: 100%; border-radius: 5px;"></div>
+                </div>
             </div>
-            <div class="card" onclick="alert('Fitur Angka 1-100 & Counting Latihan')">
-                <div class="card-icon">🔢</div>
-                <h3>Angka 1-100</h3>
-                <p>Belajar menghitung benda-benda lucu.</p>
-            </div>
-            <div class="card" onclick="alert('Fitur Membaca Suku Kata Dasar')">
-                <div class="card-icon">📖</div>
-                <h3>Membaca</h3>
-                <p>Mengeja suku kata dengan mudah.</p>
-            </div>
-            <div class="card" onclick="alert('Fitur Tracing Huruf & Angka Interaktif')">
-                <div class="card-icon">✍️</div>
-                <h3>Menulis</h3>
-                <p>Latihan menggores garis di layar.</p>
-            </div>
-        </div>
-    </main>
+        </aside>
 
-    <section class="container" style="background-color: rgba(112,224,0,0.1); border-radius: 50px;" id="bermain">
-        <h2 class="section-title">Zona Game Tebak Angka 🎮</h2>
-        <div class="quiz-zone">
-            <h3 id="quiz-question">Berapa jumlah buah Apel dibawah ini?</h3>
-            <div style="font-size: 3.5rem; margin: 20px 0;" id="quiz-display">🍎 🍎 🍎</div>
-            <div class="options-container">
-                <button class="btn-opt" onclick="checkAnswer(2)">2</button>
-                <button class="btn-opt" onclick="checkAnswer(3)">3</button>
-                <button class="btn-opt" onclick="checkAnswer(5)">5</button>
-                <button class="btn-opt" onclick="checkAnswer(4)">4</button>
+        <main class="dashboard">
+            <section class="banner">
+                <h1 id="greeting">Selamat Datang!</h1>
+                <p>Hari ini kita mau belajar apa? Pilih menu di bawah ya!</p>
+            </section>
+
+            <div class="menu-grid">
+                <div class="menu-item" style="border-color: var(--primary);">
+                    <i class="fa-solid fa-font" style="color: var(--primary);"></i>
+                    <h3>Huruf A-Z</h3>
+                </div>
+                <div class="menu-item" style="border-color: var(--secondary);">
+                    <i class="fa-solid fa-arrow-up-9-1" style="color: var(--secondary);"></i>
+                    <h3>Angka 1-100</h3>
+                </div>
+                <div class="menu-item" style="border-color: var(--success);">
+                    <i class="fa-solid fa-book-open" style="color: var(--success);"></i>
+                    <h3>Membaca</h3>
+                </div>
+                <div class="menu-item" style="border-color: var(--danger);">
+                    <i class="fa-solid fa-pencil" style="color: var(--danger);"></i>
+                    <h3>Menulis</h3>
+                </div>
             </div>
-            <div class="score-badge">Skor Kamu: <span id="score">0</span> ⭐</div>
-        </div>
-    </section>
+        </main>
+    </div>
 
     <script>
-        // --- GAME LOGIC ---
-        let currentScore = 0;
-        function checkAnswer(ans) {
-            if(ans === 3) {
-                alert("Hore! Jawabanmu BENAR! 🥳🎉");
-                currentScore += 10;
-                document.getElementById('score').innerText = currentScore;
-                generateNewQuestion();
-            } else {
-                alert("Wah, coba lagi yuk! Pasti bisa! 💪✨");
+        // --- LOGIKA UPLOAD LOGO TK ---
+        function handleLogo(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('display-logo').src = e.target.result;
+                    localStorage.setItem('pc_logo', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        function generateNewQuestion() {
-            // Simulasi reset/ganti kuis sederhana
-            document.getElementById('quiz-question').innerText = "Berapa jumlah bintang di bawah ini?";
-            document.getElementById('quiz-display').innerText = "⭐ ⭐ ⭐ ⭐";
-            const options = document.querySelectorAll('.btn-opt');
-            options[0].innerText = "1";
-            options[1].innerText = "5";
-            options[2].innerText = "4"; // Kunci jawaban baru
-            options[3].innerText = "2";
-            
-            // Update fungsi cek jawaban untuk demonstrasi sederhana
-            options[2].setAttribute('onclick', 'alert("Hebat! Benar lagi! 🚀"); currentScore+=10; document.getElementById("score").innerText = currentScore;');
+        // --- LOGIKA UPLOAD FOTO PROFIL SISWA ---
+        function handleProfilePhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-img').src = e.target.result;
+                    document.getElementById('nav-user-img').src = e.target.result;
+                    localStorage.setItem('pc_user_photo', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
-        // --- AUDIO SYNTHESIS (Pelafalan Huruf) ---
-        function playAlphabetSound() {
-            let synth = window.speechSynthesis;
-            let textToSpeak = new SpeechSynthesisUtterance("A, B, C. A untuk Apel, B untuk Balon");
-            textToSpeak.lang = 'id-ID';
-            synth.speak(textToSpeak);
-            alert("🔊 Memutar Suara: A B C (Menggunakan fitur text-to-speech browser)");
+        // --- SIMPAN NAMA SISWA ---
+        function saveName(name) {
+            document.getElementById('greeting').innerText = name ? `Halo, ${name}!` : "Selamat Datang!";
+            localStorage.setItem('pc_user_name', name);
         }
 
         // --- DARK MODE TOGGLE ---
-        function toggleDarkMode() {
-            const body = document.documentElement;
-            const currentTheme = body.getAttribute('data-theme');
-            const toggleBtn = document.querySelector('.btn-toggle');
-            
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                toggleBtn.innerText = '☀️';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                toggleBtn.innerText = '🌙';
-            }
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('pc_theme', isDark ? 'light' : 'dark');
         }
 
-        // --- MULTILINGUAL SWITCH ---
-        const langData = {
-            id: {
-                title: "Belajar Jadi Lebih Seru & Ceria!",
-                desc: "Aplikasi edukasi interaktif untuk anak usia 4-7 tahun. Mengenal huruf, angka, dan membaca dengan petualangan interaktif.",
-                btn: "Mulai Belajar! 🚀",
-                menu: "Pilih Petualangan Belajarmu! 🗺️"
-            },
-            en: {
-                title: "Learning is Fun & Cheerful!",
-                desc: "Interactive educational website for kids aged 4-7. Learn letters, numbers, and reading with interactive adventures.",
-                btn: "Start Learning! 🚀",
-                menu: "Choose Your Learning Adventure! 🗺️"
+        // --- LOAD DATA SAAT REFRESH ---
+        window.onload = () => {
+            const savedLogo = localStorage.getItem('pc_logo');
+            const savedPhoto = localStorage.getItem('pc_user_photo');
+            const savedName = localStorage.getItem('pc_user_name');
+            const savedTheme = localStorage.getItem('pc_theme');
+
+            if (savedLogo) document.getElementById('display-logo').src = savedLogo;
+            if (savedPhoto) {
+                document.getElementById('profile-img').src = savedPhoto;
+                document.getElementById('nav-user-img').src = savedPhoto;
             }
+            if (savedName) {
+                document.getElementById('user-name').value = savedName;
+                document.getElementById('greeting').innerText = `Halo, ${savedName}!`;
+            }
+            if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
         };
-
-        function switchLanguage(lang) {
-            document.getElementById('hero-title').innerHTML = langData[lang].title;
-            document.getElementById('hero-desc').innerText = langData[lang].desc;
-            document.getElementById('hero-btn').innerText = langData[lang].btn;
-            document.getElementById('menu-title').innerText = langData[lang].menu;
-        }
     </script>
 </body>
 </html>
