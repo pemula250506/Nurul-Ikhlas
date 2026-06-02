@@ -27,147 +27,77 @@
             --placeholder-bg: #2C3A5F;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Nunito', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            transition: 0.3s;
-        }
+        body { background-color: var(--bg); color: var(--text); transition: 0.3s; }
 
         /* --- NAVIGATION --- */
         nav {
-            background: var(--card);
-            padding: 15px 5%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: var(--card); padding: 15px 5%; display: flex; flex-direction: column;
+            gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
         }
-
-        .nav-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .bubble-menu {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
+        .nav-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .bubble-menu { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         .bubble-btn {
-            background: var(--bg);
-            border: none;
-            padding: 8px 18px;
-            border-radius: 25px;
-            font-weight: 800;
-            color: var(--text);
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+            background: var(--bg); border: none; padding: 8px 18px; border-radius: 25px;
+            font-weight: 800; color: var(--text); cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px; font-size: 0.9rem; box-shadow: 0 4px 0 rgba(0,0,0,0.1);
         }
-
-        .bubble-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(0,0,0,0.1); }
         .bubble-btn.active { background: var(--primary); color: white; }
 
         .logo-area { display: flex; align-items: center; gap: 12px; }
         .logo-container-box {
-            width: 50px; height: 50px; border-radius: 10px;
-            border: 2px dashed var(--primary); background: var(--placeholder-bg);
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            width: 50px; height: 50px; border-radius: 10px; border: 2px dashed var(--primary);
+            background: var(--placeholder-bg); display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
         .logo-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
         .brand-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--primary); }
 
-        /* --- CONTENT WRAPPER --- */
-        .main-wrapper {
-            padding: 30px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
+        /* --- CONTENT --- */
+        .main-wrapper { padding: 30px 5%; max-width: 1200px; margin: 0 auto; }
         .page-section { display: none; animation: fadeIn 0.5s; }
         .page-section.active { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- DASHBOARD ELEMENTS (GRID RATA) --- */
+        /* --- BERANDA --- */
         .banner {
             background: linear-gradient(135deg, var(--primary), #00D2FF);
-            padding: 50px 20px; border-radius: 40px; color: white;
-            text-align: center; margin-bottom: 30px;
+            padding: 50px 20px; border-radius: 40px; color: white; text-align: center; margin-bottom: 30px;
         }
-        .banner h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; }
-
-        .menu-grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 20px;
-            align-items: stretch; /* Memastikan semua baris grid sama tinggi */
-        }
-
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .menu-item {
-            background: var(--card); 
-            padding: 40px 20px; 
-            border-radius: 30px;
-            text-align: center; 
-            cursor: pointer; 
-            transition: 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%; /* Memaksa kartu memenuhi ruang grid agar rata */
+            background: var(--card); padding: 40px 20px; border-radius: 30px; text-align: center;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;
         }
-
         .menu-item:hover { transform: scale(1.05); }
-        .menu-item i { 
-            font-size: 3.5rem; 
-            margin-bottom: 20px; 
-            display: block;
-            height: 60px; /* Konsistensi tinggi ikon */
-            display: flex;
-            align-items: center;
-        }
-        .menu-item h3 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.2rem;
-            line-height: 1.2;
-        }
+        .menu-item i { font-size: 3rem; margin-bottom: 15px; }
 
-        /* --- PROFIL & KONTAK STYLE --- */
-        .profile-container {
-            background: var(--card); padding: 40px; border-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        /* --- PROFIL (RAME VERSION) --- */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px;
         }
-        .profile-header { text-align: center; margin-bottom: 40px; }
-        .profile-header h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--primary); }
-        
-        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .card-info {
-            background: var(--bg); padding: 25px; border-radius: 25px; border-top: 6px solid var(--primary);
+        .gallery-box {
+            aspect-ratio: 4/3; background: var(--placeholder-bg); border-radius: 20px;
+            border: 3px dashed var(--primary); overflow: hidden; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; position: relative;
         }
-        .card-info h3 { margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .gallery-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .gallery-box span { font-size: 0.8rem; font-weight: 800; color: var(--primary); text-align: center; padding: 10px; }
+        .gallery-box:hover { background: #fff; }
+
+        .profile-card { background: var(--card); padding: 30px; border-radius: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .section-title { font-family: 'Fredoka One'; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+        .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .facility-item { background: var(--bg); padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .facility-item i { font-size: 1.5rem; color: var(--secondary); margin-bottom: 10px; display: block; }
+        .facility-item p { font-weight: 800; font-size: 0.85rem; }
+
+        .info-pill { display: inline-block; background: var(--primary); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; }
 
         input[type="file"] { display: none; }
-
     </style>
 </head>
 <body>
@@ -175,90 +105,98 @@
     <nav>
         <div class="nav-top">
             <div class="logo-area">
-                <label for="logo-upload" class="logo-container-box">
+                <label for="logo-upload" class="logo-container-box" title="Klik ganti logo">
                     <i class="fa-solid fa-mosque" id="logo-icon" style="color:var(--primary)"></i>
                     <img src="" id="display-logo" class="logo-preview">
                 </label>
-                <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
+                <input type="file" id="logo-upload" accept="image/*" onchange="handleImage(this, 'display-logo', 'logo-icon', 'tk_logo')">
                 <span class="brand-name">TK Nurul Ikhlas</span>
             </div>
             <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
         </div>
 
         <div class="bubble-menu">
-            <button class="bubble-btn active" onclick="showPage('home', this)">
-                <i class="fa-solid fa-house"></i> Beranda
-            </button>
-            <button class="bubble-btn" onclick="showPage('profil', this)">
-                <i class="fa-solid fa-school"></i> Profil Sekolah
-            </button>
-            <button class="bubble-btn" onclick="showPage('kontak', this)">
-                <i class="fa-solid fa-phone"></i> Kontak
-            </button>
+            <button class="bubble-btn active" onclick="showPage('home', this)"><i class="fa-solid fa-house"></i> Beranda</button>
+            <button class="bubble-btn" onclick="showPage('profil', this)"><i class="fa-solid fa-school"></i> Profil Sekolah</button>
+            <button class="bubble-btn" onclick="showPage('kontak', this)"><i class="fa-solid fa-phone"></i> Kontak</button>
         </div>
     </nav>
 
     <div class="main-wrapper">
         
-        <!-- HALAMAN BERANDA -->
         <section id="home" class="page-section active">
             <div class="banner">
                 <h1>Halo, Sahabat Kecil!</h1>
-                <p>Ayo bermain dan belajar bersama di TK Nurul Ikhlas</p>
+                <p>Membentuk Generasi Cerdas, Berakhlak, dan Ceria</p>
             </div>
-            
             <div class="menu-grid">
-                <!-- Item 1 -->
-                <div class="menu-item" style="color: var(--primary);">
-                    <i class="fa-solid fa-spell-check"></i>
-                    <h3>Belajar Huruf</h3>
-                </div>
-                <!-- Item 2 (Sekarang Rata) -->
-                <div class="menu-item" style="color: var(--secondary);">
-                    <i class="fa-solid fa-arrow-1-9"></i>
-                    <h3>Belajar Angka</h3>
-                </div>
-                <!-- Item 3 -->
-                <div class="menu-item" style="color: var(--success);">
-                    <i class="fa-solid fa-shapes"></i>
-                    <h3>Mengenal Bentuk</h3>
-                </div>
-                <!-- Item 4 -->
-                <div class="menu-item" style="color: var(--danger);">
-                    <i class="fa-solid fa-paint-brush"></i>
-                    <h3>Mewarnai</h3>
-                </div>
+                <div class="menu-item" style="color: var(--primary);"><i class="fa-solid fa-spell-check"></i><h3>Huruf A-Z</h3></div>
+                <div class="menu-item" style="color: var(--secondary);"><i class="fa-solid fa-arrow-1-9"></i><h3>Angka</h3></div>
+                <div class="menu-item" style="color: var(--success);"><i class="fa-solid fa-book-open"></i><h3>Membaca</h3></div>
+                <div class="menu-item" style="color: var(--danger);"><i class="fa-solid fa-palette"></i><h3>Mewarnai</h3></div>
             </div>
         </section>
 
-        <!-- HALAMAN PROFIL SEKOLAH -->
         <section id="profil" class="page-section">
-            <div class="profile-container">
-                <div class="profile-header">
-                    <h2>Tentang Sekolah Kami</h2>
-                    <p>Membentuk masa depan cerah dengan kasih sayang</p>
+            
+            <h2 class="section-title"><i class="fa-solid fa-images"></i> Galeri Sekolah (Klik Ganti Foto)</h2>
+            <div class="gallery-grid">
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-1', 'txt-gal-1', 'gal_1')">
+                    <span id="txt-gal-1"><i class="fa-solid fa-plus"></i><br>Foto Gedung</span>
+                    <img src="" id="img-gal-1">
+                </label>
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-2', 'txt-gal-2', 'gal_2')">
+                    <span id="txt-gal-2"><i class="fa-solid fa-plus"></i><br>Foto Kelas</span>
+                    <img src="" id="img-gal-2">
+                </label>
+                <label class="gallery-box">
+                    <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-3', 'txt-gal-3', 'gal_3')">
+                    <span id="txt-gal-3"><i class="fa-solid fa-plus"></i><br>Foto Bermain</span>
+                    <img src="" id="img-gal-3">
+                </label>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <div>
+                    <div class="profile-card">
+                        <h2 class="section-title"><i class="fa-solid fa-star"></i> Visi & Misi</h2>
+                        <p style="margin-bottom: 15px;"><b>Visi:</b> Terwujudnya anak yang sholeh, cerdas, mandiri dan kreatif.</p>
+                        <p><b>Misi:</b><br>1. Menanamkan aqidah islami sejak dini.<br>2. Menciptakan suasana belajar sambil bermain yang ceria.<br>3. Menjalin kerjasama yang baik dengan orang tua.</p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2 class="section-title"><i class="fa-solid fa-couch"></i> Fasilitas Kami</h2>
+                        <div class="facility-grid">
+                            <div class="facility-item"><i class="fa-solid fa-mosque"></i><p>Musholla</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-child-reaching"></i><p>Playground</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-book"></i><p>Perpustakaan</p></div>
+                            <div class="facility-item"><i class="fa-solid fa-wifi"></i><p>Area WIFI</p></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="profile-grid">
-                    <div class="card-info">
-                        <h3><i class="fa-solid fa-eye"></i> Visi Kami</h3>
-                        <p>Menjadi pusat pendidikan anak usia dini yang membentuk karakter islami, mandiri, dan kreatif.</p>
+
+                <div>
+                    <div class="profile-card" style="text-align: center; border: 2px solid var(--success);">
+                        <span class="info-pill">RESMI BAN-PDM</span>
+                        <h2 style="font-family:'Fredoka One'; color:var(--success);">AKREDITASI A</h2>
+                        <p style="font-size: 0.8rem;">Sangat Baik (Terverifikasi)</p>
                     </div>
-                    <div class="card-info" style="border-top-color: var(--secondary);">
-                        <h3><i class="fa-solid fa-bullseye"></i> Misi Kami</h3>
-                        <p>Menciptakan lingkungan belajar yang aman, ceria, dan menanamkan aqidah sejak dini.</p>
-                    </div>
-                    <div class="card-info" style="border-top-color: var(--success);">
-                        <h3><i class="fa-solid fa-medal"></i> Akreditasi</h3>
-                        <p>TK Nurul Ikhlas telah mendapatkan Akreditasi <strong>A (Sangat Baik)</strong>.</p>
+
+                    <div class="profile-card">
+                        <h2 class="section-title" style="font-size: 1rem;"><i class="fa-solid fa-clock"></i> Jam Sekolah</h2>
+                        <p style="font-size: 0.9rem;">Senin - Kamis:<br>07.30 - 11.00 WIB</p>
+                        <hr style="margin: 10px 0; opacity: 0.2;">
+                        <p style="font-size: 0.9rem;">Jumat:<br>07.30 - 09.30 WIB</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HALAMAN KONTAK -->
         <section id="kontak" class="page-section">
-            <div class="profile-container" style="text-align: center;">
-                <h2 style="font-family:'Fredoka One'; color:var(--primary); margin-bottom:20px;">Hubungi Kami</h2>
+            <div class="profile-card" style="text-align: center;">
+                <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-paper-plane"></i> Hubungi Kami</h2>
                 <p style="margin-bottom:10px;"><i class="fa-solid fa-map-location-dot"></i> Jl. Pendidikan No. 12, Kota Nurul Ikhlas</p>
                 <p style="margin-bottom:10px;"><i class="fa-solid fa-phone-volume"></i> (021) 123-4567</p>
                 <p style="margin-bottom:10px;"><i class="fa-solid fa-envelope"></i> info@tknurulikhlas.sch.id</p>
@@ -275,15 +213,17 @@
             btn.classList.add('active');
         }
 
-        function handleLogo(input) {
+        // Fungsi Universal Handle Gambar (Logo & Galeri)
+        function handleImage(input, imgId, hideId, storageKey) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const img = document.getElementById('display-logo');
+                    const img = document.getElementById(imgId);
+                    const hide = document.getElementById(hideId);
                     img.src = e.target.result;
                     img.style.display = 'block';
-                    document.getElementById('logo-icon').style.display = 'none';
-                    localStorage.setItem('tk_logo', e.target.result);
+                    if(hide) hide.style.display = 'none';
+                    localStorage.setItem(storageKey, e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -297,15 +237,27 @@
         }
 
         window.onload = () => {
-            const savedLogo = localStorage.getItem('tk_logo');
+            // Load Logo
+            loadSavedImage('tk_logo', 'display-logo', 'logo-icon');
+            // Load Gallery
+            loadSavedImage('gal_1', 'img-gal-1', 'txt-gal-1');
+            loadSavedImage('gal_2', 'img-gal-2', 'txt-gal-2');
+            loadSavedImage('gal_3', 'img-gal-3', 'txt-gal-3');
+
             const savedTheme = localStorage.getItem('tk_theme');
-            if (savedLogo) {
-                const img = document.getElementById('display-logo');
-                img.src = savedLogo; img.style.display = 'block';
-                document.getElementById('logo-icon').style.display = 'none';
-            }
             if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
         };
+
+        function loadSavedImage(key, imgId, hideId) {
+            const data = localStorage.getItem(key);
+            if (data) {
+                const img = document.getElementById(imgId);
+                const hide = document.getElementById(hideId);
+                img.src = data;
+                img.style.display = 'block';
+                if(hide) hide.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
