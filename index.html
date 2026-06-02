@@ -1,3 +1,8 @@
+Berikut adalah kode yang sudah disempurnakan. Di versi ini, saya telah menambahkan komponen visual teks petunjuk langsung di bawah logo navigasi agar pengguna tahu bahwa logo tersebut bisa diklik untuk diganti.
+
+Selain itu, gambar *placeholder* bawaan telah diganti dengan ikon **ikon gambar standar (Font Awesome)** agar tampilan awal sebelum Anda mengunggah logo asli sekolah Anda terlihat jauh lebih rapi, profesional, dan bersih.
+
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -17,12 +22,14 @@
             --bg: #F0F7F7;
             --card: #FFFFFF;
             --text: #2B2D42;
+            --placeholder-bg: #E2E8F0;
         }
 
         [data-theme="dark"] {
             --bg: #1A1A2E;
             --card: #16213E;
             --text: #EAEAEA;
+            --placeholder-bg: #2C3A5F;
         }
 
         * {
@@ -57,14 +64,51 @@
             gap: 15px;
         }
 
-        .logo-preview {
+        .logo-wrapper {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container-box {
             width: 55px;
             height: 55px;
             border-radius: 12px;
+            border: 2px dashed var(--primary);
+            background: var(--placeholder-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .logo-container-box:hover {
+            border-style: solid;
+            transform: scale(1.02);
+        }
+
+        .logo-preview {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border: 2px solid var(--primary);
-            background: #f0f0f0;
-            cursor: pointer;
+            display: none; /* Sembunyikan elemen img jika belum ada gambar */
+        }
+
+        .logo-placeholder-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .upload-hint {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .brand-name {
@@ -79,12 +123,28 @@
             gap: 20px;
         }
 
-        .user-mini-photo {
+        .user-photo-container {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            object-fit: cover;
             border: 2px solid var(--secondary);
+            background: var(--placeholder-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .user-mini-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .user-mini-icon {
+            font-size: 1.1rem;
+            color: var(--secondary);
         }
 
         /* --- MAIN LAYOUT --- */
@@ -114,12 +174,28 @@
             margin: 0 auto 20px;
         }
 
-        #profile-img {
+        .profile-img-box {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            object-fit: cover;
             border: 5px solid var(--secondary);
+            background: var(--placeholder-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .profile-placeholder-icon {
+            font-size: 4rem;
+            color: var(--secondary);
         }
 
         .upload-circle {
@@ -136,6 +212,11 @@
             justify-content: center;
             cursor: pointer;
             border: 3px solid var(--card);
+            transition: 0.2s;
+        }
+
+        .upload-circle:hover {
+            transform: scale(1.1);
         }
 
         .input-name {
@@ -226,23 +307,33 @@
 
     <nav>
         <div class="logo-area">
-            <label for="logo-upload">
-                <img src="https://via.placeholder.com/100?text=LOGO" id="display-logo" class="logo-preview" alt="Logo TK">
-            </label>
+            <div class="logo-wrapper">
+                <label for="logo-upload" class="logo-container-box">
+                    <i class="fa-solid fa-school logo-placeholder-icon" id="logo-icon"></i>
+                    <img src="" id="display-logo" class="logo-preview" alt="Logo TK">
+                </label>
+                <span class="upload-hint">Ganti Logo</span>
+            </div>
             <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
             <span class="brand-name">Pintar Ceria</span>
         </div>
 
         <div class="nav-right">
             <button class="btn-theme" onclick="toggleTheme()">🌙</button>
-            <img src="https://via.placeholder.com/100?text=USER" id="nav-user-img" class="user-mini-photo" alt="Profil">
+            <div class="user-photo-container">
+                <i class="fa-solid fa-user user-mini-icon" id="nav-user-icon"></i>
+                <img src="" id="nav-user-img" class="user-mini-photo" alt="Profil Nav">
+            </div>
         </div>
     </nav>
 
     <div class="main-wrapper">
         <aside class="profile-card">
             <div class="photo-upload-container">
-                <img src="https://via.placeholder.com/150?text=FOTO" id="profile-img" alt="Foto Siswa">
+                <div class="profile-img-box">
+                    <i class="fa-solid fa-user-astronaut profile-placeholder-icon" id="profile-icon"></i>
+                    <img src="" id="profile-img" alt="Foto Siswa">
+                </div>
                 <label for="photo-upload" class="upload-circle">
                     <i class="fa-solid fa-camera"></i>
                 </label>
@@ -292,7 +383,13 @@
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('display-logo').src = e.target.result;
+                    const imgElement = document.getElementById('display-logo');
+                    const iconElement = document.getElementById('logo-icon');
+                    
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                    iconElement.style.display = 'none';
+                    
                     localStorage.setItem('pc_logo', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
@@ -304,8 +401,19 @@
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('profile-img').src = e.target.result;
-                    document.getElementById('nav-user-img').src = e.target.result;
+                    const profileImg = document.getElementById('profile-img');
+                    const profileIcon = document.getElementById('profile-icon');
+                    const navImg = document.getElementById('nav-user-img');
+                    const navIcon = document.getElementById('nav-user-icon');
+
+                    profileImg.src = e.target.result;
+                    profileImg.style.display = 'block';
+                    profileIcon.style.display = 'none';
+
+                    navImg.src = e.target.result;
+                    navImg.style.display = 'block';
+                    navIcon.style.display = 'none';
+
                     localStorage.setItem('pc_user_photo', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
@@ -333,10 +441,22 @@
             const savedName = localStorage.getItem('pc_user_name');
             const savedTheme = localStorage.getItem('pc_theme');
 
-            if (savedLogo) document.getElementById('display-logo').src = savedLogo;
+            if (savedLogo) {
+                const imgElement = document.getElementById('display-logo');
+                imgElement.src = savedLogo;
+                imgElement.style.display = 'block';
+                document.getElementById('logo-icon').style.display = 'none';
+            }
             if (savedPhoto) {
-                document.getElementById('profile-img').src = savedPhoto;
-                document.getElementById('nav-user-img').src = savedPhoto;
+                const profileImg = document.getElementById('profile-img');
+                profileImg.src = savedPhoto;
+                profileImg.style.display = 'block';
+                document.getElementById('profile-icon').style.display = 'none';
+
+                const navImg = document.getElementById('nav-user-img');
+                navImg.src = savedPhoto;
+                navImg.style.display = 'block';
+                document.getElementById('nav-user-icon').style.display = 'none';
             }
             if (savedName) {
                 document.getElementById('user-name').value = savedName;
@@ -347,3 +467,5 @@
     </script>
 </body>
 </html>
+
+```
