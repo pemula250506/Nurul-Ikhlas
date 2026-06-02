@@ -80,11 +80,6 @@
             transition: 0.2s;
         }
 
-        .logo-container-box:hover {
-            border-style: solid;
-            background: #fff;
-        }
-
         .logo-preview {
             width: 100%;
             height: 100%;
@@ -97,37 +92,10 @@
             color: var(--primary);
         }
 
-        .upload-hint {
-            font-size: 0.6rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-top: 3px;
-            text-transform: uppercase;
-        }
-
         .brand-name {
             font-family: 'Fredoka One', cursive;
             font-size: 1.8rem;
             color: var(--primary);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-theme {
-            background: #eee;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
         }
 
         /* --- MAIN LAYOUT --- */
@@ -140,67 +108,76 @@
             margin: 0 auto;
         }
 
-        /* --- SIDEBAR INFO --- */
-        .info-sidebar {
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* --- BANNER --- */
+        .banner {
+            background: linear-gradient(135deg, var(--primary), #00D2FF);
+            padding: 40px;
+            border-radius: 40px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(78,168,222,0.2);
+        }
+
+        .banner h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; }
+
+        /* --- PROFIL SEKOLAH SECTION --- */
+        .school-profile-card {
             background: var(--card);
             padding: 30px;
             border-radius: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            height: fit-content;
         }
 
-        .info-sidebar h2 {
-            font-family: 'Fredoka One', cursive;
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 10px;
-        }
-
-        .info-list {
-            list-style: none;
-        }
-
-        .info-list li {
-            margin-bottom: 15px;
+        .profile-header {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.95rem;
-            line-height: 1.4;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .info-list i {
+        .profile-header i {
+            font-size: 2rem;
             color: var(--secondary);
-            margin-top: 3px;
         }
 
-        /* --- DASHBOARD AREA --- */
-        .dashboard {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .banner {
-            background: linear-gradient(135deg, var(--primary), #00D2FF);
-            padding: 50px;
-            border-radius: 40px;
-            color: white;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(78,168,222,0.3);
-        }
-
-        .banner h1 {
+        .profile-header h2 {
             font-family: 'Fredoka One', cursive;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            color: var(--text);
         }
 
-        .banner p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .profile-item {
+            padding: 20px;
+            border-radius: 20px;
+            background: var(--bg);
+            border-left: 5px solid var(--primary);
+        }
+
+        .profile-item h4 {
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text);
         }
 
         /* --- MENU GRID --- */
@@ -212,7 +189,7 @@
 
         .menu-item {
             background: var(--card);
-            padding: 40px 20px;
+            padding: 35px 20px;
             border-radius: 30px;
             text-align: center;
             cursor: pointer;
@@ -221,28 +198,27 @@
             border-bottom: 6px solid transparent;
         }
 
-        .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        .menu-item:hover { transform: translateY(-10px); }
+        .menu-item i { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .menu-item h3 { font-family: 'Fredoka One', cursive; }
+
+        /* --- SIDEBAR --- */
+        .info-sidebar {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 30px;
+            height: fit-content;
         }
 
-        .menu-item i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .menu-item h3 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.3rem;
-        }
+        .info-sidebar h2 { font-family: 'Fredoka One', cursive; color: var(--primary); margin-bottom: 15px; }
+        .info-list { list-style: none; }
+        .info-list li { margin-bottom: 15px; display: flex; gap: 10px; font-size: 0.9rem; }
+        .info-list i { color: var(--secondary); }
 
         input[type="file"] { display: none; }
 
         @media (max-width: 900px) {
             .main-wrapper { grid-template-columns: 1fr; }
-            .info-sidebar { order: 2; }
-            .dashboard { order: 1; }
         }
     </style>
 </head>
@@ -250,50 +226,58 @@
 
     <nav>
         <div class="logo-area">
-            <div class="logo-wrapper" title="Klik untuk ganti logo TK">
+            <div class="logo-wrapper" title="Ganti logo TK">
                 <label for="logo-upload" class="logo-container-box">
                     <i class="fa-solid fa-mosque logo-placeholder-icon" id="logo-icon"></i>
                     <img src="" id="display-logo" class="logo-preview" alt="Logo TK">
                 </label>
-                <span class="upload-hint">Ganti Logo</span>
             </div>
             <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
             <span class="brand-name">TK Nurul Ikhlas</span>
         </div>
-
-        <div class="nav-right">
-            <button class="btn-theme" onclick="toggleTheme()" title="Ganti Mode">🌙</button>
-        </div>
+        <button class="btn-theme" onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
     </nav>
 
     <div class="main-wrapper">
         <aside class="info-sidebar">
-            <h2>Tentang Kami</h2>
+            <h2>Kontak Kami</h2>
             <ul class="info-list">
-                <li>
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Jl. Pendidikan No. 12, Kota Nurul Ikhlas</span>
-                </li>
-                <li>
-                    <i class="fa-solid fa-phone"></i>
-                    <span>(021) 123-4567</span>
-                </li>
-                <li>
-                    <i class="fa-solid fa-heart"></i>
-                    <span>Mendidik dengan kasih sayang dan nilai islami.</span>
-                </li>
+                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Pendidikan No. 12, Kota Nurul Ikhlas</span></li>
+                <li><i class="fa-solid fa-phone"></i><span>(021) 123-4567</span></li>
+                <li><i class="fa-solid fa-envelope"></i><span>info@tknurulikhlas.sch.id</span></li>
             </ul>
-            <div style="margin-top: 25px; padding: 15px; background: var(--bg); border-radius: 20px; text-align: center;">
-                <p style="font-weight: 800; color: var(--primary); font-size: 0.8rem;">TAHUN AJARAN 2024/2025</p>
-            </div>
         </aside>
 
         <main class="dashboard">
+            <!-- Banner -->
             <section class="banner">
                 <h1>Selamat Datang!</h1>
-                <p>Ayo belajar bersama di TK Nurul Ikhlas</p>
+                <p>Membentuk Generasi Cerdas, Berakhlak, dan Ceria</p>
             </section>
 
+            <!-- FITUR BARU: PROFIL SEKOLAH -->
+            <section class="school-profile-card">
+                <div class="profile-header">
+                    <i class="fa-solid fa-school"></i>
+                    <h2>Profil Sekolah Kami</h2>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <h4><i class="fa-solid fa-star"></i> Visi</h4>
+                        <p>Menjadi lembaga pendidikan anak usia dini yang unggul dalam membentuk karakter islami dan kreativitas anak.</p>
+                    </div>
+                    <div class="profile-item" style="border-left-color: var(--secondary);">
+                        <h4><i class="fa-solid fa-rocket"></i> Misi</h4>
+                        <p>Menyelenggarakan pembelajaran yang aktif, inovatif, dan menyenangkan berbasis nilai-nilai kebaikan.</p>
+                    </div>
+                    <div class="profile-item" style="border-left-color: var(--success);">
+                        <h4><i class="fa-solid fa-award"></i> Akreditasi</h4>
+                        <p>Sekolah kami telah Terakreditasi <strong>A (Sangat Baik)</strong> oleh BAN-PDM.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Belajar -->
             <div class="menu-grid">
                 <div class="menu-item" style="border-color: var(--primary);">
                     <i class="fa-solid fa-font" style="color: var(--primary);"></i>
@@ -316,48 +300,39 @@
     </div>
 
     <script>
-        // --- LOGIKA UPLOAD LOGO TK ---
         function handleLogo(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const imgElement = document.getElementById('display-logo');
                     const iconElement = document.getElementById('logo-icon');
-                    
                     imgElement.src = e.target.result;
                     imgElement.style.display = 'block';
                     iconElement.style.display = 'none';
-                    
                     localStorage.setItem('nurul_ikhlas_logo', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // --- DARK MODE TOGGLE ---
         function toggleTheme() {
             const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const isDark = currentTheme === 'dark';
-            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            localStorage.setItem('nurul_ikhlas_theme', isDark ? 'light' : 'dark');
+            const current = body.getAttribute('data-theme');
+            const target = current === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', target);
+            localStorage.setItem('nurul_ikhlas_theme', target);
         }
 
-        // --- LOAD DATA SAAT REFRESH ---
         window.onload = () => {
             const savedLogo = localStorage.getItem('nurul_ikhlas_logo');
             const savedTheme = localStorage.getItem('nurul_ikhlas_theme');
-
             if (savedLogo) {
-                const imgElement = document.getElementById('display-logo');
-                imgElement.src = savedLogo;
-                imgElement.style.display = 'block';
+                const img = document.getElementById('display-logo');
+                img.src = savedLogo;
+                img.style.display = 'block';
                 document.getElementById('logo-icon').style.display = 'none';
             }
-            
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-            }
+            if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
         };
     </script>
 </body>
