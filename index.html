@@ -3,479 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK Nurul Ikhlas - Dashboard Pintar</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>TK Nurul Ikhlas - Beranda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #4A90E2;
-            --accent-pink: #FF85A1;
-            --accent-green: #6BCB77;
-            --accent-purple: #A66CFF;
-            --accent-yellow: #FFD93D;
-            --bg-soft: #F0F4F8;
-            --text-dark: #2C3E50;
+            --pink: #FF85A1;
+            --green: #6BCB77;
+            --purple: #A66CFF;
+            --yellow: #FFD93D;
+            --bg: #F0F9FF;
+            --text: #2C3E50;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
+        * { 
+            box-sizing: border-box; 
+            font-family: 'Quicksand', sans-serif; 
         }
 
         body {
             margin: 0;
-            background-color: var(--bg-soft);
-            color: var(--text-dark);
+            background-color: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        h1, h2, h3, .brand-title {
-            font-family: 'Fredoka', sans-serif;
-        }
-
-        /* BANNER TOP / HEADER UI */
+        /* HEADER UI */
         header {
             background: white;
-            padding: 20px 40px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-bottom: 5px solid var(--accent-yellow);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom: 5px solid var(--yellow);
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
+        .brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        
+        .logo-ui { 
+            width: 50px; height: 50px; background: var(--bg); 
+            border-radius: 50%; display: flex; justify-content: center; 
+            align-items: center; font-size: 24px; border: 2px solid var(--pink);
         }
 
-        .logo-container {
-            width: 60px;
-            height: 60px;
-            background: #FFF9E6;
-            border-radius: 50%;
-            border: 3px solid var(--accent-pink);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
+        .brand h1 { 
+            font-family: 'Fredoka', sans-serif; 
+            font-size: 1.6rem; 
+            color: var(--primary); 
+            margin: 0; 
         }
 
-        .brand-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin: 0;
+        /* NAVIGASI ATAS */
+        .nav-tabs { display: flex; gap: 8px; }
+        .tab-btn {
+            padding: 10px 18px; border: none; border-radius: 12px;
+            background: transparent; font-weight: 700; text-decoration: none;
+            color: var(--text); font-size: 0.9rem; transition: 0.3s;
         }
-
-        .nav-menu {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 15px;
-            background: transparent;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-dark);
-        }
-
-        .nav-btn:hover {
-            background: rgba(0,0,0,0.05);
-        }
-
-        /* State Tombol Navigasi Aktif */
-        .nav-btn.active[data-page="beranda"] { background: #E1F5FE; color: var(--primary); }
-        .nav-btn.active[data-page="membaca"] { background: #FFEAF0; color: var(--accent-pink); }
-        .nav-btn.active[data-page="menghitung"] { background: #E8F8EC; color: var(--accent-green); }
-        .nav-btn.active[data-page="kreatif"] { background: #F3E8FF; color: var(--accent-purple); }
-        .nav-btn.active[data-page="profil"] { background: #FFF9E6; color: #B8860B; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        .tab-btn:hover:not(.active) { background: rgba(0,0,0,0.05); }
 
         /* KONTEN UTAMA */
-        main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 20px;
+        main { 
+            flex: 1; 
+            padding: 40px 20px; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            width: 100%; 
+        }
+        
+        .hero { 
+            text-align: center; 
+            margin-bottom: 40px; 
+        }
+        
+        .hero h2 { 
+            font-family: 'Fredoka', sans-serif; 
+            font-size: 2.2rem; 
+            color: var(--text); 
+            margin: 0 0 10px 0;
         }
 
-        .page {
-            display: none;
-            animation: smoothFade 0.4s ease forwards;
+        .hero p { font-size: 1.2rem; color: #7F8C8D; font-weight: 500; margin: 0; }
+
+        /* GRID MENU BERANDA */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 25px; 
         }
 
-        .page.active {
-            display: block;
-        }
-
-        @keyframes smoothFade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* UI BERANDA (GRID MENU) */
-        .hero {
+        .menu-card {
+            background: white; 
+            padding: 40px 20px; 
+            border-radius: 24px; 
             text-align: center;
-            margin-bottom: 40px;
-        }
-        .hero p { font-size: 1.2rem; color: #7F8C8D; font-weight: 700; }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
-
-        .card-menu {
-            background: white;
-            border-radius: 24px;
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border-bottom: 8px solid #ddd;
             box-shadow: 0 8px 16px rgba(0,0,0,0.02);
-            border-bottom: 8px solid #E2E8F0;
         }
 
-        .card-menu:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        .menu-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
         }
 
-        .card-menu .icon { font-size: 60px; margin-bottom: 15px; display: block; }
-        .card-menu h3 { margin: 0; font-size: 1.4rem; color: var(--text-dark); }
-
-        .c-membaca { border-color: var(--accent-pink); }
-        .c-menghitung { border-color: var(--accent-green); }
-        .c-kreatif { border-color: var(--accent-purple); }
-        .c-profil { border-color: var(--accent-yellow); }
-
-        /* BOX APLIKASI / WORKSPACE FITUR */
-        .app-box {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+        .menu-card .icon { font-size: 60px; margin-bottom: 15px; display: block; }
+        
+        .menu-card h3 { 
+            margin: 0; 
+            font-size: 1.3rem; 
+            font-family: 'Fredoka', sans-serif; 
+            color: var(--text);
         }
 
-        .game-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 0 #357ABD;
-            transition: 0.1s;
-        }
-        .game-btn:active { transform: translateY(5px); box-shadow: none; }
-
-        /* UI KHUSUS MENU MEMBACA & HURUF */
-        .sub-nav {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .sub-btn {
-            padding: 10px 25px;
-            border: 2px solid var(--accent-pink);
-            border-radius: 20px;
-            background: transparent;
-            font-weight: 700;
-            cursor: pointer;
-            color: var(--accent-pink);
-            transition: 0.3s;
-        }
-        .sub-btn.active {
-            background: var(--accent-pink);
-            color: white;
-        }
-        .membaca-container {
-            display: none;
-        }
-        .membaca-container.active {
-            display: block;
-        }
-        .flashcard {
-            font-size: 5rem;
-            background: #FFEAF0;
-            color: var(--accent-pink);
-            padding: 30px;
-            border-radius: 25px;
-            margin: 20px auto;
-            display: inline-block;
-            min-width: 220px;
-            box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08);
-        }
-        .fruit-image {
-            font-size: 6rem;
-            margin: 10px 0;
-            display: block;
-            animation: bounce 1s infinite alternate;
-        }
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-10px); }
-        }
-
-        /* UI KHUSUS MENGHITUNG */
-        .star-display { font-size: 3.5rem; margin: 25px 0; letter-spacing: 8px; }
-
-        /* UI KHUSUS PAPAN KREATIF */
-        #canvas-kreatif {
-            background: #FAFAFA;
-            border: 4px dashed #CBD5E1;
-            border-radius: 20px;
-            cursor: crosshair;
-            touch-action: none;
-            max-width: 100%;
-        }
+        /* WARNA KHUSUS PER CARD MENU */
+        .c-baca { border-color: var(--pink); }
+        .c-angka { border-color: var(--green); }
+        .c-gambar { border-color: var(--purple); }
+        .c-profil { border-color: var(--yellow); }
 
         /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #94A3B8;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 20px; }
-            .nav-menu { width: 100%; overflow-x: auto; padding-bottom: 5px; }
+        footer { 
+            text-align: center; 
+            padding: 25px; 
+            color: #94A3B8; 
+            font-size: 0.9rem; 
+            font-weight: 500; 
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand" onclick="switchPage('beranda')">
-            <div class="logo-container">🏫</div>
-            <h1 class="brand-title">TK Nurul Ikhlas</h1>
+        <div class="brand">
+            <div class="logo-ui">🏫</div>
+            <h1>TK Nurul Ikhlas</h1>
         </div>
-        <nav class="nav-menu">
-            <button class="nav-btn active" data-page="beranda" onclick="switchPage('beranda')">🏠 Beranda</button>
-            <button class="nav-btn" data-page="membaca" onclick="switchPage('membaca')">📖 Belajar Baca</button>
-            <button class="nav-btn" data-page="menghitung" onclick="switchPage('menghitung')">🔢 Angka</button>
-            <button class="nav-btn" data-page="kreatif" onclick="switchPage('kreatif')">🎨 Kreatif</button>
-            <button class="nav-btn" data-page="profil" onclick="switchPage('profil')">👤 Profil</button>
+        <nav class="nav-tabs">
+            <a href="index.html" class="tab-btn active">Beranda</a>
+            <a href="membaca.html" class="tab-btn">Membaca</a>
+            <a href="menghitung.html" class="tab-btn">Angka</a>
+            <a href="kreatif.html" class="tab-btn">Kreatif</a>
+            <a href="profil.html" class="tab-btn">Profil</a>
         </nav>
     </header>
 
     <main>
-        
-        <section id="beranda" class="page active">
-            <div class="hero">
-                <h2>Selamat Datang, Sobat Pintar! 👋</h2>
-                <p>Pilih salah satu menu di bawah ini untuk belajar bersama!</p>
-            </div>
-            <div class="grid-container">
-                <div class="card-menu c-membaca" onclick="switchPage('membaca')">
-                    <span class="icon">📖</span>
-                    <h3>BELAJAR BACA</h3>
-                </div>
-                <div class="card-menu c-menghitung" onclick="switchPage('menghitung')">
-                    <span class="icon">🔢</span>
-                    <h3>MENGENAL ANGKA</h3>
-                </div>
-                <div class="card-menu c-kreatif" onclick="switchPage('kreatif')">
-                    <span class="icon">🎨</span>
-                    <h3>PAPAN KREATIF</h3>
-                </div>
-                <div class="card-menu c-profil" onclick="switchPage('profil')">
-                    <span class="icon">👤</span>
-                    <h3>PROFIL PINTAR</h3>
-                </div>
-            </div>
-        </section>
+        <div class="hero">
+            <h2>Selamat Datang, Sobat Pintar! 👋</h2>
+            <p>Mulai petualangan belajar seru hari ini dengan senyuman!</p>
+        </div>
 
-        <section id="membaca" class="page">
-            <div class="app-box">
-                <h2 style="color: var(--accent-pink); margin-bottom: 5px;">📖 Ruang Belajar Membaca</h2>
-                <p style="margin-bottom: 25px; color: #7F8C8D;">Pilih mode belajar yang kamu sukai di bawah ini:</p>
-                
-                <div class="sub-nav">
-                    <button id="btn-opsi-huruf" class="sub-btn active" onclick="switchMembacaOpsi('huruf')">🔤 Mengenal Huruf</button>
-                    <button id="btn-opsi-buah" class="sub-btn" onclick="switchMembacaOpsi('buah')">🍎 Membaca Nama Buah</button>
-                </div>
-
-                <div id="box-opsi-huruf" class="membaca-container active">
-                    <p>Yuk, sebutkan huruf besar dan kecil ini!</p>
-                    <div class="flashcard" id="letter-card">A a</div>
-                    <br><br>
-                    <button class="game-btn" style="background: var(--accent-pink); box-shadow: 0 5px 0 #D65A76;" onclick="gantiHuruf()">Huruf Selanjutnya ✨</button>
-                </div>
-
-                <div id="box-opsi-buah" class="membaca-container">
-                    <p>Mari mengeja nama buah-buahan berikut!</p>
-                    <div class="flashcard" style="background: #FFF9E6; color: var(--text-dark); min-width: 280px;">
-                        <span id="fruit-pic" class="fruit-image">🍎</span>
-                        <span id="fruit-name" style="font-family: 'Fredoka'; font-size: 3rem; color: #E11D48;">A - P - E - L</span>
-                    </div>
-                    <br><br>
-                    <button class="game-btn" style="background: var(--accent-green); box-shadow: 0 5px 0 #4CAE5A;" onclick="gantiBuah()">Buah Selanjutnya 🍏</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="menghitung" class="page">
-            <div class="app-box">
-                <h2 style="color: var(--accent-green);">🔢 Hitung Bintang Seru</h2>
-                <p>Coba hitung berapa jumlah bintang berkedip di bawah ini?</p>
-                <div id="star-area" class="star-display">⭐ ⭐ ⭐</div>
-                <button class="game-btn" style="background: var(--accent-green); box-shadow: 0 5px 0 #4CAE5A;" onclick="cekBintang()">Tebak Angka 🎲</button>
-            </div>
-        </section>
-
-        <section id="kreatif" class="page">
-            <div class="app-box">
-                <h2 style="color: var(--accent-purple);">🎨 Papan Kreatif Digital</h2>
-                <p>Gunakan jari tanganmu atau mouse untuk menggambar sesukamu!</p>
-                <canvas id="canvas-kreatif" width="600" height="350"></canvas>
-                <br><br>
-                <button class="game-btn" style="background: #E11D48; box-shadow: 0 5px 0 #9F1239;" onclick="hapusKanvas()">Bersihkan Papan 🧹</button>
-            </div>
-        </section>
-
-        <section id="profil" class="page">
-            <div class="app-box" style="text-align: left; max-width: 500px;">
-                <h2 style="color: #B8860B; text-align: center; margin-top: 0;">👤 Profil Sobat Pintar</h2>
-                <hr style="border: 0; border-top: 2px dashed #CBD5E1; margin: 20px 0;">
-                <p><strong>Nama Lembaga:</strong> TK Nurul Ikhlas</p>
-                <p><strong>Tahun Pelajaran:</strong> 2026/2027</p>
-                <p><strong>Kategori Akun:</strong> Siswa Pintar/Aktif 🔥</p>
-                <p><strong>Reward Koleksi:</strong> ⭐ 28 Bintang Prestasi</p>
-            </div>
-        </section>
-
+        <div class="menu-grid">
+            <a href="membaca.html" class="menu-card c-baca">
+                <span class="icon">📖</span>
+                <h3>BELAJAR BACA</h3>
+            </a>
+            <a href="menghitung.html" class="menu-card c-angka">
+                <span class="icon">🔢</span>
+                <h3>MENGENAL ANGKA</h3>
+            </a>
+            <a href="kreatif.html" class="menu-card c-gambar">
+                <span class="icon">🎨</span>
+                <h3>PAPAN KREATIF</h3>
+            </a>
+            <a href="profil.html" class="menu-card c-profil">
+                <span class="icon">👤</span>
+                <h3>PROFIL PINTAR</h3>
+            </a>
+        </div>
     </main>
 
-    <footer>
-        <p>© 2026 TK Nurul Ikhlas - Platform Pembelajaran Modern Anak Usia Dini</p>
-    </footer>
+    <footer>© 2026 TK Nurul Ikhlas - Platform Pembelajaran Modern Anak</footer>
 
-    <script>
-        // --- 1. SISTEM PERPINDAHAN HALAMAN UTAMA ---
-        function switchPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.getAttribute('data-page') === pageId) {
-                    btn.classList.add('active');
-                }
-            });
-
-            if(pageId === 'kreatif') { initCanvas(); }
-        }
-
-        // --- 2. LOGIKA SUB-MENU BELAJAR BACA ---
-        function switchMembacaOpsi(opsi) {
-            document.querySelectorAll('.membaca-container').forEach(box => box.classList.remove('active'));
-            document.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
-
-            if (opsi === 'huruf') {
-                document.getElementById('box-opsi-huruf').classList.add('active');
-                document.getElementById('btn-opsi-huruf').classList.add('active');
-            } else {
-                document.getElementById('box-opsi-buah').classList.add('active');
-                document.getElementById('btn-opsi-buah').classList.add('active');
-            }
-        }
-
-        // --- A. Logika Acak Huruf ---
-        const hurufBesarKecil = ['A a','B b','C c','D d','E e','F f','G g','H h','I i','J j','K k','L l','M m','N n','O o','P p','Q q','R r','S s','T t','U u','V v','W w','X x','Y y','Z z'];
-        let idxHuruf = 0;
-        function gantiHuruf() {
-            idxHuruf = (idxHuruf + 1) % hurufBesarKecil.length;
-            document.getElementById('letter-card').innerText = hurufBesarKecil[idxHuruf];
-        }
-
-        // --- B. Logika Tebak & Eja Nama Buah ---
-        const dataBuah = [
-            { nama: "A - P - E - L", gambar: "🍎" },
-            { nama: "P - I - S - A - N - G", gambar: "🍌" },
-            { nama: "J - E - R - U - K", gambar: "🍊" },
-            { nama: "A - N - G - G - U - R", gambar: "🍇" },
-            { nama: "S - Semangka", gambar: "🍉" },
-            { nama: "M - A - N - G - G - A", gambar: "🥭" }
-        ];
-        let idxBuah = 0;
-        function gantiBuah() {
-            idxBuah = (idxBuah + 1) % dataBuah.length;
-            document.getElementById('fruit-pic').innerText = dataBuah[idxBuah].gambar;
-            document.getElementById('fruit-name').innerText = dataBuah[idxBuah].nama;
-        }
-
-        // --- 3. LOGIKA MENGHITUNG BINTANG ---
-        let skorBintang = 3;
-        function cekBintang() {
-            let tebakan = prompt(`Ada berapa bintang yang kamu lihat? Masukkan angka:`);
-            if(parseInt(tebakan) === skorBintang) {
-                alert("🎉 LUAR BIASA! Jawabanmu benar sekali!");
-                skorBintang = Math.floor(Math.random() * 6) + 1; 
-                document.getElementById('star-area').innerText = "⭐ ".repeat(skorBintang);
-            } else if (tebakan !== null) {
-                alert("❌ Hmm, coba hitung lagi pelan-pelan ya sayang.");
-            }
-        }
-
-        // --- 4. LOGIKA KANVAS DRAWING (PAPAN KREATIF) ---
-        const canvas = document.getElementById('canvas-kreatif');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-
-        function initCanvas() {
-            const w = canvas.parentElement.clientWidth;
-            if(w < 640) { canvas.width = w - 40; }
-        }
-
-        canvas.addEventListener('mousedown', () => isDrawing = true);
-        canvas.addEventListener('mouseup', () => { isDrawing = false; ctx.beginPath(); });
-        canvas.addEventListener('mousemove', menggambar);
-        
-        canvas.addEventListener('touchstart', (e) => { isDrawing = true; e.preventDefault(); });
-        canvas.addEventListener('touchend', () => { isDrawing = false; ctx.beginPath(); });
-        canvas.addEventListener('touchmove', (e) => { menggambar(e.touches[0]); e.preventDefault(); });
-
-        function menggambar(e) {
-            if (!isDrawing) return;
-            const bound = canvas.getBoundingClientRect();
-            ctx.lineWidth = 6;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = '#A66CFF';
-
-            const x = (e.clientX || e.pageX) - bound.left;
-            const y = (e.clientY || e.pageY) - bound.top;
-
-            ctx.lineTo(x, y);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-        }
-
-        function hapusKanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
-    </script>
 </body>
 </html>
