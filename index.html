@@ -40,276 +40,229 @@
             transition: 0.3s;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION & BUBBLE MENU --- */
         nav {
             background: var(--card);
-            padding: 12px 5%;
+            padding: 15px 5%;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .logo-area {
+        .nav-top {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-        }
-
-        .logo-wrapper {
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .logo-container-box {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            border: 2px dashed var(--primary);
-            background: var(--placeholder-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: 0.2s;
-        }
-
-        .logo-preview {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none; 
         }
 
-        .logo-placeholder-icon {
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-
-        .brand-name {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-
-        /* --- MAIN LAYOUT --- */
-        .main-wrapper {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-            padding: 30px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .dashboard {
+        .bubble-menu {
             display: flex;
-            flex-direction: column;
-            gap: 30px;
+            gap: 10px;
+            justify-content: center;
         }
 
-        /* --- BANNER --- */
-        .banner {
-            background: linear-gradient(135deg, var(--primary), #00D2FF);
-            padding: 40px;
-            border-radius: 40px;
-            color: white;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(78,168,222,0.2);
-        }
-
-        .banner h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; }
-
-        /* --- PROFIL SEKOLAH SECTION --- */
-        .school-profile-card {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .profile-header i {
-            font-size: 2rem;
-            color: var(--secondary);
-        }
-
-        .profile-header h2 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.6rem;
-            color: var(--text);
-        }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .profile-item {
-            padding: 20px;
-            border-radius: 20px;
+        .bubble-btn {
             background: var(--bg);
-            border-left: 5px solid var(--primary);
-        }
-
-        .profile-item h4 {
-            color: var(--primary);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
             font-weight: 800;
-            margin-bottom: 8px;
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .profile-item p {
             font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--text);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
         }
 
-        /* --- MENU GRID --- */
+        .bubble-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(0,0,0,0.1); }
+        .bubble-btn.active { background: var(--primary); color: white; }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-container-box {
+            width: 50px; height: 50px; border-radius: 10px;
+            border: 2px dashed var(--primary); background: var(--placeholder-bg);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .logo-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .brand-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--primary); }
+
+        /* --- CONTENT WRAPPER --- */
+        .main-wrapper {
+            padding: 30px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-section { display: none; animation: fadeIn 0.5s; }
+        .page-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- DASHBOARD ELEMENTS --- */
+        .banner {
+            background: linear-gradient(135deg, var(--primary), #00D2FF);
+            padding: 50px 20px; border-radius: 40px; color: white;
+            text-align: center; margin-bottom: 30px;
+        }
+        .banner h1 { font-family: 'Fredoka One', cursive; font-size: 2.5rem; }
+
         .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
         }
-
         .menu-item {
-            background: var(--card);
-            padding: 35px 20px;
-            border-radius: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
+            background: var(--card); padding: 40px 20px; border-radius: 30px;
+            text-align: center; cursor: pointer; transition: 0.3s;
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            border-bottom: 6px solid transparent;
         }
+        .menu-item:hover { transform: scale(1.05); }
+        .menu-item i { font-size: 3rem; margin-bottom: 15px; display: block; }
 
-        .menu-item:hover { transform: translateY(-10px); }
-        .menu-item i { font-size: 3.5rem; margin-bottom: 15px; display: block; }
-        .menu-item h3 { font-family: 'Fredoka One', cursive; }
-
-        /* --- SIDEBAR --- */
-        .info-sidebar {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 30px;
-            height: fit-content;
+        /* --- PROFIL CARD STYLE --- */
+        .profile-container {
+            background: var(--card); padding: 40px; border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-
-        .info-sidebar h2 { font-family: 'Fredoka One', cursive; color: var(--primary); margin-bottom: 15px; }
-        .info-list { list-style: none; }
-        .info-list li { margin-bottom: 15px; display: flex; gap: 10px; font-size: 0.9rem; }
-        .info-list i { color: var(--secondary); }
+        .profile-header { text-align: center; margin-bottom: 40px; }
+        .profile-header h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--primary); }
+        
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card-info {
+            background: var(--bg); padding: 25px; border-radius: 25px; border-top: 6px solid var(--primary);
+        }
+        .card-info h3 { margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 10px; }
 
         input[type="file"] { display: none; }
 
-        @media (max-width: 900px) {
-            .main-wrapper { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-area">
-            <div class="logo-wrapper" title="Ganti logo TK">
+        <div class="nav-top">
+            <div class="logo-area">
                 <label for="logo-upload" class="logo-container-box">
-                    <i class="fa-solid fa-mosque logo-placeholder-icon" id="logo-icon"></i>
-                    <img src="" id="display-logo" class="logo-preview" alt="Logo TK">
+                    <i class="fa-solid fa-mosque" id="logo-icon" style="color:var(--primary)"></i>
+                    <img src="" id="display-logo" class="logo-preview">
                 </label>
+                <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
+                <span class="brand-name">TK Nurul Ikhlas</span>
             </div>
-            <input type="file" id="logo-upload" accept="image/*" onchange="handleLogo(this)">
-            <span class="brand-name">TK Nurul Ikhlas</span>
+            <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
         </div>
-        <button class="btn-theme" onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
+
+        <!-- BUBBLE MENU DI ATAS -->
+        <div class="bubble-menu">
+            <button class="bubble-btn active" onclick="showPage('home', this)">
+                <i class="fa-solid fa-house"></i> Beranda
+            </button>
+            <button class="bubble-btn" onclick="showPage('profil', this)">
+                <i class="fa-solid fa-school"></i> Profil Sekolah
+            </button>
+            <button class="bubble-btn" onclick="showPage('kontak', this)">
+                <i class="fa-solid fa-phone"></i> Kontak
+            </button>
+        </div>
     </nav>
 
     <div class="main-wrapper">
-        <aside class="info-sidebar">
-            <h2>Kontak Kami</h2>
-            <ul class="info-list">
-                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Pendidikan No. 12, Kota Nurul Ikhlas</span></li>
-                <li><i class="fa-solid fa-phone"></i><span>(021) 123-4567</span></li>
-                <li><i class="fa-solid fa-envelope"></i><span>info@tknurulikhlas.sch.id</span></li>
-            </ul>
-        </aside>
-
-        <main class="dashboard">
-            <!-- Banner -->
-            <section class="banner">
-                <h1>Selamat Datang!</h1>
-                <p>Membentuk Generasi Cerdas, Berakhlak, dan Ceria</p>
-            </section>
-
-            <!-- FITUR BARU: PROFIL SEKOLAH -->
-            <section class="school-profile-card">
-                <div class="profile-header">
-                    <i class="fa-solid fa-school"></i>
-                    <h2>Profil Sekolah Kami</h2>
-                </div>
-                <div class="profile-grid">
-                    <div class="profile-item">
-                        <h4><i class="fa-solid fa-star"></i> Visi</h4>
-                        <p>Menjadi lembaga pendidikan anak usia dini yang unggul dalam membentuk karakter islami dan kreativitas anak.</p>
-                    </div>
-                    <div class="profile-item" style="border-left-color: var(--secondary);">
-                        <h4><i class="fa-solid fa-rocket"></i> Misi</h4>
-                        <p>Menyelenggarakan pembelajaran yang aktif, inovatif, dan menyenangkan berbasis nilai-nilai kebaikan.</p>
-                    </div>
-                    <div class="profile-item" style="border-left-color: var(--success);">
-                        <h4><i class="fa-solid fa-award"></i> Akreditasi</h4>
-                        <p>Sekolah kami telah Terakreditasi <strong>A (Sangat Baik)</strong> oleh BAN-PDM.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Menu Belajar -->
+        
+        <!-- HALAMAN BERANDA -->
+        <section id="home" class="page-section active">
+            <div class="banner">
+                <h1>Halo, Sahabat Kecil!</h1>
+                <p>Ayo bermain dan belajar bersama di TK Nurul Ikhlas</p>
+            </div>
             <div class="menu-grid">
-                <div class="menu-item" style="border-color: var(--primary);">
-                    <i class="fa-solid fa-font" style="color: var(--primary);"></i>
-                    <h3>Huruf A-Z</h3>
+                <div class="menu-item" style="color: var(--primary);">
+                    <i class="fa-solid fa-spell-check"></i>
+                    <h3>Belajar Huruf</h3>
                 </div>
-                <div class="menu-item" style="border-color: var(--secondary);">
-                    <i class="fa-solid fa-calculator" style="color: var(--secondary);"></i>
-                    <h3>Angka & Hitung</h3>
+                <div class="menu-item" style="color: var(--secondary);">
+                    <i class="fa-solid fa-arrow-1-9"></i>
+                    <h3>Belajar Angka</h3>
                 </div>
-                <div class="menu-item" style="border-color: var(--success);">
-                    <i class="fa-solid fa-book-open-reader" style="color: var(--success);"></i>
-                    <h3>Membaca</h3>
+                <div class="menu-item" style="color: var(--success);">
+                    <i class="fa-solid fa-shapes"></i>
+                    <h3>Mengenal Bentuk</h3>
                 </div>
-                <div class="menu-item" style="border-color: var(--danger);">
-                    <i class="fa-solid fa-palette" style="color: var(--danger);"></i>
-                    <h3>Kreativitas</h3>
+                <div class="menu-item" style="color: var(--danger);">
+                    <i class="fa-solid fa-paint-brush"></i>
+                    <h3>Mewarnai</h3>
                 </div>
             </div>
-        </main>
+        </section>
+
+        <!-- HALAMAN PROFIL SEKOLAH -->
+        <section id="profil" class="page-section">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h2>Tentang Sekolah Kami</h2>
+                    <p>Membentuk masa depan cerah dengan kasih sayang</p>
+                </div>
+                <div class="profile-grid">
+                    <div class="card-info">
+                        <h3><i class="fa-solid fa-eye"></i> Visi Kami</h3>
+                        <p>Menjadi pusat pendidikan anak usia dini yang membentuk karakter islami, mandiri, dan kreatif melalui pembiasaan baik sejak dini.</p>
+                    </div>
+                    <div class="card-info" style="border-top-color: var(--secondary);">
+                        <h3><i class="fa-solid fa-bullseye"></i> Misi Kami</h3>
+                        <p>1. Menanamkan aqidah dan akhlak mulia.<br>2. Mengembangkan bakat minat anak secara optimal.<br>3. Menciptakan lingkungan belajar yang aman dan ceria.</p>
+                    </div>
+                    <div class="card-info" style="border-top-color: var(--success);">
+                        <h3><i class="fa-solid fa-medal"></i> Akreditasi</h3>
+                        <p>Alhamdulillah, TK Nurul Ikhlas telah mendapatkan Akreditasi <strong>A (Sangat Baik)</strong> dari Badan Akreditasi Nasional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN KONTAK -->
+        <section id="kontak" class="page-section">
+            <div class="profile-container" style="text-align: center;">
+                <h2 style="font-family:'Fredoka One'; color:var(--primary); margin-bottom:20px;">Hubungi Kami</h2>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-map-location-dot"></i> Jl. Pendidikan No. 12, Kota Nurul Ikhlas</p>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-phone-volume"></i> (021) 123-4567</p>
+                <p style="margin-bottom:10px;"><i class="fa-solid fa-envelope"></i> info@tknurulikhlas.sch.id</p>
+            </div>
+        </section>
+
     </div>
 
     <script>
+        // Fungsi ganti halaman
+        function showPage(pageId, btn) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Hapus status aktif di semua tombol bubble
+            document.querySelectorAll('.bubble-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            
+            // Tampilkan halaman yang dipilih & aktifkan tombolnya
+            document.getElementById(pageId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Fungsi Logo & Tema (Sama seperti sebelumnya)
         function handleLogo(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const imgElement = document.getElementById('display-logo');
-                    const iconElement = document.getElementById('logo-icon');
-                    imgElement.src = e.target.result;
-                    imgElement.style.display = 'block';
-                    iconElement.style.display = 'none';
-                    localStorage.setItem('nurul_ikhlas_logo', e.target.result);
+                    const img = document.getElementById('display-logo');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    document.getElementById('logo-icon').style.display = 'none';
+                    localStorage.setItem('tk_logo', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -317,19 +270,17 @@
 
         function toggleTheme() {
             const body = document.body;
-            const current = body.getAttribute('data-theme');
-            const target = current === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', target);
-            localStorage.setItem('nurul_ikhlas_theme', target);
+            const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('tk_theme', theme);
         }
 
         window.onload = () => {
-            const savedLogo = localStorage.getItem('nurul_ikhlas_logo');
-            const savedTheme = localStorage.getItem('nurul_ikhlas_theme');
+            const savedLogo = localStorage.getItem('tk_logo');
+            const savedTheme = localStorage.getItem('tk_theme');
             if (savedLogo) {
                 const img = document.getElementById('display-logo');
-                img.src = savedLogo;
-                img.style.display = 'block';
+                img.src = savedLogo; img.style.display = 'block';
                 document.getElementById('logo-icon').style.display = 'none';
             }
             if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
