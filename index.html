@@ -3,131 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK Nurul Ikhlas - Dashboard</title>
+    <title>TK Nurul Ikhlas - Modern Learning Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --warna-utama: #4A90E2;
-            --warna-aksen: #FF85A1;
-            --warna-bg: #e0f7fa;
-            --warna-profil: #FFD93D;
+            --primary: #4A90E2;
+            --accent-pink: #FF85A1;
+            --accent-green: #6BCB77;
+            --accent-purple: #A66CFF;
+            --accent-yellow: #FFD93D;
+            --bg-soft: #F0F4F8;
+            --text-dark: #2C3E50;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
         }
 
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
-            background-color: var(--warna-bg);
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
-            align-items: center;
             min-height: 100vh;
         }
 
-        /* HEADER */
-        .header {
-            background: white;
-            width: 100%;
-            padding: 30px 0;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-bottom: 8px solid var(--warna-profil);
+        h1, h2, h3, .brand-title {
+            font-family: 'Fredoka', sans-serif;
         }
 
-        .logo-box {
-            width: 130px;
-            height: 130px;
+        /* HEADER & NAVIGASI */
+        header {
             background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-bottom: 5px solid var(--accent-yellow);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-container {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-soft);
             border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 5px solid var(--warna-aksen);
+            border: 3px solid var(--accent-pink);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .logo-box img {
-            max-width: 90%;
-            max-height: 90%;
+        .logo-container img {
+            max-width: 80%;
             object-fit: contain;
         }
 
-        .nama-sekolah {
-            font-size: 2.5rem;
-            color: var(--warna-utama);
+        .brand-title {
+            font-size: 1.8rem;
+            color: var(--primary);
             margin: 0;
-            text-shadow: 2px 2px 0px white;
         }
 
-        /* GRID MENU */
-        .container-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px 0;
+        .nav-menu {
+            display: flex;
+            gap: 10px;
         }
 
-        .tombol-menu {
-            background: white;
-            border-radius: 35px;
-            padding: 35px 15px;
-            text-decoration: none;
-            text-align: center;
+        .nav-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 15px;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
             transition: all 0.3s ease;
-            border-bottom: 10px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
         }
 
-        .tombol-menu:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        .nav-btn:hover {
+            background: rgba(0,0,0,0.05);
         }
 
-        .icon { font-size: 70px; margin-bottom: 15px; display: block; }
-        .judul-menu { font-size: 1.6rem; color: #333; margin: 0; }
+        .nav-btn.active[data-page="beranda"] { background: var(--bg-soft); color: var(--primary); }
+        .nav-btn.active[data-page="membaca"] { background: #FFEAF0; color: var(--accent-pink); }
+        .nav-btn.active[data-page="menghitung"] { background: #E8F8EC; color: var(--accent-green); }
+        .nav-btn.active[data-page="kreatif"] { background: #F3E8FF; color: var(--accent-purple); }
+        .nav-btn.active[data-page="profil"] { background: #FFF9E6; color: #B8860B; }
 
-        /* Warna Khusus Menu */
-        .bg-membaca { border-color: #FF85A1; }
-        .bg-menghitung { border-color: #6BCB77; }
-        .bg-kreatif { border-color: #A66CFF; }
-        .bg-profil { border-color: var(--warna-profil); }
+        /* KONTEN UTAMA */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
+        .page {
+            display: none;
+            animation: smoothFade 0.4s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes smoothFade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* DASHBOARD GRID (BERANDA) */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero p { font-size: 1.2rem; color: #7F8C8D; font-weight: 700; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .card-menu {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.02);
+            border-bottom: 8px solid #E2E8F0;
+        }
+
+        .card-menu:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .card-menu .icon { font-size: 60px; margin-bottom: 15px; display: block; }
+        .card-menu h3 { margin: 0; font-size: 1.4rem; }
+
+        /* Variasi Warna Card */
+        .c-membaca { border-color: var(--accent-pink); }
+        .c-menghitung { border-color: var(--accent-green); }
+        .c-kreatif { border-color: var(--accent-purple); }
+        .c-profil { border-color: var(--accent-yellow); }
+
+        /* AREA FITUR INTERAKTIF */
+        .app-box {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 1. Membaca */
+        .flashcard {
+            font-size: 5rem;
+            background: #FFEAF0;
+            color: var(--accent-pink);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 20px auto;
+            display: inline-block;
+            min-width: 200px;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: inset 0 -5px 0 rgba(0,0,0,0.1);
+        }
+
+        /* 2. Menghitung */
+        .game-btn {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #4CAE5A;
+            transition: 0.1s;
+        }
+        .game-btn:active { transform: translateY(5px); box-shadow: none; }
+
+        /* 3. Kreatif Canvas */
+        #canvas-kreatif {
+            background: #FAFAFA;
+            border: 4px dashed #CBD5E1;
+            border-radius: 20px;
+            cursor: crosshair;
+            touch-action: none;
+            max-width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #94A3B8;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .nav-menu { width: 100%; overflow-x: auto; padding-bottom: 5px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo-box">
-            <img src="ChatGPT_Image_18_Mei_2026__18.53.23-removebg-preview.png" alt="Logo TK">
+    <header>
+        <div class="brand" onclick="switchPage('beranda')">
+            <div class="logo-container">
+                <img src="ChatGPT_Image_18_Mei_2026__18.53.23-removebg-preview.png" alt="🏫">
+            </div>
+            <h1 class="brand-title">TK Nurul Ikhlas</h1>
         </div>
-        <h1 class="nama-sekolah">TK Nurul Ikhlas</h1>
-        <p style="color: #FF85A1; font-weight: bold; margin-top: 5px;">Mulai Belajar dengan Senyuman!</p>
-    </div>
+        <nav class="nav-menu">
+            <button class="nav-btn active" data-page="beranda" onclick="switchPage('beranda')">🏠 Beranda</button>
+            <button class="nav-btn" data-page="membaca" onclick="switchPage('membaca')">📖 Huruf</button>
+            <button class="nav-btn" data-page="menghitung" onclick="switchPage('menghitung')">🔢 Angka</button>
+            <button class="nav-btn" data-page="kreatif" onclick="switchPage('kreatif')">🎨 Kreatif</button>
+            <button class="nav-btn" data-page="profil" onclick="switchPage('profil')">👤 Profil</button>
+        </nav>
+    </header>
 
-    <div class="container-menu">
-        <a href="membaca.html" class="tombol-menu bg-membaca">
-            <span class="icon">📖</span>
-            <h2 class="judul-menu">MENGENAL HURUF</h2>
-        </a>
+    <main>
+        
+        <section id="beranda" class="page active">
+            <div class="hero">
+                <h2>Halo Sobat Pintar! 👋</h2>
+                <p>Mulai belajar seru hari ini dengan senyuman!</p>
+            </div>
+            <div class="grid-container">
+                <div class="card-menu c-membaca" onclick="switchPage('membaca')">
+                    <span class="icon">📖</span>
+                    <h3>MENGENAL HURUF</h3>
+                </div>
+                <div class="card-menu c-menghitung" onclick="switchPage('menghitung')">
+                    <span class="icon">🔢</span>
+                    <h3>MENGENAL ANGKA</h3>
+                </div>
+                <div class="card-menu c-kreatif" onclick="switchPage('kreatif')">
+                    <span class="icon">🎨</span>
+                    <h3>PAPAN KREATIF</h3>
+                </div>
+                <div class="card-menu c-profil" onclick="switchPage('profil')">
+                    <span class="icon">👤</span>
+                    <h3>PROFIL PINTAR</h3>
+                </div>
+            </div>
+        </section>
 
-        <a href="menghitung.html" class="tombol-menu bg-menghitung">
-            <span class="icon">🔢</span>
-            <h2 class="judul-menu">MENGENAL ANGKA</h2>
-        </a>
+        <section id="membaca" class="page">
+            <div class="app-box">
+                <h2 style="color: var(--accent-pink);">📖 Mengenal Huruf & Suara</h2>
+                <p>Yuk, sebutkan huruf di bawah ini bareng-bareng!</p>
+                <div class="flashcard" id="letter-card">A</div>
+                <br><br>
+                <button class="game-btn" style="background: var(--accent-pink); box-shadow: 0 5px 0 #D65A76;" onclick="gantiHuruf()">Huruf Selanjutnya ✨</button>
+            </div>
+        </section>
 
-        <a href="kreatif.html" class="tombol-menu bg-kreatif">
-            <span class="icon">🎨</span>
-            <h2 class="judul-menu">KREATIF</h2>
-        </a>
+        <section id="menghitung" class="page">
+            <div class="app-box">
+                <h2 style="color: var(--accent-green);">🔢 Hitung Bintang!</h2>
+                <p>Ada berapa jumlah bintang di bawah ini?</p>
+                <div id="star-area" style="font-size: 3rem; margin: 20px 0; letter-spacing: 5px;">⭐ ⭐ ⭐</div>
+                <button class="game-btn" onclick="cekBintang()">Tebak Angka 🎲</button>
+            </div>
+        </section>
 
-        <a href="propil.html" class="tombol-menu bg-profil">
-            <span class="icon">🏠</span>
-            <h2 class="judul-menu">PROFIL</h2>
-        </a>
-    </div>
+        <section id="kreatif" class="page">
+            <div class="app-box">
+                <h2 style="color: var(--accent-purple);">🎨 Papan Kreatif Digital</h2>
+                <p>Gunakan jari atau mouse-mu untuk menggambar bebas di sini!</p>
+                <canvas id="canvas-kreatif" width="600" height="350"></canvas>
+                <br><br>
+                <button class="game-btn" style="background: #E11D48; box-shadow: 0 5px 0 #9F1239;" onclick="hapusKanvas()">Bersihkan Papan 🧹</button>
+            </div>
+        </section>
 
-    <p style="color: #999; margin-bottom: 30px;">© 2026 TK Nurul Ikhlas - Dashboard Sekolah Anak</p>
+        <section id="profil" class="page">
+            <div class="app-box" style="text-align: left; max-width: 500px;">
+                <h2 style="color: #B8860B; text-align: center;">👤 Profil Sobat Pintar</h2>
+                <hr style="border: 1px solid var(--bg-soft); margin: 20px 0;">
+                <p><strong>Nama Sekolah:</strong> TK Nurul Ikhlas</p>
+                <p><strong>Tahun Ajaran:</strong> 2026/2027</p>
+                <p><strong>Status Belajar:</strong> Sangat Aktif 🔥</p>
+                <p><strong>Bintang yang Dikumpulkan:</strong> ⭐ 15 Bintang</p>
+            </div>
+        </section>
 
+    </main>
+
+    <footer>
+        <p>© 2026 TK Nurul Ikhlas - Platform Pembelajaran Digital Anak</p>
+    </footer>
+
+    <script>
+        // 1. SISTEM SPA (NAVIGASI TANPA RELOAD)
+        function switchPage(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            // Tampilkan halaman target
+            document.getElementById(pageId).classList.add('active');
+
+            // Update status tombol navigasi aktif
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.getAttribute('data-page') === pageId) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Otomatis inisialisasi canvas jika membuka menu kreatif
+            if(pageId === 'kreatif') {
+                initCanvas();
+            }
+        }
+
+        // 2. LOGIKA FITUR HURUF
+        const daftarHuruf = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        let indeksHuruf = 0;
+        function gantiHuruf() {
+            indeksHuruf = (indeksHuruf + 1) % daftarHuruf.length;
+            document.getElementById('letter-card').innerText = daftarHuruf[indeksHuruf];
+        }
+
+        // 3. LOGIKA FITUR ANGKA
+        let jumlahBintangSkarang = 3;
+        function cekBintang() {
+            let jawaban = prompt(`Ada berapa bintang? Masukkan angka:`);
+            if(parseInt(jawaban) === jumlahBintangSkarang) {
+                alert("🎉 Hebat! Jawabanmu BENAR!");
+                // Acak jumlah bintang berikutnya
+                jumlahBintangSkarang = Math.floor(Math.random() * 5) + 1; 
+                document.getElementById('star-area').innerText = "⭐ ".repeat(jumlahBintangSkarang);
+            } else if (jawaban !== null) {
+                alert("❌ Tetot! Coba hitung lagi pelan-pelan ya.");
+            }
+        }
+
+        // 4. LOGIKA FITUR KREATIF (CANVAS DRAWING)
+        const canvas = document.getElementById('canvas-kreatif');
+        const ctx = canvas.getContext('2d');
+        let sedangMenggambar = false;
+
+        function initCanvas() {
+            // Responsif canvas di layar mobile
+            const containerWidth = canvas.parentElement.clientWidth;
+            if(containerWidth < 640) {
+                canvas.width = containerWidth - 40;
+            }
+        }
+
+        canvas.addEventListener('mousedown', () => sedangMenggambar = true);
+        canvas.addEventListener('mouseup', () => { sedangMenggambar = false; ctx.beginPath(); });
+        canvas.addEventListener('mousemove', menggambar);
+        
+        // Support Layar Sentuh HP
+        canvas.addEventListener('touchstart', (e) => { sedangMenggambar = true; e.preventDefault(); });
+        canvas.addEventListener('touchend', () => { sedangMenggambar = false; ctx.beginPath(); });
+        canvas.addEventListener('touchmove', (e) => { menggambar(e.touches[0]); e.preventDefault(); });
+
+        function menggambar(e) {
+            if (!sedangMenggambar) return;
+            const batasKanvas = canvas.getBoundingClientRect();
+            
+            ctx.lineWidth = 6;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#A66CFF'; // Warna kuas mengikuti tema ungu kreatif
+
+            // Hitung posisi koordinat tepat di kanvas
+            const x = (e.clientX || e.pageX) - batasKanvas.left;
+            const y = (e.clientY || e.pageY) - batasKanvas.top;
+
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        function hapusKanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
 </body>
 </html>
