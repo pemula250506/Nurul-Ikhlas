@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar Huruf A-Z - TK Nurul Ikhlas</title>
+    <title>Belajar Angka & Berhitung - TK Nurul Ikhlas</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -14,6 +14,7 @@
             --secondary: #FDC500;
             --success: #70E000;
             --danger: #FF4D6D;
+            --purple: #9D4EDD;
             --bg: #F0F7F7;
             --card: #FFFFFF;
             --text: #2B2D42;
@@ -30,139 +31,265 @@
 
         .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
         .back-btn { background: var(--danger); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 800; box-shadow: 0 4px 0 rgba(0,0,0,0.1); transition: 0.2s; }
-        .title { font-family: 'Fredoka One', cursive; color: var(--primary); font-size: 2rem; text-align: center; flex-grow: 1; }
+        .title { font-family: 'Fredoka One', cursive; color: var(--success); font-size: 2rem; text-align: center; flex-grow: 1; }
 
+        .main-container { display: flex; flex-direction: column; gap: 40px; }
         .belajar-box { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
         @media (max-width: 768px) { .belajar-box { grid-template-columns: 1fr; } }
 
-        .alphabet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-height: 500px; overflow-y: auto; padding-right: 5px; }
-        .alphabet-grid::-webkit-scrollbar { width: 6px; }
-        .alphabet-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        /* Grid Angka */
+        .number-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-height: 420px; overflow-y: auto; padding-right: 5px; }
+        .number-grid::-webkit-scrollbar { width: 6px; }
+        .number-grid::-webkit-scrollbar-thumb { background: var(--success); border-radius: 10px; }
 
-        .letter-btn { background: var(--card); border: 2px solid #e2e8f0; font-family: 'Fredoka One', cursive; font-size: 1.5rem; padding: 15px 0; border-radius: 15px; cursor: pointer; color: var(--text); transition: 0.2s; box-shadow: 0 4px 0 #e2e8f0; }
-        .letter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 0 #3a8ebf; transform: translateY(2px); }
+        .num-btn { background: var(--card); border: 2px solid #e2e8f0; font-family: 'Fredoka One', cursive; font-size: 1.8rem; padding: 12px 0; border-radius: 15px; cursor: pointer; color: var(--text); transition: 0.2s; box-shadow: 0 4px 0 #e2e8f0; }
+        .num-btn.active { background: var(--success); color: white; border-color: var(--success); box-shadow: 0 4px 0 #52a300; transform: translateY(2px); }
 
-        .display-card { background: var(--card); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 480px; cursor: pointer; }
-        .big-letter { font-family: 'Fredoka One', cursive; font-size: 6rem; color: var(--primary); margin-bottom: 5px; }
+        /* Tampilan Utama Angka */
+        .display-card { background: var(--card); border-radius: 30px; padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 420px; cursor: pointer; justify-content: center; position: relative; }
+        .big-number { font-family: 'Fredoka One', cursive; font-size: 6rem; color: var(--success); margin-bottom: 5px; }
+        .number-name { font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: var(--text); }
+        .count-display { font-size: 2rem; margin: 15px 0; min-height: 80px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; max-width: 90%; }
+        .suara-instruksi { font-size: 0.9rem; color: var(--success); font-weight: bold; }
 
-        .category-menu { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; justify-content: center; }
-        .cat-btn { background: var(--bg); border: none; padding: 10px 20px; border-radius: 20px; font-weight: 800; cursor: pointer; color: var(--text); transition: 0.3s; }
-        .cat-btn.active { color: white; }
-        .cat-btn.btn-hewan.active { background: var(--danger); }
-        .cat-btn.btn-buah.active { background: var(--success); }
-        .cat-btn.btn-kendaraan.active { background: var(--secondary); }
-
-        .object-illustration { font-size: 8rem; margin: 15px 0; animation: bounce 0.5s infinite alternate; }
-        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
-
-        .object-name { font-family: 'Fredoka One', cursive; font-size: 3rem; color: var(--text); }
-        .object-spelling { font-size: 1.5rem; color: #888; font-weight: 800; letter-spacing: 3px; margin-top: 10px; }
-        .suara-instruksi { margin-top: 25px; font-size: 1rem; color: var(--primary); font-weight: bold; }
+        /* Area Game Berhitung */
+        .game-card { background: var(--card); border-radius: 30px; padding: 40px 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .game-title { font-family: 'Fredoka One', cursive; color: var(--purple); font-size: 2rem; margin-bottom: 25px; }
+        
+        .math-box { display: flex; align-items: center; justify-content: center; gap: 20px; font-family: 'Fredoka One', cursive; font-size: 3.5rem; margin-bottom: 20px; flex-wrap: wrap; }
+        .math-item { display: flex; flex-direction: column; align-items: center; min-width: 80px; }
+        .math-emoji { font-size: 1.5rem; min-height: 50px; max-width: 150px; display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; margin-top: 10px; font-family: sans-serif; }
+        
+        .operator { color: var(--primary); }
+        .sama-dengan { color: var(--text); }
+        
+        .input-jawaban { width: 120px; height: 80px; font-family: 'Fredoka One', cursive; font-size: 3rem; text-align: center; border: 4px dashed var(--purple); border-radius: 20px; background: var(--bg); color: var(--purple); outline: none; }
+        
+        .btn-cek { background: var(--purple); color: white; border: none; font-family: 'Fredoka One', cursive; padding: 15px 40px; font-size: 1.5rem; border-radius: 20px; cursor: pointer; box-shadow: 0 5px 0 #7b2cbf; transition: 0.2s; margin-top: 10px; }
+        .btn-cek:active { transform: translateY(3px); box-shadow: 0 2px 0 #7b2cbf; }
+        
+        .feedback { font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-top: 20px; min-height: 40px; }
+        .feedback.benar { color: var(--success); }
+        .feedback.salah { color: var(--danger); }
     </style>
 </head>
 <body>
 
     <div class="header">
         <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
-        <h1 class="title">🔤 Belajar Huruf</h1>
+        <h1 class="title">🔢 Belajar Angka & Berhitung</h1>
         <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌓</button>
     </div>
 
-    <div class="belajar-box">
-        <div class="alphabet-grid" id="alphabet-box"></div>
+    <div class="main-container">
+        <div class="belajar-box">
+            <div class="number-grid" id="number-box"></div>
 
-        <div class="display-card" onclick="suaraBenda()">
-            <div class="big-letter" id="view-letter">A</div>
+            <div class="display-card" onclick="suaraAngka()">
+                <div class="big-number" id="view-number">1</div>
+                <div class="number-name" id="view-name">Satu</div>
+                <div class="count-display" id="view-count">🎈</div>
+                <div class="suara-instruksi" id="status-suara"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <h2 class="game-title">✨ Ayo Bermain Berhitung! ✨</h2>
             
-            <div class="category-menu" onclick="event.stopPropagation();">
-                <button class="cat-btn btn-hewan active" onclick="setKategori('hewan')">🦁 Hewan</button>
-                <button class="cat-btn btn-buah" onclick="setKategori('buah')">🍎 Buah</button>
-                <button class="cat-btn btn-kendaraan" onclick="setKategori('kendaraan')">🚗 Kendaraan</button>
+            <div class="math-box">
+                <div class="math-item">
+                    <span id="num1">3</span>
+                    <div class="math-emoji" id="emoji1">🍎🍎🍎</div>
+                </div>
+                
+                <span class="operator" id="math-op">+</span>
+                
+                <div class="math-item">
+                    <span id="num2">2</span>
+                    <div class="math-emoji" id="emoji2">🍎🍎</div>
+                </div>
+                
+                <span class="sama-dengan">=</span>
+                
+                <input type="number" class="input-jawaban" id="jawaban-user" placeholder="?" min="0" max="40">
             </div>
 
-            <div class="object-illustration" id="view-icon">🐔</div>
-            <div class="object-name" id="view-name">Ayam</div>
-            <div class="object-spelling" id="view-spelling">A-Y-A-M</div>
-            
-            <div class="suara-instruksi"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
+            <button class="btn-cek" id="tombol-periksa" onclick="cekJawaban()">Periksa Jawaban 🧐</button>
+            <div class="feedback" id="game-feedback"></div>
         </div>
     </div>
 
     <script>
-        const databaseBelajar = {
-            'A': { hewan: ['🐔', 'Ayam', 'A-Y-A-M'], buah: ['🍎', 'Apel', 'A-P-E-L'], kendaraan: ['🚀', 'Angkasa', 'A-N-G-K-A-S-A'] },
-            'B': { hewan: ['🐊', 'Buaya', 'B-U-A-Y-A'], buah: ['🥔', 'Bengkoang', 'B-E-N-G-K-U-A-N'], kendaraan: ['🚌', 'Bus', 'B-U-S'] },
-            'C': { hewan: ['🦎', 'Cicak', 'C-I-C-A-K'], buah: ['🍒', 'Ceri', 'C-E-R-I'], kendaraan: ['🚜', 'Craktor', 'C-R-A-K-T-O-R'] },
-            'D': { hewan: ['🐑', 'Domba', 'D-O-M-B-A'], buah: ['🥔', 'Duku', 'D-U-K-U'], kendaraan: ['🐴 🚃', 'Delman', 'D-E-L-M-A-N'] },
-            'E': { hewan: ['🦅', 'Elang', 'E-L-A-N-G'], buah: ['🍇', 'Elderberry', 'E-L-D-E-R-B-E-R-R-Y'], kendaraan: ['🛴', 'E-scooter', 'E-S-C-O-O-T-E-R'] },
-            'F': { hewan: ['🦩', 'Flamingo', 'F-L-A-M-I-N-G-O'], buah: ['🍓', 'Frut', 'F-R-U-T'], kendaraan: ['⛴️', 'Feri', 'F-E-R-I'] },
-            'G': { hewan: ['🐘', 'Gajah', 'G-A-J-A-H'], buah: ['🌾', 'Gandum', 'G-A-N-D-U-M'], kendaraan: ['🛒', 'Gerobak', 'G-E-R-O-B-A-K'] },
-            'H': { hewan: ['🐯', 'Harimau', 'H-A-R-I-M-A-U'], buah: ['🥥', 'Haver', 'H-A-V-E-R'], kendaraan: ['🚁', 'Helikopter', 'H-E-L-I-K-O-P-T-E-R'] },
-            'I': { hewan: ['🐟', 'Ikan', 'I-K-A-N'], buah: ['🍃', 'Iles-iles', 'I-L-E-S'], kendaraan: ['🚑', 'Innova', 'I-N-N-O-V-A'] },
-            'J': { hewan: ['🦒', 'Jerapah', 'J-E-R-A-P-A-H'], buah: ['🍊', 'Jeruk', 'J-E-R-U-K'], kendaraan: ['🚙', 'Jeep', 'J-E-E-P'] },
-            'K': { hewan: ['🐱', 'Kucing', 'K-U-C-I-N-G'], buah: ['🥥', 'Kelapa', 'K-E-L-A-P-A'], kendaraan: ['🚗', 'Kereta', 'K-E-R-E-T-A'] },
-            'L': { hewan: ['🐝', 'Lebah', 'L-E-B-A-H'], buah: ['🍋', 'Lemon', 'L-E-M-O-N'], kendaraan: ['🛳️', 'Lori', 'L-O-R-I'] },
-            'M': { hewan: ['🐒', 'Monyet', 'M-O-N-Y-E-T'], buah: ['🥭', 'Manggis', 'M-A-N-G-G-I-S'], kendaraan: ['🏍️', 'Motor', 'M-O-T-O-R'] },
-            'N': { hewan: ['🦟', 'Nyamuk', 'N-Y-A-M-U-K'], buah: ['🍍', 'Nanas', 'N-A-N-A-S'], kendaraan: ['🏎️', 'Nascar', 'N-A-S-C-A-R'] },
-            'O': { hewan: ['🦧', 'Orangutan', 'O-R-A-N-G-U-T-A-N'], buah: ['🍏', 'Oranye', 'O-R-A-N-Y-E'], kendaraan: ['🛺', 'Ojek', 'O-J-E-K'] },
-            'P': { hewan: ['🐼', 'Panda', 'P-A-N-D-A'], buah: ['🍌', 'Pisang', 'P-I-S-A-N-G'], kendaraan: ['✈️', 'Pesawat', 'P-E-S-A-W-A-T'] },
-            'Q': { hewan: ['🐦', 'Quail', 'Q-U-A-I-L'], buah: ['🍐', 'Quini', 'Q-U-I-N-I'], kendaraan: ['🚜', 'Quad', 'Q-U-A-D'] },
-            'R': { hewan: ['🦌', 'Rusa', 'R-U-S-A'], buah: ['🍓', 'Rambutan', 'R-A-M-B-U-T-A-N'], kendaraan: ['🚀', 'Roket', 'R-O-K-E-T'] },
-            'S': { hewan: ['🦁', 'Singa', 'S-I-N-G-A'], buah: ['🍐', 'Sirsak', 'S-I-R-S-A-K'], kendaraan: ['🚲', 'Sepeda', 'S-E-P-E-D-A'] },
-            'T': { hewan: ['🐭', 'Tikus', 'T-I-K-U-S'], buah: ['🍎', 'Tomat', 'T-O-M-A-T'], kendaraan: ['🚕', 'Taxi', 'T-A-X-I'] },
-            'U': { hewan: ['🐍', 'Ular', 'U-L-A-R'], buah: ['🍠', 'Ubi', 'U-B-I'], kendaraan: ['💨', 'Udara', 'U-D-A-R-A'] },
-            'V': { hewan: ['🐍', 'Viper', 'V-I-P-E-R'], buah: ['🌿', 'Vanili', 'V-A-N-I-L-I'], kendaraan: ['🚐', 'Van', 'V-A-N'] },
-            'W': { hewan: ['🐗', 'Walang', 'W-A-L-A-N-G'], buah: ['🥕', 'Wortel', 'W-O-R-T-E-L'], kendaraan: ['🚙', 'Wagon', 'W-A-G-O-N'] },
-            'X': { hewan: ['🐟', 'Xenopus', 'X-E-N-O-P-U-S'], buah: ['🍉', 'Ximenia', 'X-I-M-E-N-I-A'], kendaraan: ['🚗', 'Xenia', 'X-E-N-I-A'] },
-            'Y': { hewan: ['🐂', 'Yak', 'Y-A-K'], buah: ['🍠', 'Yam', 'Y-A-M'], kendaraan: ['⛵', 'Yacht', 'Y-A-C-H-T'] },
-            'Z': { hewan: ['🦓', 'Zebra', 'Z-E-B-R-A'], buah: ['🍈', 'Zaitun', 'Z-A-I-T-U-N'], kendaraan: ['🚘', 'Zenvo', 'Z-E-N-V-O'] }
+        const databaseAngka = {
+            1: { nama: 'Satu', emoji: '🎈' }, 2: { nama: 'Dua', emoji: '🚗' }, 3: { nama: 'Tiga', emoji: '🍎' },
+            4: { nama: 'Empat', emoji: '🐱' }, 5: { nama: 'Lima', emoji: '⭐' }, 6: { nama: 'Enam', emoji: '🐠' },
+            7: { nama: 'Tujuh', emoji: '🍓' }, 8: { nama: 'Delapan', emoji: '🦋' }, 9: { nama: 'Sembilan', emoji: '🍦' },
+            10: { nama: 'Sepuluh', emoji: '⚽' }, 11: { nama: 'Sebelas', emoji: '🚀' }, 12: { nama: 'Dua Belas', emoji: '🍒' },
+            13: { nama: 'Tiga Belas', emoji: '🍩' }, 14: { nama: 'Empat Belas', emoji: '🐥' }, 15: { nama: 'Lima Belas', emoji: '🍬' },
+            16: { nama: 'Enam Belas', emoji: '🐸' }, 17: { nama: 'Tujuh Belas', emoji: '🌻' }, 18: { nama: 'Delapan Belas', emoji: '🦀' },
+            19: { nama: 'Sembilan Belas', emoji: '🍕' }, 20: { nama: 'Dua Puluh', emoji: '🎁' }
         };
 
-        let hurufAktif = 'A';
-        let kategoriAktif = 'hewan';
+        let angkaAktif = 1;
+        let nilaiBenar = 0;
+        const gameEmojis = ['🍎', '🎈', '⭐', '🚗', '🍬', '🍩', '🐥', '🧸', '🍦', '🌈', '🐱', '🐠', '🍄', '🍔'];
 
-        const alphabetBox = document.getElementById('alphabet-box');
-        for (let i = 65; i <= 90; i++) {
-            const huruf = String.fromCharCode(i);
+        const pujianBenar = [
+            "HEBAT! Jawabanmu BENAR! 🎉🥳",
+            "PINTAR SEKALI! Dua jempol buat kamu! 👍👍",
+            "LUAR BIASA! Kamu berhasil! 🌟✨",
+            "WOW! Kamu cepat sekali berhitung! 🚀🕺",
+            "YEY! Betul lagi, kamu keren! 🏆❤️"
+        ];
+        
+        const textSuaraBenar = [
+            "Hebat! Jawabanmu benar!",
+            "Pintar sekali! Dua jempol buat kamu!",
+            "Luar biasa! Kamu berhasil!",
+            "Wow! Kamu cepat sekali berhitung!",
+            "Yey! Betul lagi, kamu keren!"
+        ];
+
+        const motivasiSalah = [
+            "Yaaah, coba hitung lagi yuk! 💪😊",
+            "Sedikit lagi betul! Yuk ulangi hitung emojinya! 🧐✨",
+            "Jangan menyerah, coba hitung sekali lagi! ❤️🧸",
+            "Oops! Masih kurang tepat, ayo coba lagi sayang! 🤗"
+        ];
+
+        const textSuaraSalah = [
+            "Coba hitung lagi yuk",
+            "Sedikit lagi betul, yuk ulangi hitung emojinya",
+            "Jangan menyerah, coba hitung sekali lagi",
+            "Masih kurang tepat, ayo coba lagi sayang"
+        ];
+
+        // ANTI-DOUBLE SYSTEM: Mengunci antrean secara total menggunakan variabel status kustom
+        let sedangBicara = false; 
+
+        function playSuaraTxt(text) {
+            if (!('speechSynthesis' in window)) return;
+
+            // JIKA SEDANG BERBICARA, TOLAK INSTANS BARU (Ini mencegah suara double akibat spam klik)
+            if (window.speechSynthesis.speaking || sedangBicara) {
+                return; 
+            }
+
+            sedangBicara = true;
+            const ucapan = new SpeechSynthesisUtterance(text);
+            ucapan.lang = 'id-ID';
+            ucapan.rate = 0.85;
+
+            // Reset status pengunci ketika suara sudah benar-benar selesai
+            ucapan.onend = function() {
+                sedangBicara = false;
+                document.getElementById('status-suara').innerHTML = `<i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara`;
+            };
+
+            ucapan.onerror = function() {
+                sedangBicara = false;
+                document.getElementById('status-suara').innerHTML = `<i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara`;
+            };
+
+            document.getElementById('status-suara').innerHTML = `📢 <i>Sedang berbicara...</i>`;
+            window.speechSynthesis.speak(ucapan);
+        }
+
+        // Buat tombol angka 1-20
+        const numberBox = document.getElementById('number-box');
+        for (let i = 1; i <= 20; i++) {
             const btn = document.createElement('button');
-            btn.className = `letter-btn ${huruf === 'A' ? 'active' : ''}`;
-            btn.innerText = huruf;
-            btn.id = `btn-${huruf}`;
-            btn.onclick = () => gantiHuruf(huruf);
-            alphabetBox.appendChild(btn);
+            btn.className = `num-btn ${i === 1 ? 'active' : ''}`;
+            btn.innerText = i;
+            btn.id = `btn-num-${i}`;
+            btn.onclick = () => {
+                // Jangan biarkan ganti angka / spam suara jika suara lama belum selesai
+                if(!sedangBicara) gantiAngka(i);
+            };
+            numberBox.appendChild(btn);
         }
 
-        function gantiHuruf(huruf) {
-            document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
-            const activeBtn = document.getElementById(`btn-${huruf}`);
+        function gantiAngka(angka) {
+            document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-num-${angka}`);
             if(activeBtn) activeBtn.classList.add('active');
-            hurufAktif = huruf;
-            updateDisplay();
-        }
-
-        function setKategori(kategori) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.btn-${kategori}`).classList.add('active');
-            kategoriAktif = kategori;
+            angkaAktif = angka;
             updateDisplay();
         }
 
         function updateDisplay() {
-            const data = databaseBelajar[hurufAktif][kategoriAktif];
-            document.getElementById('view-letter').innerText = hurufAktif;
-            document.getElementById('view-icon').innerText = data[0];
-            document.getElementById('view-name').innerText = data[1];
-            document.getElementById('view-spelling').innerText = data[2];
+            const data = databaseAngka[angkaAktif];
+            document.getElementById('view-number').innerText = angkaAktif;
+            document.getElementById('view-name').innerText = data.nama;
+            
+            let kumpulanEmoji = '';
+            for (let i = 0; i < angkaAktif; i++) { kumpulanEmoji += data.emoji; }
+            document.getElementById('view-count').innerText = kumpulanEmoji;
         }
 
-        function suaraBenda() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const data = databaseBelajar[hurufAktif][kategoriAktif];
-                const ucapan = new SpeechSynthesisUtterance(`${hurufAktif}... ${data[1]}`);
-                ucapan.lang = 'id-ID';
-                ucapan.rate = 0.8;
-                window.speechSynthesis.speak(ucapan);
+        function suaraAngka() {
+            const data = databaseAngka[angkaAktif];
+            playSuaraTxt(`${angkaAktif}... ${data.nama}`);
+        }
+
+        function buatSoalBaru() {
+            const tipeSoal = Math.random() > 0.5 ? '+' : '-';
+            const emojiPilihan = gameEmojis[Math.floor(Math.random() * gameEmojis.length)];
+            
+            let n1, n2;
+
+            if (tipeSoal === '+') {
+                n1 = Math.floor(Math.random() * 10) + 1;
+                n2 = Math.floor(Math.random() * 10) + 1;
+                nilaiBenar = n1 + n2;
+            } else {
+                n1 = Math.floor(Math.random() * 12) + 6;
+                n2 = Math.floor(Math.random() * (n1 - 1)) + 1; 
+                nilaiBenar = n1 - n2;
+            }
+
+            document.getElementById('num1').innerText = n1;
+            document.getElementById('num2').innerText = n2;
+            document.getElementById('math-op').innerText = tipeSoal;
+            document.getElementById('jawaban-user').value = '';
+            document.getElementById('game-feedback').innerText = '';
+            document.getElementById('tombol-periksa').disabled = false;
+
+            let txtEmoji1 = '', txtEmoji2 = '';
+            for(let i=0; i<n1; i++) { txtEmoji1 += emojiPilihan; }
+            for(let i=0; i<n2; i++) { txtEmoji2 += emojiPilihan; }
+            
+            document.getElementById('emoji1').innerText = txtEmoji1;
+            document.getElementById('emoji2').innerText = txtEmoji2;
+        }
+
+        function cekJawaban() {
+            // Jika audio feedback soal sebelumnya belum selesai, abaikan klik cek jawaban
+            if (sedangBicara) return;
+
+            const jawabanUser = parseInt(document.getElementById('jawaban-user').value);
+            const feedback = document.getElementById('game-feedback');
+            
+            if (isNaN(jawabanUser)) {
+                feedback.className = "feedback salah";
+                feedback.innerText = "Isi dulu jawabannya, sayang! 😮";
+                playSuaraTxt("Isi dulu jawabannya, sayang");
+                return;
+            }
+
+            const indeksAcak = Math.floor(Math.random() * pujianBenar.length);
+            const indeksSalahAcak = Math.floor(Math.random() * motivasiSalah.length);
+
+            if (jawabanUser === nilaiBenar) {
+                document.getElementById('tombol-periksa').disabled = true;
+                feedback.className = "feedback benar";
+                feedback.innerText = pujianBenar[indeksAcak];
+                playSuaraTxt(textSuaraBenar[indeksAcak]);
+                setTimeout(buatSoalBaru, 3500); 
+            } else {
+                feedback.className = "feedback salah";
+                feedback.innerText = motivasiSalah[indeksSalahAcak];
+                playSuaraTxt(textSuaraSalah[indeksSalahAcak]);
             }
         }
 
@@ -176,8 +303,17 @@
         window.onload = () => {
             const savedTheme = localStorage.getItem('tk_theme');
             if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+            
+            // Pengaman ekstra: Reset paksa sistem audio browser saat halaman baru dibuka
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            
             updateDisplay();
+            buatSoalBaru();
         };
     </script>
 </body>
 </html>
+
+```
