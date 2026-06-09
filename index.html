@@ -60,13 +60,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- BERANDA (MENU GRID DISERTAI GAMBAR) --- */
+        /* --- BERANDA (MENU GRID BARU DENGAN IKON STATIS) --- */
         .banner {
             background: linear-gradient(135deg, var(--primary), #00D2FF);
             padding: 50px 20px; border-radius: 40px; color: white; text-align: center; margin-bottom: 30px;
         }
         
-        /* Grid diset rata 4 kolom seimbang */
         .menu-grid { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -78,23 +77,25 @@
         .menu-link { text-decoration: none; color: inherit; display: block; }
         
         .menu-item {
-            background: var(--card); padding: 25px 20px; border-radius: 30px; text-align: center;
+            background: var(--card); padding: 30px 20px; border-radius: 30px; text-align: center;
             transition: 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            height: 100%; min-height: 220px; border: 3px solid transparent;
         }
-        .menu-link:hover .menu-item { transform: scale(1.05); }
+        
+        /* Memberikan warna border sesuai tema menu saat di-hover */
+        .menu-link:nth-child(1):hover .menu-item { transform: scale(1.05); border-color: var(--primary); }
+        .menu-link:nth-child(2):hover .menu-item { transform: scale(1.05); border-color: var(--secondary); }
+        .menu-link:nth-child(3):hover .menu-item { transform: scale(1.05); border-color: var(--success); }
+        .menu-link:nth-child(4):hover .menu-item { transform: scale(1.05); border-color: var(--danger); }
 
-        /* Wadah Gambar di Atas Teks Menu */
-        .menu-preview-box {
-            width: 100%; aspect-ratio: 4/3; background: var(--placeholder-bg); border-radius: 20px;
-            border: 3px dashed currentColor; overflow: hidden; margin-bottom: 15px; position: relative;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;
+        /* Box khusus menampung Ikon Besar di Beranda */
+        .menu-icon-box {
+            font-size: 4rem; margin-bottom: 15px; transition: 0.3s;
         }
-        .menu-preview-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .menu-preview-box i { font-size: 2.5rem; margin-bottom: 5px; }
-        .menu-preview-box span { font-size: 0.75rem; font-weight: 800; display: block; }
+        .menu-link:hover .menu-icon-box { transform: scale(1.1); }
 
-        .menu-item h3 { font-family: 'Fredoka One', cursive; font-size: 1.2rem; margin-top: 5px; }
+        .menu-item h3 { font-family: 'Fredoka One', cursive; font-size: 1.4rem; margin-top: 5px; }
 
         /* --- PROFIL --- */
         .gallery-grid {
@@ -151,6 +152,7 @@
 
     <div class="main-wrapper">
         
+        <!-- --- BERANDA --- -->
         <section id="home" class="page-section active">
             <div class="banner">
                 <h1>Halo, Sahabat Kecil!</h1>
@@ -158,68 +160,49 @@
             </div>
             
             <div class="menu-grid">
-                <div class="menu-container">
-                    <label class="menu-preview-box" style="color: var(--primary);">
-                        <input type="file" accept="image/*" onchange="handleImage(this, 'img-menu-1', 'ctx-menu-1', 'menu_1')">
-                        <div id="ctx-menu-1" style="text-align:center;">
-                            <i class="fa-solid fa-arrow-up-a-z"></i><br><span>+ Pasang Foto</span>
+                <!-- Menu 1: Huruf A-Z -->
+                <a href="huruf.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--primary);">
+                        <div class="menu-icon-box">
+                            <i class="fa-solid fa-arrow-up-a-z"></i>
                         </div>
-                        <img src="" id="img-menu-1">
-                    </label>
-                    <a href="huruf.html" class="menu-link">
-                        <div class="menu-item" style="color: var(--primary);">
-                            <h3>Huruf A-Z</h3>
-                        </div>
-                    </a>
-                </div>
+                        <h3>Huruf A-Z</h3>
+                    </div>
+                </a>
 
-                <div class="menu-container">
-                    <label class="menu-preview-box" style="color: var(--secondary);">
-                        <input type="file" accept="image/*" onchange="handleImage(this, 'img-menu-2', 'ctx-menu-2', 'menu_2')">
-                        <div id="ctx-menu-2" style="text-align:center;">
-                            <i class="fa-solid fa-calculator"></i><br><span>+ Pasang Foto</span>
+                <!-- Menu 2: Angka -->
+                <a href="angka.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--secondary);">
+                        <div class="menu-icon-box">
+                            <i class="fa-solid fa-calculator"></i>
                         </div>
-                        <img src="" id="img-menu-2">
-                    </label>
-                    <a href="angka.html" class="menu-link">
-                        <div class="menu-item" style="color: var(--secondary);">
-                            <h3>Angka</h3>
-                        </div>
-                    </a>
-                </div>
+                        <h3>Angka</h3>
+                    </div>
+                </a>
 
-                <div class="menu-container">
-                    <label class="menu-preview-box" style="color: var(--success);">
-                        <input type="file" accept="image/*" onchange="handleImage(this, 'img-menu-3', 'ctx-menu-3', 'menu_3')">
-                        <div id="ctx-menu-3" style="text-align:center;">
-                            <i class="fa-solid fa-book-open-reader"></i><br><span>+ Pasang Foto</span>
+                <!-- Menu 3: Membaca -->
+                <a href="membaca.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--success);">
+                        <div class="menu-icon-box">
+                            <i class="fa-solid fa-book-open-reader"></i>
                         </div>
-                        <img src="" id="img-menu-3">
-                    </label>
-                    <a href="membaca.html" class="menu-link">
-                        <div class="menu-item" style="color: var(--success);">
-                            <h3>Membaca</h3>
-                        </div>
-                    </a>
-                </div>
+                        <h3>Membaca</h3>
+                    </div>
+                </a>
 
-                <div class="menu-container">
-                    <label class="menu-preview-box" style="color: var(--danger);">
-                        <input type="file" accept="image/*" onchange="handleImage(this, 'img-menu-4', 'ctx-menu-4', 'menu_4')">
-                        <div id="ctx-menu-4" style="text-align:center;">
-                            <i class="fa-solid fa-paint-roller"></i><br><span>+ Pasang Foto</span>
+                <!-- Menu 4: Mewarnai -->
+                <a href="mewarnai.html" class="menu-link">
+                    <div class="menu-item" style="color: var(--danger);">
+                        <div class="menu-icon-box">
+                            <i class="fa-solid fa-paint-roller"></i>
                         </div>
-                        <img src="" id="img-menu-4">
-                    </label>
-                    <a href="mewarnai.html" class="menu-link">
-                        <div class="menu-item" style="color: var(--danger);">
-                            <h3>Mewarnai</h3>
-                        </div>
-                    </a>
-                </div>
+                        <h3>Mewarnai</h3>
+                    </div>
+                </a>
             </div>
         </section>
 
+        <!-- --- PROFIL --- -->
         <section id="profil" class="page-section">
             <h2 class="section-title"><i class="fa-solid fa-images"></i> Galeri Sekolah (Klik Ganti Foto)</h2>
             <div class="gallery-grid">
@@ -276,6 +259,7 @@
             </div>
         </section>
 
+        <!-- --- KONTAK --- -->
         <section id="kontak" class="page-section">
             <div class="profile-card" style="text-align: center;">
                 <h2 class="section-title" style="justify-content: center;"><i class="fa-solid fa-paper-plane"></i>HUBUNGI KAMI</h2>
@@ -318,17 +302,11 @@
         }
 
         window.onload = () => {
-            // Memuat Gambar Logo & Galeri Profil
+            // Memuat Gambar Logo & Galeri Profil saja
             loadSavedImage('tk_logo', 'display-logo', 'logo-icon');
             loadSavedImage('gal_1', 'img-gal-1', 'txt-gal-1');
             loadSavedImage('gal_2', 'img-gal-2', 'txt-gal-2');
             loadSavedImage('gal_3', 'img-gal-3', 'txt-gal-3');
-
-            // Memuat Gambar Menu Beranda
-            loadSavedImage('menu_1', 'img-menu-1', 'ctx-menu-1');
-            loadSavedImage('menu_2', 'img-menu-2', 'ctx-menu-2');
-            loadSavedImage('menu_3', 'img-menu-3', 'ctx-menu-3');
-            loadSavedImage('menu_4', 'img-menu-4', 'ctx-menu-4');
 
             const savedTheme = localStorage.getItem('tk_theme');
             if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
@@ -347,5 +325,3 @@
     </script>
 </body>
 </html>
-
-```
