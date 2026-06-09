@@ -1,12 +1,3 @@
-Maaf sekali atas ketidaknyamanan ini. Di Google Chrome (terutama Chrome Android di HP), ada satu *bug* bawaan yang sangat menjengkelkan: ketika kita menekan tombol berulang kali, fungsi `window.speechSynthesis.cancel()` bukannya menghentikan suara, tapi malah membuat browser **bingung dan menumpuk suara yang sama secara bersamaan (jadi *double* / menggema)**.
-
-Untuk benar-benar mengunci agar suara **TIDAK BISA DOUBLE** dalam kondisi apa pun, kodenya sekarang diubah total menggunakan sistem **Kunci Antrean (State Locker)**.
-
-Logikanya dibalik: Jika browser sedang bersuara (`window.speechSynthesis.speaking`), tombol klik akan **diabaikan/dikunci total**. Tombol baru bisa diklik lagi setelah suara yang pertama benar-benar selesai berbunyi.
-
-Ini kode HTML penuh yang sudah diperbaiki 100% aman dari suara *double*:
-
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
