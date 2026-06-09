@@ -50,7 +50,8 @@
             width: 50px; height: 50px; border-radius: 10px; border: 2px dashed var(--primary);
             background: var(--placeholder-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer;
         }
-        .logo-preview { width: 100%; height: 100%; object-fit: cover; display: none; }
+        /* Perubahan: Menghapus display:none agar gambar default langsung muncul */
+        .logo-preview { width: 100%; height: 100%; object-fit: cover; }
         .brand-name { font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--primary); }
 
         /* --- CONTENT --- */
@@ -60,7 +61,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- BERANDA (MENU GRID BARU DENGAN IKON STATIS) --- */
+        /* --- BERANDA --- */
         .banner {
             background: linear-gradient(135deg, var(--primary), #00D2FF);
             padding: 50px 20px; border-radius: 40px; color: white; text-align: center; margin-bottom: 30px;
@@ -83,18 +84,13 @@
             height: 100%; min-height: 220px; border: 3px solid transparent;
         }
         
-        /* Memberikan warna border sesuai tema menu saat di-hover */
         .menu-link:nth-child(1):hover .menu-item { transform: scale(1.05); border-color: var(--primary); }
         .menu-link:nth-child(2):hover .menu-item { transform: scale(1.05); border-color: var(--secondary); }
         .menu-link:nth-child(3):hover .menu-item { transform: scale(1.05); border-color: var(--success); }
         .menu-link:nth-child(4):hover .menu-item { transform: scale(1.05); border-color: var(--danger); }
 
-        /* Box khusus menampung Ikon Besar di Beranda */
-        .menu-icon-box {
-            font-size: 4rem; margin-bottom: 15px; transition: 0.3s;
-        }
+        .menu-icon-box { font-size: 4rem; margin-bottom: 15px; transition: 0.3s; }
         .menu-link:hover .menu-icon-box { transform: scale(1.1); }
-
         .menu-item h3 { font-family: 'Fredoka One', cursive; font-size: 1.4rem; margin-top: 5px; }
 
         /* --- PROFIL --- */
@@ -108,9 +104,10 @@
             border: 3px dashed var(--primary); overflow: hidden; cursor: pointer;
             display: flex; align-items: center; justify-content: center; position: relative;
         }
-        .gallery-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        .gallery-box span { font-size: 0.8rem; font-weight: 800; color: var(--primary); text-align: center; padding: 10px; }
-        .gallery-box:hover { background: #fff; }
+        /* Perubahan: Gambar langsung aktif tanpa disembunyikan di awal */
+        .gallery-box img { width: 100%; height: 100%; object-fit: cover; }
+        /* Perubahan: Text "+ Foto" otomatis sembunyi jika gambar sudah ada src-nya */
+        .gallery-box span { position: absolute; font-size: 0.8rem; font-weight: 800; color: var(--primary); text-align: center; padding: 10px; z-index: 1; }
 
         .profile-card { background: var(--card); padding: 30px; border-radius: 30px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .section-title { font-family: 'Fredoka One'; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
@@ -134,8 +131,9 @@
         <div class="nav-top">
             <div class="logo-area">
                 <label for="logo-upload" class="logo-container-box" title="Klik ganti logo">
-                    <i class="fa-solid fa-mosque" id="logo-icon" style="color:var(--primary)"></i>
-                    <img src="" id="display-logo" class="logo-preview">
+                    <i class="fa-solid fa-mosque" id="logo-icon" style="color:var(--primary); display:none;"></i>
+                    <!-- SILAKAN GANTI KODE DI DALAM src="" DENGAN BASE64 LOGO ASLI KAMU -->
+                    <img src="ChatGPT_Image_18_Mei_2026__18.53.23-removebg-preview.png" id="display-logo" class="logo-preview">
                 </label>
                 <input type="file" id="logo-upload" accept="image/*" onchange="handleImage(this, 'display-logo', 'logo-icon', 'tk_logo')">
                 <span class="brand-name">TK Nurul Ikhlas</span>
@@ -160,42 +158,27 @@
             </div>
             
             <div class="menu-grid">
-                <!-- Menu 1: Huruf A-Z -->
                 <a href="huruf.html" class="menu-link">
                     <div class="menu-item" style="color: var(--primary);">
-                        <div class="menu-icon-box">
-                            <i class="fa-solid fa-arrow-up-a-z"></i>
-                        </div>
+                        <div class="menu-icon-box"><i class="fa-solid fa-arrow-up-a-z"></i></div>
                         <h3>Huruf A-Z</h3>
                     </div>
                 </a>
-
-                <!-- Menu 2: Angka -->
                 <a href="angka.html" class="menu-link">
                     <div class="menu-item" style="color: var(--secondary);">
-                        <div class="menu-icon-box">
-                            <i class="fa-solid fa-calculator"></i>
-                        </div>
+                        <div class="menu-icon-box"><i class="fa-solid fa-calculator"></i></div>
                         <h3>Angka</h3>
                     </div>
                 </a>
-
-                <!-- Menu 3: Membaca -->
                 <a href="membaca.html" class="menu-link">
                     <div class="menu-item" style="color: var(--success);">
-                        <div class="menu-icon-box">
-                            <i class="fa-solid fa-book-open-reader"></i>
-                        </div>
+                        <div class="menu-icon-box"><i class="fa-solid fa-book-open-reader"></i></div>
                         <h3>Membaca</h3>
                     </div>
                 </a>
-
-                <!-- Menu 4: Mewarnai -->
                 <a href="mewarnai.html" class="menu-link">
                     <div class="menu-item" style="color: var(--danger);">
-                        <div class="menu-icon-box">
-                            <i class="fa-solid fa-paint-roller"></i>
-                        </div>
+                        <div class="menu-icon-box"><i class="fa-solid fa-paint-roller"></i></div>
                         <h3>Mewarnai</h3>
                     </div>
                 </a>
@@ -208,21 +191,25 @@
             <div class="gallery-grid">
                 <label class="gallery-box">
                     <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-1', 'txt-gal-1', 'gal_1')">
-                    <span id="txt-gal-1"><i class="fa-solid fa-plus"></i><br>Foto Gedung</span>
-                    <img src="" id="img-gal-1">
+                    <span id="txt-gal-1" style="display: none;"><i class="fa-solid fa-plus"></i><br>Foto Gedung</span>
+                    <!-- SILAKAN GANTI src DI BAWAH DENGAN BASE64 FOTO GEDUNG KAMU -->
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%25' height='100%25' fill='%23e2e8f0'/><text x='50%25' y='50%25' font-size='20' fill='%234EA8DE' font-weight='bold' text-anchor='middle'>[ Foto Gedung Sekolah ]</text></svg>" id="img-gal-1">
                 </label>
                 <label class="gallery-box">
                     <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-2', 'txt-gal-2', 'gal_2')">
-                    <span id="txt-gal-2"><i class="fa-solid fa-plus"></i><br>Foto Kelas</span>
-                    <img src="" id="img-gal-2">
+                    <span id="txt-gal-2" style="display: none;"><i class="fa-solid fa-plus"></i><br>Foto Kelas</span>
+                    <!-- SILAKAN GANTI src DI BAWAH DENGAN BASE64 FOTO KELAS KAMU -->
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%25' height='100%25' fill='%23e2e8f0'/><text x='50%25' y='50%25' font-size='20' fill='%23FDC500' font-weight='bold' text-anchor='middle'>[ Foto Ruang Kelas ]</text></svg>" id="img-gal-2">
                 </label>
                 <label class="gallery-box">
                     <input type="file" accept="image/*" onchange="handleImage(this, 'img-gal-3', 'txt-gal-3', 'gal_3')">
-                    <span id="txt-gal-3"><i class="fa-solid fa-plus"></i><br>Foto Bermain</span>
-                    <img src="" id="img-gal-3">
+                    <span id="txt-gal-3" style="display: none;"><i class="fa-solid fa-plus"></i><br>Foto Bermain</span>
+                    <!-- SILAKAN GANTI src DI BAWAH DENGAN BASE64 FOTO BERMAIN KAMU -->
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%25' height='100%25' fill='%23e2e8f0'/><text x='50%25' y='50%25' font-size='20' fill='%2370E000' font-weight='bold' text-anchor='middle'>[ Foto Area Bermain ]</text></svg>" id="img-gal-3">
                 </label>
             </div>
 
+            <!-- ... (Sisa struktur Visi Misi & Fasilitas tetap sama) ... -->
             <div class="layout-split">
                 <div>
                     <div class="profile-card">
@@ -230,7 +217,6 @@
                         <p style="margin-bottom: 15px;"><b>Visi:</b> Terwujudnya anak yang sholeh, cerdas, mandiri dan kreatif.</p>
                         <p><b>Misi:</b><br>1. Menanamkan aqidah islami sejak dini.<br>2. Menciptakan suasana belajar sambil bermain yang ceria.<br>3. Menjalin kerjasama yang baik dengan orang tua.</p>
                     </div>
-
                     <div class="profile-card">
                         <h2 class="section-title"><i class="fa-solid fa-couch"></i> Fasilitas Kami</h2>
                         <div class="facility-grid">
@@ -241,14 +227,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <div class="profile-card" style="text-align: center; border: 2px solid var(--success);">
                         <span class="info-pill">RESMI BAN-PDM</span>
                         <h2 style="font-family:'Fredoka One'; color:var(--success);">AKREDITASI A</h2>
                         <p style="font-size: 0.8rem;">Sangat Baik (Terverifikasi)</p>
                     </div>
-
                     <div class="profile-card">
                         <h2 class="section-title" style="font-size: 1rem;"><i class="fa-solid fa-clock"></i> Jam Sekolah</h2>
                         <p style="font-size: 0.9rem;">Senin - Kamis:<br>07.30 - 11.00 WIB</p>
@@ -268,7 +252,6 @@
                 <p style="margin-bottom:10px;"><i class="fa-solid fa-envelope"></i> info@tknurulikhlas.sch.id</p>
             </div>
         </section>
-
     </div>
 
     <script>
@@ -286,7 +269,6 @@
                     const img = document.getElementById(imgId);
                     const hide = document.getElementById(hideId);
                     img.src = e.target.result;
-                    img.style.display = 'block';
                     if(hide) hide.style.display = 'none';
                     localStorage.setItem(storageKey, e.target.result);
                 }
@@ -302,7 +284,7 @@
         }
 
         window.onload = () => {
-            // Memuat Gambar Logo & Galeri Profil saja
+            // Cek memori lokal, jika kosong maka browser otomatis pakai kode Base64 bawaan kodingan di atas
             loadSavedImage('tk_logo', 'display-logo', 'logo-icon');
             loadSavedImage('gal_1', 'img-gal-1', 'txt-gal-1');
             loadSavedImage('gal_2', 'img-gal-2', 'txt-gal-2');
@@ -318,7 +300,6 @@
                 const img = document.getElementById(imgId);
                 const hide = document.getElementById(hideId);
                 img.src = data;
-                img.style.display = 'block';
                 if(hide) hide.style.display = 'none';
             }
         }
