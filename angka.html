@@ -46,7 +46,7 @@
         .num-btn.active { background: var(--success); color: white; border-color: var(--success); box-shadow: 0 4px 0 #52a300; transform: translateY(2px); }
 
         /* Tampilan Utama Angka */
-        .display-card { background: var(--card); border-radius: 30px; padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 420px; cursor: pointer; justify-content: center; }
+        .display-card { background: var(--card); border-radius: 30px; padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 420px; cursor: pointer; justify-content: center; position: relative; }
         .big-number { font-family: 'Fredoka One', cursive; font-size: 6rem; color: var(--success); margin-bottom: 5px; }
         .number-name { font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: var(--text); }
         .count-display { font-size: 2rem; margin: 15px 0; min-height: 80px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; max-width: 90%; }
@@ -89,7 +89,7 @@
                 <div class="big-number" id="view-number">1</div>
                 <div class="number-name" id="view-name">Satu</div>
                 <div class="count-display" id="view-count">🎈</div>
-                <div class="suara-instruksi"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
+                <div class="suara-instruksi" id="status-suara"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
             </div>
         </div>
 
@@ -114,29 +114,86 @@
                 <input type="number" class="input-jawaban" id="jawaban-user" placeholder="?" min="0" max="40">
             </div>
 
-            <button class="btn-cek" onclick="cekJawaban()">Periksa Jawaban 🧐</button>
+            <button class="btn-cek" id="tombol-periksa" onclick="cekJawaban()">Periksa Jawaban 🧐</button>
             <div class="feedback" id="game-feedback"></div>
         </div>
     </div>
 
     <script>
-        // Database Angka 1-20
         const databaseAngka = {
             1: { nama: 'Satu', emoji: '🎈' }, 2: { nama: 'Dua', emoji: '🚗' }, 3: { nama: 'Tiga', emoji: '🍎' },
             4: { nama: 'Empat', emoji: '🐱' }, 5: { nama: 'Lima', emoji: '⭐' }, 6: { nama: 'Enam', emoji: '🐠' },
             7: { nama: 'Tujuh', emoji: '🍓' }, 8: { nama: 'Delapan', emoji: '🦋' }, 9: { nama: 'Sembilan', emoji: '🍦' },
             10: { nama: 'Sepuluh', emoji: '⚽' }, 11: { nama: 'Sebelas', emoji: '🚀' }, 12: { nama: 'Dua Belas', emoji: '🍒' },
             13: { nama: 'Tiga Belas', emoji: '🍩' }, 14: { nama: 'Empat Belas', emoji: '🐥' }, 15: { nama: 'Lima Belas', emoji: '🍬' },
-            16: { nama: 'Enam Belas', emoji: '🐸' }, 17: { nama: 'Tujuh Belas', emoji: 'Sunflower' }, 18: { nama: 'Delapan Belas', emoji: '🦀' },
+            16: { nama: 'Enam Belas', emoji: '🐸' }, 17: { nama: 'Tujuh Belas', emoji: '🌻' }, 18: { nama: 'Delapan Belas', emoji: '🦀' },
             19: { nama: 'Sembilan Belas', emoji: '🍕' }, 20: { nama: 'Dua Puluh', emoji: '🎁' }
         };
 
-        // Ganti simbol matahari/bunga manual untuk kestabilan emoji 17
-        databaseAngka[17].emoji = '🌻';
-
         let angkaAktif = 1;
         let nilaiBenar = 0;
-        const gameEmojis = ['🍎', '🎈', '⭐', '🚗', '🍬', '🍩'];
+        const gameEmojis = ['🍎', '🎈', '⭐', '🚗', '🍬', '🍩', '🐥', '🧸', '🍦', '🌈', '🐱', '🐠', '🍄', '🍔'];
+
+        const pujianBenar = [
+            "HEBAT! Jawabanmu BENAR! 🎉🥳",
+            "PINTAR SEKALI! Dua jempol buat kamu! 👍👍",
+            "LUAR BIASA! Kamu berhasil! 🌟✨",
+            "WOW! Kamu cepat sekali berhitung! 🚀🕺",
+            "YEY! Betul lagi, kamu keren! 🏆❤️"
+        ];
+        
+        const textSuaraBenar = [
+            "Hebat! Jawabanmu benar!",
+            "Pintar sekali! Dua jempol buat kamu!",
+            "Luar biasa! Kamu berhasil!",
+            "Wow! Kamu cepat sekali berhitung!",
+            "Yey! Betul lagi, kamu keren!"
+        ];
+
+        const motivasiSalah = [
+            "Yaaah, coba hitung lagi yuk! 💪😊",
+            "Sedikit lagi betul! Yuk ulangi hitung emojinya! 🧐✨",
+            "Jangan menyerah, coba hitung sekali lagi! ❤️🧸",
+            "Oops! Masih kurang tepat, ayo coba lagi sayang! 🤗"
+        ];
+
+        const textSuaraSalah = [
+            "Coba hitung lagi yuk",
+            "Sedikit lagi betul, yuk ulangi hitung emojinya",
+            "Jangan menyerah, coba hitung sekali lagi",
+            "Masih kurang tepat, ayo coba lagi sayang"
+        ];
+
+        // ANTI-DOUBLE SYSTEM: Mengunci antrean secara total menggunakan variabel status kustom
+        let sedangBicara = false; 
+
+        function playSuaraTxt(text) {
+            if (!('speechSynthesis' in window)) return;
+
+            // JIKA SEDANG BERBICARA, TOLAK INSTANS BARU (Ini mencegah suara double akibat spam klik)
+            if (window.speechSynthesis.speaking || sedangBicara) {
+                return; 
+            }
+
+            sedangBicara = true;
+            const ucapan = new SpeechSynthesisUtterance(text);
+            ucapan.lang = 'id-ID';
+            ucapan.rate = 0.85;
+
+            // Reset status pengunci ketika suara sudah benar-benar selesai
+            ucapan.onend = function() {
+                sedangBicara = false;
+                document.getElementById('status-suara').innerHTML = `<i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara`;
+            };
+
+            ucapan.onerror = function() {
+                sedangBicara = false;
+                document.getElementById('status-suara').innerHTML = `<i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara`;
+            };
+
+            document.getElementById('status-suara').innerHTML = `📢 <i>Sedang berbicara...</i>`;
+            window.speechSynthesis.speak(ucapan);
+        }
 
         // Buat tombol angka 1-20
         const numberBox = document.getElementById('number-box');
@@ -145,7 +202,10 @@
             btn.className = `num-btn ${i === 1 ? 'active' : ''}`;
             btn.innerText = i;
             btn.id = `btn-num-${i}`;
-            btn.onclick = () => gantiAngka(i);
+            btn.onclick = () => {
+                // Jangan biarkan ganti angka / spam suara jika suara lama belum selesai
+                if(!sedangBicara) gantiAngka(i);
+            };
             numberBox.appendChild(btn);
         }
 
@@ -168,17 +228,10 @@
         }
 
         function suaraAngka() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const data = databaseAngka[angkaAktif];
-                const ucapan = new SpeechSynthesisUtterance(`${angkaAktif}... ${data.nama}`);
-                ucapan.lang = 'id-ID';
-                ucapan.rate = 0.8;
-                window.speechSynthesis.speak(ucapan);
-            }
+            const data = databaseAngka[angkaAktif];
+            playSuaraTxt(`${angkaAktif}... ${data.nama}`);
         }
 
-        // FUNGSI GAME BERHITUNG (+ dan -)
         function buatSoalBaru() {
             const tipeSoal = Math.random() > 0.5 ? '+' : '-';
             const emojiPilihan = gameEmojis[Math.floor(Math.random() * gameEmojis.length)];
@@ -186,12 +239,12 @@
             let n1, n2;
 
             if (tipeSoal === '+') {
-                n1 = Math.floor(Math.random() * 10) + 1; // 1-10
-                n2 = Math.floor(Math.random() * 10) + 1; // 1-10
+                n1 = Math.floor(Math.random() * 10) + 1;
+                n2 = Math.floor(Math.random() * 10) + 1;
                 nilaiBenar = n1 + n2;
             } else {
-                n1 = Math.floor(Math.random() * 15) + 5; // 5-20
-                n2 = Math.floor(Math.random() * n1) + 1; // n2 tidak boleh lebih besar dari n1 biar tidak minus
+                n1 = Math.floor(Math.random() * 12) + 6;
+                n2 = Math.floor(Math.random() * (n1 - 1)) + 1; 
                 nilaiBenar = n1 - n2;
             }
 
@@ -200,8 +253,8 @@
             document.getElementById('math-op').innerText = tipeSoal;
             document.getElementById('jawaban-user').value = '';
             document.getElementById('game-feedback').innerText = '';
+            document.getElementById('tombol-periksa').disabled = false;
 
-            // Tampilkan visualisasi emoji soal
             let txtEmoji1 = '', txtEmoji2 = '';
             for(let i=0; i<n1; i++) { txtEmoji1 += emojiPilihan; }
             for(let i=0; i<n2; i++) { txtEmoji2 += emojiPilihan; }
@@ -211,35 +264,32 @@
         }
 
         function cekJawaban() {
+            // Jika audio feedback soal sebelumnya belum selesai, abaikan klik cek jawaban
+            if (sedangBicara) return;
+
             const jawabanUser = parseInt(document.getElementById('jawaban-user').value);
             const feedback = document.getElementById('game-feedback');
             
             if (isNaN(jawabanUser)) {
                 feedback.className = "feedback salah";
                 feedback.innerText = "Isi dulu jawabannya, sayang! 😮";
-                playSuaraTxt("Isi dulu jawabannya");
+                playSuaraTxt("Isi dulu jawabannya, sayang");
                 return;
             }
 
+            const indeksAcak = Math.floor(Math.random() * pujianBenar.length);
+            const indeksSalahAcak = Math.floor(Math.random() * motivasiSalah.length);
+
             if (jawabanUser === nilaiBenar) {
+                document.getElementById('tombol-periksa').disabled = true;
                 feedback.className = "feedback benar";
-                feedback.innerText = "HEBAT! Jawabanmu BENAR! 🎉🥳";
-                playSuaraTxt("Hebat! Jawabanmu benar!");
-                setTimeout(buatSoalBaru, 3000); // Ganti soal otomatis setelah 3 detik
+                feedback.innerText = pujianBenar[indeksAcak];
+                playSuaraTxt(textSuaraBenar[indeksAcak]);
+                setTimeout(buatSoalBaru, 3500); 
             } else {
                 feedback.className = "feedback salah";
-                feedback.innerText = "Yaaah, coba hitung lagi yuk! 💪😊";
-                playSuaraTxt("Coba hitung lagi yuk");
-            }
-        }
-
-        function playSuaraTxt(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const ucapan = new SpeechSynthesisUtterance(text);
-                ucapan.lang = 'id-ID';
-                ucapan.rate = 0.9;
-                window.speechSynthesis.speak(ucapan);
+                feedback.innerText = motivasiSalah[indeksSalahAcak];
+                playSuaraTxt(textSuaraSalah[indeksSalahAcak]);
             }
         }
 
@@ -253,9 +303,17 @@
         window.onload = () => {
             const savedTheme = localStorage.getItem('tk_theme');
             if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+            
+            // Pengaman ekstra: Reset paksa sistem audio browser saat halaman baru dibuka
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            
             updateDisplay();
             buatSoalBaru();
         };
     </script>
 </body>
 </html>
+
+```
