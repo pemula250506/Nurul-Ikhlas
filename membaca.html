@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belajar Membaca - TK Nurul Ikhlas</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Menggunakan font Comfortaa & Fredoka yang bentuk huruf 'a'-nya bulat dengan tangkai lurus di kanan (bukan alpha) -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -23,8 +24,20 @@
             --text: #EAEAEA;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); transition: 0.3s; padding: 20px 5%; }
+        /* UTAMA: Mengunci font Comfortaa untuk teks anak TK agar huruf 'a' berbentuk bulat + garis lurus di kanan */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Comfortaa', 'Fredoka', cursive, sans-serif; 
+        }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: 0.3s; 
+            padding: 20px 5%; 
+        }
 
         .header {
             display: flex;
@@ -39,21 +52,21 @@
             padding: 10px 20px;
             border-radius: 20px;
             text-decoration: none;
-            font-weight: 800;
+            font-weight: bold;
             box-shadow: 0 4px 0 rgba(0,0,0,0.1);
             transition: 0.2s;
         }
         .back-btn:hover { transform: translateY(-2px); }
 
         .title {
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
             color: var(--primary);
             font-size: 2rem;
             text-align: center;
             flex-grow: 1;
         }
 
-        /* --- TABS --- */
         .tabs-container {
             display: flex;
             justify-content: center;
@@ -67,7 +80,8 @@
             padding: 10px 20px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 800;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
             color: var(--text);
             transition: 0.3s;
         }
@@ -76,7 +90,6 @@
             color: white;
         }
 
-        /* --- CONTENT SECTION --- */
         .content-section {
             display: none;
             animation: popIn 0.4s ease-out;
@@ -90,7 +103,6 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        /* --- GRID KATA --- */
         .read-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -111,22 +123,21 @@
             border-color: var(--primary);
         }
 
-        /* Pewarnaan Suku Kata */
-        .syllable-1 { color: #FF4D6D; font-family: 'Fredoka One'; font-size: 1.8rem; }
-        .syllable-2 { color: #4EA8DE; font-family: 'Fredoka One'; font-size: 1.8rem; }
-        .syllable-3 { color: #FDC500; font-family: 'Fredoka One'; font-size: 1.8rem; }
+        /* Suku kata sengaja pakai font-weight 500/700 Comfortaa agar lengkungan tangkai 'a' jelas terlihat */
+        .syllable-1 { color: #FF4D6D; font-weight: 700; font-size: 2.3rem; }
+        .syllable-2 { color: #4EA8DE; font-weight: 700; font-size: 2.3rem; }
+        .syllable-3 { color: #FDC500; font-weight: 700; font-size: 2.3rem; }
 
         .word-full {
-            font-family: 'Fredoka One';
-            font-size: 2rem;
+            font-weight: 700;
+            font-size: 2.3rem;
             color: var(--text);
             margin-bottom: 10px;
         }
         .sentence-text {
-            font-family: 'Nunito';
-            font-weight: 800;
-            font-size: 1.5rem;
-            line-height: 2rem;
+            font-weight: 700;
+            font-size: 1.9rem;
+            line-height: 2.5rem;
         }
 
         .sound-icon {
@@ -158,71 +169,70 @@
         
         <section id="suku-kata" class="content-section active">
             <div class="read-grid">
-                <div class="read-card" onclick="suaraBicara('ba ju')">
+                <div class="read-card" onclick="suaraBicara('baju')">
                     <span class="syllable-1">ba</span><span class="syllable-2">ju</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('bo la')">
+                <div class="read-card" onclick="suaraBicara('bola')">
                     <span class="syllable-1">bo</span><span class="syllable-2">la</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('bu ku')">
+                <div class="read-card" onclick="suaraBicara('buku')">
                     <span class="syllable-1">bu</span><span class="syllable-2">ku</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('ca ci')">
+                <div class="read-card" onclick="suaraBicara('caci')">
                     <span class="syllable-1">ca</span><span class="syllable-2">ci</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('da si')">
+                <div class="read-card" onclick="suaraBicara('dasi')">
                     <span class="syllable-1">da</span><span class="syllable-2">si</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('gla tui')">
+                <div class="read-card" onclick="suaraBicara('mata')">
                     <span class="syllable-1">ma</span><span class="syllable-2">ta</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('to pi')">
+                <div class="read-card" onclick="suaraBicara('topi')">
                     <span class="syllable-1">to</span><span class="syllable-2">pi</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('me ja')">
+                <div class="read-card" onclick="suaraBicara('meja')">
                     <span class="syllable-1">me</span><span class="syllable-2">ja</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('sen dal')">
+                <div class="read-card" onclick="suaraBicara('sendal')">
                     <span class="syllable-1">sen</span><span class="syllable-2">dal</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('se pa tu')">
-                    <span class="syllable-1">sep</span><span class="syllable-2">atu</span>
+                <div class="read-card" onclick="suaraBicara('sepatu')">
+                    <span class="syllable-1">se</span><span class="syllable-2">pa</span><span class="syllable-3">tu</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('se pe da')">
-                    <span class="syllable-1">sep</span><span class="syllable-2">eda</span>
+                <div class="read-card" onclick="suaraBicara('sepeda')">
+                    <span class="syllable-1">se</span><span class="syllable-2">pe</span><span class="syllable-3">da</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('mo tor')">
+                <div class="read-card" onclick="suaraBicara('motor')">
                     <span class="syllable-1">mo</span><span class="syllable-2">tor</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('pro so tan')">
-                    <span class="syllable-1">pros</span><span class="syllable-2">otan</span>
+                <div class="read-card" onclick="suaraBicara('prosotan')">
+                    <span class="syllable-1">pro</span><span class="syllable-2">so</span><span class="syllable-3">tan</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('pu la ng')">
-                    <span class="syllable-1">pul</span><span class="syllable-2">ang</span>
+                <div class="read-card" onclick="suaraBicara('pulang')">
+                    <span class="syllable-1">pu</span><span class="syllable-2">lang</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-                <div class="read-card" onclick="suaraBicara('be rang kat')">
-                    <span class="syllable-1">bera</span><span class="syllable-2">ngkat</span>
+                <div class="read-card" onclick="suaraBicara('berangkat')">
+                    <span class="syllable-1">be</span><span class="syllable-2">rang</span><span class="syllable-3">kat</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('kaos kaki')">
-                    <span class="syllable-1">kaos</span><span class="syllable-2">kaki</span>
+                    <span class="syllable-1">ka</span><span class="syllable-2">os</span> <span class="syllable-1">ka</span><span class="syllable-2">ki</span>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
-
             </div>
         </section>
 
@@ -230,82 +240,82 @@
             <div class="read-grid">
                 <div class="read-card" onclick="suaraBicara('Rumah')">
                     <div class="word-full">🏠 Rumah</div>
-                    <p style="font-size:0.9rem; color:gray;">ru - mah</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ru - mah</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Gajah')">
                     <div class="word-full">🐘 Gajah</div>
-                    <p style="font-size:0.9rem; color:gray;">ga - jah</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ga - jah</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Sekolah')">
                     <div class="word-full">🏫 Sekolah</div>
-                    <p style="font-size:0.9rem; color:gray;">se - ko - lah</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">se - ko - lah</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Burung')">
                     <div class="word-full">🐦 Burung</div>
-                    <p style="font-size:0.9rem; color:gray;">bu - rung</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">bu - rung</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Kucing')">
                     <div class="word-full">🐱 Kucing</div>
-                    <p style="font-size:0.9rem; color:gray;">ku - cing</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ku - cing</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Pisang')">
                     <div class="word-full">🍌 Pisang</div>
-                    <p style="font-size:0.9rem; color:gray;">pi - sang</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">pi - sang</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Pensil')">
                     <div class="word-full">✏️ Pensil</div>
-                    <p style="font-size:0.9rem; color:gray;">pen - sil</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">pen - sil</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Ngopi')">
                     <div class="word-full">☕ Ngopi</div>
-                    <p style="font-size:0.9rem; color:gray;">ngo - pi</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ngo - pi</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('anak ayam')">
                     <div class="word-full">🐣 Anak ayam</div>
-                    <p style="font-size:0.9rem; color:gray;">anak - ayam</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">a - nak - a - yam</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Balon')">
                     <div class="word-full">🎈 Balon</div>
-                    <p style="font-size:0.9rem; color:gray;">ba - lon</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ba - lon</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Kelinci')">
                     <div class="word-full">🐰 Kelinci</div>
-                    <p style="font-size:0.9rem; color:gray;">keli - nci</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">ke - lin - ci</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Es Krim')">
                     <div class="word-full">🍦 Es Krim</div>
-                    <p style="font-size:0.9rem; color:gray;">es - krim</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">es - krim</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Donat')">
                     <div class="word-full">🍩 Donat</div>
-                    <p style="font-size:0.9rem; color:gray;">do - nat</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">do - nat</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Susu')">
                     <div class="word-full">🥛 Susu</div>
-                    <p style="font-size:0.9rem; color:gray;">su - su</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">su - su</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Pelangi')">
                     <div class="word-full">🌈 Pelangi</div>
-                    <p style="font-size:0.9rem; color:gray;">pela - ngi</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">pe - lan - gi</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
                 <div class="read-card" onclick="suaraBicara('Bintang')">
                     <div class="word-full">⭐ Bintang</div>
-                    <p style="font-size:0.9rem; color:gray;">bin - tang</p>
+                    <p style="font-size:1.2rem; color:gray; font-weight: bold;">bin - tang</p>
                     <i class="fa-solid fa-volume-high sound-icon"></i>
                 </div>
             </div>
@@ -328,17 +338,17 @@
                 <div class="read-card" style="text-align: left;" onclick="suaraBicara('Kucing itu melompat tinggi')">
                     <div class="sentence-text">🐱 Kucing itu <span style="color:#70E000">melompat</span> tinggi.</div>
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
-                    </div>
-                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Irfan suka berolahraga ')">
+                </div>
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Irfan suka berolahraga')">
                     <div class="sentence-text">🏋️ Irfan <span style="color:#8b9c1f">suka</span> berolahraga.</div>
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
                 </div>
-                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Rafa suka bermain MagicChess goGo ')">
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('Rafa suka bermain Magic Chess Go Go')">
                     <div class="sentence-text">🎮👦 Rafa <span style="color:#3411be">suka bermain</span> MagicChess goGo.</div>
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
                 </div>
-                <div class="read-card" style="text-align: left;" onclick="suaraBicara('ibu tonglong ambilkan bangku ')">
-                    <div class="sentence-text">👩‍👦‍👦 ibu <span style="color:#7c1675">tonglong ambilkan</span> bangku.</div>
+                <div class="read-card" style="text-align: left;" onclick="suaraBicara('ibu tolong ambilkan bangku')">
+                    <div class="sentence-text">👩‍👦‍👦 ibu <span style="color:#7c1675">tolong ambilkan</span> bangku.</div>
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
                 </div>
                 <div class="read-card" style="text-align: left;" onclick="suaraBicara('aku mau pergi ke pasar sama ibuku')">
@@ -346,7 +356,7 @@
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
                 </div>
                 <div class="read-card" style="text-align: left;" onclick="suaraBicara('ayah tolong belikan aku mainan di mall')">
-                    <div class="sentence-text">👨‍👧🎮 <span style="color:#ec4b1f">ayah tolong</span> belikan aku mainan<span style="color:#daac93">  di mall</span>.</div>
+                    <div class="sentence-text">👨‍👧🎮 <span style="color:#ec4b1f">ayah tolong</span> belikan aku mainan<span style="color:#daac93"> di mall</span>.</div>
                     <i class="fa-solid fa-volume-high sound-icon" style="display:inline-block; margin-top:5px;"></i>
                 </div>
             </div>
@@ -355,7 +365,6 @@
     </div>
 
     <script>
-        // Fungsi pindah tab belajar
         function switchTab(sectionId, btn) {
             document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
@@ -364,21 +373,19 @@
             btn.classList.add('active');
         }
 
-        // Fitur Mengeluarkan Suara (Text-to-Speech Bahasa Indonesia)
         function suaraBicara(teks) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Menghentikan suara sebelumnya jika ada
+                window.speechSynthesis.cancel(); 
                 const ucapan = new SpeechSynthesisUtterance(teks);
-                ucapan.lang = 'id-ID'; // Set bahasa ke Indonesia
-                ucapan.rate = 0.8;    // Sedikit diperlambat agar anak-anak jelas mendengar
-                ucapan.pitch = 1.2;   // Nada suara disesuaikan agar lebih ramah anak
+                ucapan.lang = 'id-ID'; 
+                ucapan.rate = 0.65;    
+                ucapan.pitch = 1.25;   
                 window.speechSynthesis.speak(ucapan);
             } else {
                 alert("Browser kamu tidak mendukung fitur suara.");
             }
         }
 
-        // Fitur Tema Gelap/Terang Otomatis sinkron dari LocalStorage utama
         function toggleTheme() {
             const body = document.body;
             const theme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
