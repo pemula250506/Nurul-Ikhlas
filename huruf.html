@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belajar Huruf A-Z - TK Nurul Ikhlas</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -39,11 +39,14 @@
         .alphabet-grid::-webkit-scrollbar { width: 6px; }
         .alphabet-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        .letter-btn { background: var(--card); border: 2px solid #e2e8f0; font-family: 'Fredoka One', cursive; font-size: 1.5rem; padding: 15px 0; border-radius: 15px; cursor: pointer; color: var(--text); transition: 0.2s; box-shadow: 0 4px 0 #e2e8f0; }
+        /* FIX FONT: Mengubah font tombol ke Nunito super bold agar huruf 'a' ada topinya */
+        .letter-btn { background: var(--card); border: 2px solid #e2e8f0; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.3rem; padding: 15px 0; border-radius: 15px; cursor: pointer; color: var(--text); transition: 0.2s; box-shadow: 0 4px 0 #e2e8f0; }
         .letter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 0 #3a8ebf; transform: translateY(2px); }
 
         .display-card { background: var(--card); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; min-height: 480px; cursor: pointer; }
-        .big-letter { font-family: 'Fredoka One', cursive; font-size: 6rem; color: var(--primary); margin-bottom: 5px; }
+        
+        /* FIX FONT: Mengubah font display huruf besar di kartu agar huruf 'a' kecil bertopi */
+        .big-letter { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 5.5rem; color: var(--primary); margin-bottom: 5px; word-spacing: 15px; }
 
         .category-menu { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; justify-content: center; }
         .cat-btn { background: var(--bg); border: none; padding: 10px 20px; border-radius: 20px; font-weight: 800; cursor: pointer; color: var(--text); transition: 0.3s; }
@@ -55,8 +58,9 @@
         .object-illustration { font-size: 8rem; margin: 15px 0; animation: bounce 0.5s infinite alternate; }
         @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
 
-        .object-name { font-family: 'Fredoka One', cursive; font-size: 3rem; color: var(--text); }
-        .object-spelling { font-size: 1.5rem; color: #888; font-weight: 800; letter-spacing: 3px; margin-top: 10px; }
+        /* FIX FONT: Mengubah font nama benda ke Nunito 900 agar ejaan huruf 'a' di teks (ex: Ayam) juga bertopi */
+        .object-name { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 3rem; color: var(--text); }
+        .object-spelling { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.5rem; color: #888; letter-spacing: 3px; margin-top: 10px; }
         .suara-instruksi { margin-top: 25px; font-size: 1rem; color: var(--primary); font-weight: bold; }
     </style>
 </head>
@@ -72,7 +76,7 @@
         <div class="alphabet-grid" id="alphabet-box"></div>
 
         <div class="display-card" onclick="suaraBenda()">
-            <div class="big-letter" id="view-letter">A</div>
+            <div class="big-letter" id="view-letter">A a</div>
             
             <div class="category-menu" onclick="event.stopPropagation();">
                 <button class="cat-btn btn-hewan active" onclick="setKategori('hewan')">🦁 Hewan</button>
@@ -82,7 +86,7 @@
 
             <div class="object-illustration" id="view-icon">🐔</div>
             <div class="object-name" id="view-name">Ayam</div>
-            <div class="object-spelling" id="view-spelling">A-Y-A-M</div>
+            <div class="object-spelling" id="view-spelling">A-y-a-m</div>
             
             <div class="suara-instruksi"><i class="fa-solid fa-volume-high"></i> Klik kartu untuk suara</div>
         </div>
@@ -90,32 +94,32 @@
 
     <script>
         const databaseBelajar = {
-            'A': { hewan: ['🐔', 'Ayam', 'A-Y-A-M'], buah: ['🍎', 'Apel', 'A-P-E-L'], kendaraan: ['🚀', 'Angkasa', 'A-N-G-K-A-S-A'] },
-            'B': { hewan: ['🐊', 'Buaya', 'B-U-A-Y-A'], buah: ['🥔', 'Bengkoang', 'B-E-N-G-K-U-A-N'], kendaraan: ['🚌', 'Bus', 'B-U-S'] },
-            'C': { hewan: ['🦎', 'Cicak', 'C-I-C-A-K'], buah: ['🍒', 'Ceri', 'C-E-R-I'], kendaraan: ['🚜', 'Craktor', 'C-R-A-K-T-O-R'] },
-            'D': { hewan: ['🐑', 'Domba', 'D-O-M-B-A'], buah: ['🥔', 'Duku', 'D-U-K-U'], kendaraan: ['🐴 🚃', 'Delman', 'D-E-L-M-A-N'] },
-            'E': { hewan: ['🦅', 'Elang', 'E-L-A-N-G'], buah: ['🍇', 'Elderberry', 'E-L-D-E-R-B-E-R-R-Y'], kendaraan: ['🛴', 'E-scooter', 'E-S-C-O-O-T-E-R'] },
-            'F': { hewan: ['🦩', 'Flamingo', 'F-L-A-M-I-N-G-O'], buah: ['🍓', 'Frut', 'F-R-U-T'], kendaraan: ['⛴️', 'Feri', 'F-E-R-I'] },
-            'G': { hewan: ['🐘', 'Gajah', 'G-A-J-A-H'], buah: ['🌾', 'Gandum', 'G-A-N-D-U-M'], kendaraan: ['🛒', 'Gerobak', 'G-E-R-O-B-A-K'] },
-            'H': { hewan: ['🐯', 'Harimau', 'H-A-R-I-M-A-U'], buah: ['🥥', 'Haver', 'H-A-V-E-R'], kendaraan: ['🚁', 'Helikopter', 'H-E-L-I-K-O-P-T-E-R'] },
-            'I': { hewan: ['🐟', 'Ikan', 'I-K-A-N'], buah: ['🍃', 'Iles-iles', 'I-L-E-S'], kendaraan: ['🚑', 'Innova', 'I-N-N-O-V-A'] },
-            'J': { hewan: ['🦒', 'Jerapah', 'J-E-R-A-P-A-H'], buah: ['🍊', 'Jeruk', 'J-E-R-U-K'], kendaraan: ['🚙', 'Jeep', 'J-E-E-P'] },
-            'K': { hewan: ['🐱', 'Kucing', 'K-U-C-I-N-G'], buah: ['🥥', 'Kelapa', 'K-E-L-A-P-A'], kendaraan: ['🚗', 'Kereta', 'K-E-R-E-T-A'] },
-            'L': { hewan: ['🐝', 'Lebah', 'L-E-B-A-H'], buah: ['🍋', 'Lemon', 'L-E-M-O-N'], kendaraan: ['🛳️', 'Lori', 'L-O-R-I'] },
-            'M': { hewan: ['🐒', 'Monyet', 'M-O-N-Y-E-T'], buah: ['🥭', 'Manggis', 'M-A-N-G-G-I-S'], kendaraan: ['🏍️', 'Motor', 'M-O-T-O-R'] },
-            'N': { hewan: ['🦟', 'Nyamuk', 'N-Y-A-M-U-K'], buah: ['🍍', 'Nanas', 'N-A-N-A-S'], kendaraan: ['🏎️', 'Nascar', 'N-A-S-C-A-R'] },
-            'O': { hewan: ['🦧', 'Orangutan', 'O-R-A-N-G-U-T-A-N'], buah: ['🍏', 'Oranye', 'O-R-A-N-Y-E'], kendaraan: ['🛺', 'Ojek', 'O-J-E-K'] },
-            'P': { hewan: ['🐼', 'Panda', 'P-A-N-D-A'], buah: ['🍌', 'Pisang', 'P-I-S-A-N-G'], kendaraan: ['✈️', 'Pesawat', 'P-E-S-A-W-A-T'] },
-            'Q': { hewan: ['🐦', 'Quail', 'Q-U-A-I-L'], buah: ['🍐', 'Quini', 'Q-U-I-N-I'], kendaraan: ['🚜', 'Quad', 'Q-U-A-D'] },
-            'R': { hewan: ['🦌', 'Rusa', 'R-U-S-A'], buah: ['🍓', 'Rambutan', 'R-A-M-B-U-T-A-N'], kendaraan: ['🚀', 'Roket', 'R-O-K-E-T'] },
-            'S': { hewan: ['🦁', 'Singa', 'S-I-N-G-A'], buah: ['🍐', 'Sirsak', 'S-I-R-S-A-K'], kendaraan: ['🚲', 'Sepeda', 'S-E-P-E-D-A'] },
-            'T': { hewan: ['🐭', 'Tikus', 'T-I-K-U-S'], buah: ['🍎', 'Tomat', 'T-O-M-A-T'], kendaraan: ['🚕', 'Taxi', 'T-A-X-I'] },
-            'U': { hewan: ['🐍', 'Ular', 'U-L-A-R'], buah: ['🍠', 'Ubi', 'U-B-I'], kendaraan: ['💨', 'Udara', 'U-D-A-R-A'] },
-            'V': { hewan: ['🐍', 'Viper', 'V-I-P-E-R'], buah: ['🌿', 'Vanili', 'V-A-N-I-L-I'], kendaraan: ['🚐', 'Van', 'V-A-N'] },
-            'W': { hewan: ['🐗', 'Walang', 'W-A-L-A-N-G'], buah: ['🥕', 'Wortel', 'W-O-R-T-E-L'], kendaraan: ['🚙', 'Wagon', 'W-A-G-O-N'] },
-            'X': { hewan: ['🐟', 'Xenopus', 'X-E-N-O-P-U-S'], buah: ['🍉', 'Ximenia', 'X-I-M-E-N-I-A'], kendaraan: ['🚗', 'Xenia', 'X-E-N-I-A'] },
-            'Y': { hewan: ['🐂', 'Yak', 'Y-A-K'], buah: ['🍠', 'Yam', 'Y-A-M'], kendaraan: ['⛵', 'Yacht', 'Y-A-C-H-T'] },
-            'Z': { hewan: ['🦓', 'Zebra', 'Z-E-B-R-A'], buah: ['🍈', 'Zaitun', 'Z-A-I-T-U-N'], kendaraan: ['🚘', 'Zenvo', 'Z-E-N-V-O'] }
+            'A': { hewan: ['🐔', 'Ayam', 'A-y-a-m'], buah: ['🍎', 'Apel', 'A-p-e-l'], kendaraan: ['🚀', 'Angkasa', 'A-n-g-k-a-s-a'] },
+            'B': { hewan: ['🐊', 'Buaya', 'B-u-a-y-a'], buah: ['🥔', 'Bengkoang', 'B-e-n-g-k-o-a-n-g'], kendaraan: ['🚌', 'Bus', 'B-u-s'] },
+            'C': { hewan: ['🦎', 'Cicak', 'C-i-c-a-k'], buah: ['🍒', 'Ceri', 'C-e-r-i'], kendaraan: ['🚜', 'Traktor', 'T-r-a-k-t-o-r'] },
+            'D': { hewan: ['🐑', 'Domba', 'D-o-m-b-a'], buah: ['🥔', 'Duku', 'D-u-k-u'], kendaraan: ['🐴 🚃', 'Delman', 'D-e-l-m-a-n'] },
+            'E': { hewan: ['🦅', 'Elang', 'E-l-a-n-g'], buah: ['🍇', 'Elderberry', 'E-l-d-e-r-b-e-r-r-y'], kendaraan: ['🛴', 'E-scooter', 'E-s-c-o-o-t-e-r'] },
+            'F': { hewan: ['🦩', 'Flamingo', 'F-l-a-m-i-n-g-o'], buah: ['🍓', 'Frut', 'F-r-u-t'], kendaraan: ['⛴️', 'Feri', 'F-e-r-i'] },
+            'G': { hewan: ['🐘', 'Gajah', 'G-a-j-a-h'], buah: ['🌾', 'Gandum', 'G-a-n-d-u-m'], kendaraan: ['🛒', 'Gerobak', 'G-a-r-o-b-a-k'] },
+            'H': { hewan: ['🐯', 'Harimau', 'H-a-r-i-m-a-u'], buah: ['🥥', 'Haver', 'H-a-v-e-r'], kendaraan: ['🚁', 'Helikopter', 'H-e-l-i-k-o-p-t-e-r'] },
+            'I': { hewan: ['🐟', 'Ikan', 'I-k-a-n'], buah: ['🍃', 'Iles-iles', 'I-l-e-s--i-l-e-s'], kendaraan: ['🚑', 'Innova', 'I-n-n-o-v-a'] },
+            'J': { hewan: ['🦒', 'Jerapah', 'J-e-r-a-p-a-h'], buah: ['🍊', 'Jeruk', 'J-e-r-u-k'], kendaraan: ['🚙', 'Jeep', 'J-e-e-p'] },
+            'K': { hewan: ['🐱', 'Kucing', 'K-u-c-i-n-g'], buah: ['🥥', 'Kelapa', 'K-e-l-a-p-a'], kendaraan: ['🚗', 'Kereta', 'K-e-r-e-t-a'] },
+            'L': { hewan: ['🐝', 'Lebah', 'L-e-b-a-h'], buah: ['🍋', 'Lemon', 'L-e-m-o-n'], kendaraan: ['🛳️', 'Lori', 'L-o-r-i'] },
+            'M': { hewan: ['🐒', 'Monyet', 'M-o-n-y-e-t'], buah: ['🥭', 'Manggis', 'M-a-n-g-g-i-s'], kendaraan: ['🏍️', 'Motor', 'M-o-t-o-r'] },
+            'N': { hewan: ['🦟', 'Nyamuk', 'N-y-a-m-u-k'], buah: ['🍍', 'Nanas', 'N-a-n-a-s'], kendaraan: ['🏎️', 'Nascar', 'N-a-s-c-a-r'] },
+            'O': { hewan: ['🦧', 'Orangutan', 'O-r-a-n-g-u-t-a-n'], buah: ['🍏', 'Oranye', 'O-r-a-n-y-e'], kendaraan: ['🛺', 'Ojek', 'O-j-e-k'] },
+            'P': { hewan: ['🐼', 'Panda', 'P-a-n-d-a'], buah: ['🍌', 'Pisang', 'P-i-s-a-n-g'], kendaraan: ['✈️', 'Pesawat', 'P-e-s-a-w-a-t'] },
+            'Q': { hewan: ['🐦', 'Quail', 'Q-u-a-i-l'], buah: ['🍐', 'Quini', 'Q-u-i-n-i'], kendaraan: ['🚜', 'Quad', 'Q-u-a-d'] },
+            'R': { hewan: ['🦌', 'Rusa', 'R-u-s-a'], buah: ['🍓', 'Rambutan', 'R-a-m-b-u-t-a-n'], kendaraan: ['🚀', 'Roket', 'R-o-k-e-t'] },
+            'S': { hewan: ['🦁', 'Singa', 'S-i-n-g-a'], buah: ['🍐', 'Sirsak', 'S-i-r-s-a-k'], kendaraan: ['🚲', 'Sepeda', 'S-e-p-e-d-a'] },
+            'T': { hewan: ['🐭', 'Tikus', 'T-i-k-u-s'], buah: ['🍎', 'Tomat', 'T-o-m-a-t'], kendaraan: ['🚕', 'Taxi', 'T-a-x-i'] },
+            'U': { hewan: ['🐍', 'Ular', 'U-l-a-r'], buah: ['🍠', 'Ubi', 'U-b-i'], kendaraan: ['💨', 'Udara', 'U-d-a-r-a'] },
+            'V': { hewan: ['🐍', 'Viper', 'V-i-p-e-r'], buah: ['🌿', 'Vanili', 'V-a-n-i-l-i'], kendaraan: ['🚐', 'Van', 'V-a-n'] },
+            'W': { hewan: ['🐗', 'Walang', 'W-a-l-a-n-g'], buah: ['🥕', 'Wortel', 'W-o-r-t-e-l'], kendaraan: ['🚙', 'Wagon', 'W-a-g-o-n'] },
+            'X': { hewan: ['🐟', 'Xenopus', 'X-e-n-o-p-u-s'], buah: ['🍉', 'Ximenia', 'X-i-m-e-n-i-a'], kendaraan: ['🚗', 'Xenia', 'X-e-n-i-a'] },
+            'Y': { hewan: ['🐂', 'Yak', 'Y-a-k'], buah: ['🍠', 'Yam', 'Y-a-m'], kendaraan: ['⛵', 'Yacht', 'Y-a-c-h-t'] },
+            'Z': { hewan: ['🦓', 'Zebra', 'Z-e-b-r-a'], buah: ['🍈', 'Zaitun', 'Z-a-i-t-u-n'], kendaraan: ['🚘', 'Zenvo', 'Z-e-n-v-o'] }
         };
 
         let hurufAktif = 'A';
@@ -123,12 +127,15 @@
 
         const alphabetBox = document.getElementById('alphabet-box');
         for (let i = 65; i <= 90; i++) {
-            const huruf = String.fromCharCode(i);
+            const hurufBesar = String.fromCharCode(i);
+            const hurufKecil = hurufBesar.toLowerCase();
+            const formatHurufBerspasi = hurufBesar + ' ' + hurufKecil; 
+
             const btn = document.createElement('button');
-            btn.className = `letter-btn ${huruf === 'A' ? 'active' : ''}`;
-            btn.innerText = huruf;
-            btn.id = `btn-${huruf}`;
-            btn.onclick = () => gantiHuruf(huruf);
+            btn.className = `letter-btn ${hurufBesar === 'A' ? 'active' : ''}`;
+            btn.innerText = formatHurufBerspasi;
+            btn.id = `btn-${hurufBesar}`;
+            btn.onclick = () => gantiHuruf(hurufBesar);
             alphabetBox.appendChild(btn);
         }
 
@@ -149,7 +156,7 @@
 
         function updateDisplay() {
             const data = databaseBelajar[hurufAktif][kategoriAktif];
-            document.getElementById('view-letter').innerText = hurufAktif;
+            document.getElementById('view-letter').innerText = hurufAktif + ' ' + hurufAktif.toLowerCase();
             document.getElementById('view-icon').innerText = data[0];
             document.getElementById('view-name').innerText = data[1];
             document.getElementById('view-spelling').innerText = data[2];
